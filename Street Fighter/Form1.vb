@@ -97,6 +97,8 @@ Public Class Form1
         Next
     End Sub
 
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x, y As Integer
         x = 100
@@ -107,6 +109,7 @@ Public Class Form1
 
         indexIntro = 0
         SetIntro()
+        SetStand()
 
         Timer1.Interval = 100
         Timer1.Start()
@@ -130,15 +133,24 @@ Public Class Form1
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Ryu = intro(indexIntro)
-        indexIntro = indexIntro + 1
-        indexStand = indexStand + 1
 
-        If indexIntro > 7 Then Ryu = stand(indexStand)
+        If indexIntro > 7 Then
+            Timer2.Enabled = True
+            Timer1.Enabled = False
+        End If
+
+        indexIntro = indexIntro + 1
 
         DrawAgain()
         pbcanvas.Image = bg
 
 
     End Sub
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        Ryu = stand(indexStand)
+        indexStand = indexStand + 1
 
+        DrawAgain()
+        pbcanvas.Image = bg
+    End Sub
 End Class

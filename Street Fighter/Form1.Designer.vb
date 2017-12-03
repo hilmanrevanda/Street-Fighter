@@ -26,6 +26,7 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnExit = New System.Windows.Forms.Button()
         Me.pbcanvas = New System.Windows.Forms.PictureBox()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.pbcanvas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,6 +50,9 @@ Partial Class Form1
         Me.pbcanvas.TabIndex = 0
         Me.pbcanvas.TabStop = False
         '
+        'Timer2
+        '
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -68,4 +72,5 @@ Partial Class Form1
     Friend WithEvents pbcanvas As PictureBox
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnExit As Button
+    Friend WithEvents Timer2 As Timer
 End Class
