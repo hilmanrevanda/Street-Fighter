@@ -160,5 +160,53 @@
   <ItemGroup>
     <None Include="Resources\intro8.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %283%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %284%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %285%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %286%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %283%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crouchR31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnPlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SF_logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
