@@ -6,8 +6,8 @@ Public Class Form1
 
     Private indexIntro, indexStandR As Integer
 
-    Dim x As Integer '= 100
-    Dim y As Integer '= 100
+    Dim x As Integer '= 400
+    Dim y As Integer '= 240
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -89,8 +89,6 @@ Public Class Form1
 
         Return a
     End Function
-
-
     Sub spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black
         Dim i, j, a, r, g, b As Integer
@@ -122,9 +120,9 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.Background)
-        'x = 100
-        'y = 100
+        'My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.Background)
+        x = 280
+        y = 150
 
         indexIntro = 0
         indexStandR = 0
@@ -159,7 +157,6 @@ Public Class Form1
 
         DrawAgain()
         pbcanvas.Image = bg
-
 
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
