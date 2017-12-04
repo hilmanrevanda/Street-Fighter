@@ -6,8 +6,8 @@ Public Class Form1
 
     Private indexIntro, indexStandR As Integer
 
-    Private x As Integer '= 100
-    Private y As Integer '= 100
+    Dim x As Integer '= 100
+    Dim y As Integer '= 100
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -50,6 +50,7 @@ Public Class Form1
         spriteand(bg, mask, x, y)
         spriteor(bg, sprite, x, y)
     End Sub
+
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
         Dim a As Bitmap
@@ -104,6 +105,7 @@ Public Class Form1
             Next
         Next
     End Sub
+
     Sub spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'give color to the black sprite
         Dim i, j, a, r, g, b As Integer
@@ -120,22 +122,19 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        bg = New Bitmap(My.Resources.background)
-        Ryu = My.Resources.standR0
-
+        My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.Background)
         'x = 100
-        'y = 150
+        'y = 100
 
         indexIntro = 0
         indexStandR = 0
         SetIntro()
         SetStandR()
 
-        Timer1.Interval = 2000
-        Timer1.Interval = 2000
+        Timer1.Interval = 100
+        Timer2.Interval = 100
 
-        PutSprite(bg, Ryu, x, y)
+        bg = My.Resources.background
         pbcanvas.Image = bg
 
     End Sub
@@ -169,12 +168,20 @@ Public Class Form1
 
         DrawAgain()
         pbcanvas.Image = bg
+        If indexStandR > 3 Then indexStandR = 0
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles pbPlay.Click
         pbPlay.Hide()
         Timer1.Start()
+        bg = New Bitmap(My.Resources.background)
+        Ryu = My.Resources.standR0
+        ' x = 50
+        'y = 50
+
+        PutSprite(bg, Ryu, x, y)
     End Sub
+
     Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
         End
     End Sub

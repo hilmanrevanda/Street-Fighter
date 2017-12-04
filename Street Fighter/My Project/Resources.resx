@@ -130,6 +130,9 @@
   <data name="intro8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SF_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SF_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="standR2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (5).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,6 +151,12 @@
   <data name="intro1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="standL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\neutral (4)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\background-621x224.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,8 +169,14 @@
   <data name="standL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (6)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="sfmusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Street Fighter II Arcade Music - street fighter.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="standL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (5)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sound.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="intro0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,9 +196,6 @@
   <data name="intro3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\intro4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="crouchR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,16 +205,13 @@
   <data name="crouchL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="standL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\neutral (4)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="intro4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\intro4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="standR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SF_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SF_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="no_sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\no sound.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

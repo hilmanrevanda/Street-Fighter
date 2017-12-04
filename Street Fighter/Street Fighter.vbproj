@@ -208,5 +208,14 @@
   <ItemGroup>
     <None Include="Resources\SF_logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Street Fighter II Arcade Music - street fighter.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no sound.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
