@@ -6,18 +6,19 @@ Public Class Form1
 
     Private indexIntro, indexStandR As Integer
 
-    Dim x As Integer '= 400
-    Dim y As Integer '= 240
+    Dim x As Integer = 280
+
+    Dim y As Integer = 150
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
         intro(2) = My.Resources.intro2
-        intro(3) = My.Resources.intro3
-        intro(4) = My.Resources.intro4
-        intro(5) = My.Resources.intro5
-        intro(6) = My.Resources.intro6
-        intro(7) = My.Resources.intro7
-        intro(8) = My.Resources.intro8
+        intro(3) = My.Resources.intro33
+        intro(4) = My.Resources.intro3
+        intro(5) = My.Resources.intro4
+        intro(6) = My.Resources.intro5
+        intro(7) = My.Resources.intro6
+
     End Sub
     Sub SetStandR()
         standR(0) = My.Resources.standR0
@@ -118,11 +119,11 @@ Public Class Form1
             Next
         Next
     End Sub
-
+    Sub PlayLoopingBackgroundSoundFile()
+        My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.BackgroundLoop)
+    End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.Background)
-        x = 280
-        y = 150
+        PlayLoopingBackgroundSoundFile()
 
         indexIntro = 0
         indexStandR = 0
@@ -148,7 +149,7 @@ Public Class Form1
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Ryu = intro(indexIntro)
 
-        If indexIntro > 7 Then
+        If indexIntro > 6 Then
             Timer2.Enabled = True
             Timer1.Enabled = False
         End If
@@ -180,6 +181,7 @@ Public Class Form1
     End Sub
 
     Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        My.Computer.Audio.Stop()
         End
     End Sub
 End Class
