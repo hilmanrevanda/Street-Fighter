@@ -1,24 +1,25 @@
 ﻿Imports System.Drawing
 Imports System.Math
-
 Public Class Form1
-    Private bg, Ryu, intro(9), standR(4), standL(4), crouchR(4), crouchL(4) As Bitmap
-
-    Private indexIntro, indexStandR As Integer
-
+    'sprites
+    Private bg, Ryu, intro(9), standR(4), standL(4), crouch(7) As Bitmap
+    'index of activity
+    Private indexIntro, indexStandR, indexStandL, indexCrouch As Integer
+    'what Ryu is doing
+    Private doing As String
+    'location of Ryu
     Dim x As Integer = 280
-
-    Dim y As Integer = 150
+    Dim y As Integer = 140
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
         intro(2) = My.Resources.intro2
-        intro(3) = My.Resources.intro33
-        intro(4) = My.Resources.intro3
-        intro(5) = My.Resources.intro4
-        intro(6) = My.Resources.intro5
-        intro(7) = My.Resources.intro6
-
+        intro(3) = My.Resources.intro3
+        intro(4) = My.Resources.intro4
+        intro(5) = My.Resources.intro5
+        intro(6) = My.Resources.intro6
+        intro(7) = My.Resources.intro7
+        intro(8) = My.Resources.intro8
     End Sub
     Sub SetStandR()
         standR(0) = My.Resources.standR0
@@ -32,17 +33,14 @@ Public Class Form1
         standL(2) = My.Resources.standL2
         standL(3) = My.Resources.standL3
     End Sub
-    Sub SetCrouchR()
-        crouchR(0) = My.Resources.crouchR0
-        crouchR(1) = My.Resources.crouchR1
-        crouchR(2) = My.Resources.crouchR2
-        crouchR(3) = My.Resources.crouchR3
-    End Sub
-    Sub SetCrouchL()
-        crouchL(0) = My.Resources.crouchL0
-        crouchL(1) = My.Resources.crouchL1
-        crouchL(2) = My.Resources.crouchL2
-        crouchL(3) = My.Resources.crouchL3
+    Sub SetCrouch()
+        crouch(0) = My.Resources.crouchR0
+        crouch(1) = My.Resources.crouchR1
+        crouch(2) = My.Resources.crouchR2
+        crouch(3) = My.Resources.crouchR3
+        crouch(4) = My.Resources.crouchR3
+        crouch(5) = My.Resources.crouchL3
+        crouch(6) = My.Resources.crouchL3
     End Sub
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
@@ -51,7 +49,6 @@ Public Class Form1
         spriteand(bg, mask, x, y)
         spriteor(bg, sprite, x, y)
     End Sub
-
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
         Dim a As Bitmap
@@ -69,7 +66,6 @@ Public Class Form1
                 End If
             Next
         Next
-
         Return a
     End Function
     Function SpriteOf(b As Bitmap) As Bitmap
@@ -87,11 +83,10 @@ Public Class Form1
                 End If
             Next
         Next
-
         Return a
     End Function
     Sub spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'set sprite on the bg to be black
+        'set sprite on the bg to be black using and operation
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -104,9 +99,8 @@ Public Class Form1
             Next
         Next
     End Sub
-
     Sub spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'give color to the black sprite
+        'give color to the black sprite using or operation
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -127,61 +121,93 @@ Public Class Form1
 
         indexIntro = 0
         indexStandR = 0
+        indexStandR = 0
+        indexCrouch = 0
         SetIntro()
         SetStandR()
+        SetStandL()
+        SetCrouch()
 
         Timer1.Interval = 100
         Timer2.Interval = 100
 
         bg = My.Resources.background
         pbcanvas.Image = bg
-
     End Sub
+    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Left Then
+            doing = "walkL"
 
-    Sub DrawAgain()
+        ElseIf e.KeyCode = Keys.Right Then
+            doing = "walkR"
 
+        End If
+
+        If e.KeyCode = Keys.Down Then doing = "crouch"
+    End Sub
+    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+        If e.KeyCode = Keys.Down Then
+            doing = "walkR"
+        End If
+    End Sub
+    Sub ReDraw()
         bg = New Bitmap(My.Resources.background)
-        ' x = 100
-        'y = 150
         PutSprite(bg, Ryu, x, y)
     End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Ryu = intro(indexIntro)
 
-        If indexIntro > 6 Then
-            Timer2.Enabled = True
+        If indexIntro > 7 Then
             Timer1.Enabled = False
+            Timer2.Enabled = True
+            doing = "walkR"
         End If
 
         indexIntro = indexIntro + 1
 
-        DrawAgain()
+        ReDraw()
         pbcanvas.Image = bg
-
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        Ryu = standR(indexStandR)
-        indexStandR = indexStandR + 1
+        If doing = "walkL" Then
+            Ryu = standL(indexStandL)
+            indexStandL = indexStandL + 1
+        ElseIf doing = "walkR" Then
+            Ryu = standR(indexStandR)
+            indexStandR = indexStandR + 1
+        ElseIf doing = "crouch" Then
+            Ryu = crouch(indexCrouch)
+            indexCrouch = indexCrouch + 1
+            'If indexCrouch > 2 Then y = 200
+        End If
 
-        DrawAgain()
+        ReDraw()
         pbcanvas.Image = bg
-        If indexStandR > 3 Then indexStandR = 0
-    End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles pbPlay.Click
+        If indexStandR > 3 Then
+            indexStandR = 0
+        ElseIf indexStandL > 3 Then
+            indexStandL = 0
+        End If
+
+        If indexCrouch > 6 Then
+            indexCrouch = 4
+        End If
+    End Sub
+    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+
+    End Sub
+    Private Sub pbPlay_Click(sender As Object, e As EventArgs) Handles pbPlay.Click
         pbPlay.Hide()
         Timer1.Start()
         bg = New Bitmap(My.Resources.background)
         Ryu = My.Resources.standR0
-        ' x = 50
-        'y = 50
 
         PutSprite(bg, Ryu, x, y)
     End Sub
-
-    Private Sub PictureBox1_Click_1(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub pbExit_Click(sender As Object, e As EventArgs) Handles pbexit.Click
         My.Computer.Audio.Stop()
+        Timer2.Stop()
         End
     End Sub
 End Class

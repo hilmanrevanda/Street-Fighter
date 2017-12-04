@@ -121,13 +121,13 @@
   <data name="standR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="crouchL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SF_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -181,7 +181,7 @@
   <data name="intro0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btnPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -193,19 +193,19 @@
   <data name="crouchL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="crouchR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="crouchL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crouchR31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="intro3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="intro4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\intro4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="standR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
