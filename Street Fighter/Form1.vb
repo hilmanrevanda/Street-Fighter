@@ -9,7 +9,7 @@ Public Class Form1
     Private doing As String
     'location of Ryu
     Dim x As Integer = 280
-    Dim y As Integer = 140
+    Dim y As Integer = 130
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -46,7 +46,7 @@ Public Class Form1
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
         sprite = SpriteOf(d)
-        spriteand(bg, mask, x, y)
+        Spriteand(bg, mask, x, y)
         spriteor(bg, sprite, x, y)
     End Sub
     Function MaskOf(b As Bitmap) As Bitmap
@@ -69,7 +69,7 @@ Public Class Form1
         Return a
     End Function
     Function SpriteOf(b As Bitmap) As Bitmap
-        'Bg = black, sprite = white
+        'Bg = black
         Dim a As Bitmap
         Dim c As Color
         Dim i, j As Integer
@@ -85,8 +85,8 @@ Public Class Form1
         Next
         Return a
     End Function
-    Sub spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'set sprite on the bg to be black using and operation
+    Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
+        'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -99,8 +99,8 @@ Public Class Form1
             Next
         Next
     End Sub
-    Sub spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'give color to the black sprite using or operation
+    Sub Spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
+        'give color to the black sprite using or operation bcs d is sprite(white)
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -150,14 +150,17 @@ Public Class Form1
             Else
                 x = x + 5
             End If
-
         End If
 
-        If e.KeyCode = Keys.Down Then doing = "crouch"
+        If e.KeyCode = Keys.Down Then
+            doing = "crouch"
+
+        End If
     End Sub
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Then
             doing = "walkR"
+            y = 130
         End If
     End Sub
     Sub ReDraw()
@@ -190,7 +193,7 @@ Public Class Form1
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
-            'If indexCrouch > 3 Then y = +20
+            If indexCrouch > 3 Then y = 158
         End If
 
         ReDraw()
@@ -209,17 +212,17 @@ Public Class Form1
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
 
     End Sub
-    Private Sub pbPlay_Click(sender As Object, e As EventArgs) Handles pbPlay.Click
-        pbPlay.Hide()
+    Private Sub PbPlay_Click(sender As Object, e As EventArgs) Handles PbPlay.Click
+        PbPlay.Hide()
         Timer1.Start()
         bg = New Bitmap(My.Resources.background)
         Ryu = My.Resources.standR0
 
         PutSprite(bg, Ryu, x, y)
     End Sub
-    Private Sub pbExit_Click(sender As Object, e As EventArgs) Handles pbexit.Click
+    Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()
         Timer2.Stop()
-        End
+        Close()
     End Sub
 End Class

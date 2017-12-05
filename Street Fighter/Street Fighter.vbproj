@@ -217,5 +217,11 @@
   <ItemGroup>
     <None Include="Resources\no sound.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turn %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turn %282%291.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
