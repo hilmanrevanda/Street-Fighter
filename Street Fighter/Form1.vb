@@ -137,9 +137,19 @@ Public Class Form1
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Then
             doing = "walkL"
+            If x = 35 Then
+                x = 35
+            Else
+                x = x - 5
+            End If
 
         ElseIf e.KeyCode = Keys.Right Then
             doing = "walkR"
+            If x = 550 Then
+                x = 550
+            Else
+                x = x + 5
+            End If
 
         End If
 
@@ -172,13 +182,15 @@ Public Class Form1
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
             indexStandL = indexStandL + 1
+
         ElseIf doing = "walkR" Then
             Ryu = standR(indexStandR)
+
             indexStandR = indexStandR + 1
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
-            'If indexCrouch > 2 Then y = 200
+            'If indexCrouch > 3 Then y = +20
         End If
 
         ReDraw()
