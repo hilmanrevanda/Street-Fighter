@@ -2,9 +2,9 @@
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, intro(9), standR(4), standL(4), crouch(7) As Bitmap
+    Private bg, Ryu, intro(9), standR(4), standL(4), crouch(7), jump(9), jumpL(9) As Bitmap
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL As Integer
     'what Ryu is doing
     Private doing As String
     'location of Ryu
@@ -41,6 +41,28 @@ Public Class Form1
         crouch(4) = My.Resources.crouchR3
         crouch(5) = My.Resources.crouchL3
         crouch(6) = My.Resources.crouchL3
+    End Sub
+    Sub SetJump()
+        jump(0) = My.Resources.jump0
+        jump(1) = My.Resources.jump1
+        jump(2) = My.Resources.jump2
+        jump(3) = My.Resources.jump3
+        jump(4) = My.Resources.jump4
+        jump(5) = My.Resources.jump5
+        jump(6) = My.Resources.jump6
+        jump(7) = My.Resources.jump7
+        jump(8) = My.Resources.jump8
+    End Sub
+    Sub SetJumpL()
+        jumpL(0) = My.Resources.jumpL0
+        jumpL(1) = My.Resources.jumpL1
+        jumpL(2) = My.Resources.jumpL2
+        jumpL(3) = My.Resources.jumpL3
+        jumpL(4) = My.Resources.jumpL4
+        jumpL(5) = My.Resources.jumpL5
+        jumpL(6) = My.Resources.jumpL6
+        jumpL(7) = My.Resources.jumpL7
+        jumpL(8) = My.Resources.jumpL8
     End Sub
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
@@ -123,10 +145,14 @@ Public Class Form1
         indexStandR = 0
         indexStandR = 0
         indexCrouch = 0
+        indexJump = 0
+        indexJumpL = 0
         SetIntro()
         SetStandR()
         SetStandL()
         SetCrouch()
+        SetJump()
+        SetJumpL()
 
         Timer1.Interval = 100
         Timer2.Interval = 100
@@ -135,30 +161,50 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.Left Then
+        If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
             doing = "walkL"
-            If x = 35 Then
-                x = 35
+            If x = 20 Then
+                x = 20
             Else
-                x = x - 5
+                x = x - 10
             End If
 
-        ElseIf e.KeyCode = Keys.Right Then
+        ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
             doing = "walkR"
             If x = 550 Then
                 x = 550
             Else
-                x = x + 5
+                x = x + 10
             End If
         End If
 
-        If e.KeyCode = Keys.Down Then
+        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.S Then
             doing = "crouch"
+        End If
 
+        If e.KeyCode = Keys.Up Or e.KeyCode = Keys.W Then
+            doing = "jump"
+        End If
+        '20 550
+        If e.KeyCode = Keys.End Or e.KeyCode = Keys.E Then
+            If x >= 530 Then
+                doing = "jump"
+            Else
+                doing = "jumpR"
+            End If
+        End If
+
+
+        If e.KeyCode = Keys.Q Then
+            If x <= 40 Then
+                doing = "jump"
+            Else
+                doing = "jumpR"
+            End If
         End If
     End Sub
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.Down Then
+        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
             doing = "walkR"
             y = 130
         End If
@@ -188,12 +234,72 @@ Public Class Form1
 
         ElseIf doing = "walkR" Then
             Ryu = standR(indexStandR)
-
             indexStandR = indexStandR + 1
+
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
             If indexCrouch > 3 Then y = 158
+
+        ElseIf doing = "jump" Then
+            Ryu = jump(indexJump)
+            indexJump = indexJump + 1
+            If indexJump = 2 Then y = y - 10
+            If indexJump = 3 Or indexJump = 4 Or indexJump = 6 Then y = y - 15
+            If indexJump = 5 Then y = y - 20
+            If indexJump = 7 Then y = 130
+            If indexJump > 7 Then
+                doing = "walkR"
+                indexJump = 0
+            End If
+
+        ElseIf doing = "jumpR" Then
+            Ryu = jump(indexJump)
+            indexJump = indexJump + 1
+            If indexJump = 2 Or indexJump = 3 Then
+                x = x + 5
+                y = y - 10
+            End If
+            If indexJump = 4 Or indexJump = 5 Then
+                x = x + 10
+                y = y - 15
+            End If
+            If indexJump = 6 Then
+                x = x + 15
+                y = y - 20
+            End If
+            If indexJump = 7 Then
+                x = x + 20
+                y = 130
+            End If
+            If indexJump > 7 Then
+                doing = "walkR"
+                indexJump = 0
+            End If
+
+        ElseIf doing = "jumpL" Then
+            Ryu = jumpL(indexJumpL)
+            indexJumpL = indexJumpL + 1
+            If indexJumpL = 2 Or indexJumpL = 3 Then
+                x = x - 5
+                y = y - 10
+            End If
+            If indexJumpL = 4 Or indexJumpL = 5 Then
+                x = x - 10
+                y = y - 15
+            End If
+            If indexJumpL = 6 Then
+                x = x - 15
+                y = y - 20
+            End If
+            If indexJumpL = 7 Then
+                x = x - 20
+                y = 130
+            End If
+            If indexJumpL > 7 Then
+                doing = "walkL"
+                indexJumpL = 0
+            End If
         End If
 
         ReDraw()
@@ -208,6 +314,7 @@ Public Class Form1
         If indexCrouch > 6 Then
             indexCrouch = 4
         End If
+
     End Sub
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
 

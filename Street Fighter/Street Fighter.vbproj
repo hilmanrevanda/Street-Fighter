@@ -223,5 +223,59 @@
   <ItemGroup>
     <None Include="Resources\turn %282%291.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump61.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump71.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jump81.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

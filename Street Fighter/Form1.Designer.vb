@@ -25,15 +25,15 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.PbPlay = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Pbexit = New System.Windows.Forms.PictureBox()
         Me.pbcanvas = New System.Windows.Forms.PictureBox()
-        Me.PbPlay = New System.Windows.Forms.PictureBox()
-        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        CType(Me.PbPlay, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pbexit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbcanvas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PbPlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -41,6 +41,19 @@ Partial Class Form1
         '
         'Timer2
         '
+        '
+        'Timer3
+        '
+        '
+        'PbPlay
+        '
+        Me.PbPlay.Image = Global.Street_Fighter.My.Resources.Resources.btnPlay
+        Me.PbPlay.Location = New System.Drawing.Point(256, 237)
+        Me.PbPlay.Name = "PbPlay"
+        Me.PbPlay.Size = New System.Drawing.Size(293, 103)
+        Me.PbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PbPlay.TabIndex = 5
+        Me.PbPlay.TabStop = False
         '
         'PictureBox2
         '
@@ -71,24 +84,11 @@ Partial Class Form1
         Me.pbcanvas.TabIndex = 0
         Me.pbcanvas.TabStop = False
         '
-        'PbPlay
-        '
-        Me.PbPlay.Image = Global.Street_Fighter.My.Resources.Resources.btnPlay
-        Me.PbPlay.Location = New System.Drawing.Point(256, 237)
-        Me.PbPlay.Name = "PbPlay"
-        Me.PbPlay.Size = New System.Drawing.Size(293, 103)
-        Me.PbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PbPlay.TabIndex = 5
-        Me.PbPlay.TabStop = False
-        '
-        'Timer3
-        '
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.BackColor = System.Drawing.Color.Honeydew
         Me.ClientSize = New System.Drawing.Size(811, 535)
         Me.ControlBox = False
         Me.Controls.Add(Me.PbPlay)
@@ -98,10 +98,10 @@ Partial Class Form1
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Form1"
         Me.Text = "Street Fighter"
+        CType(Me.PbPlay, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Pbexit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbcanvas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PbPlay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
