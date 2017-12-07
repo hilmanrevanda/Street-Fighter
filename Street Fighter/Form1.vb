@@ -69,7 +69,7 @@ Public Class Form1
         mask = MaskOf(d)
         sprite = SpriteOf(d)
         Spriteand(bg, mask, x, y)
-        spriteor(bg, sprite, x, y)
+        Spriteor(bg, sprite, x, y)
     End Sub
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
@@ -171,8 +171,8 @@ Public Class Form1
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
             doing = "walkR"
-            If x = 550 Then
-                x = 550
+            If x = 490 Then
+                x = 490
             Else
                 x = x + 10
             End If
@@ -187,7 +187,7 @@ Public Class Form1
         End If
         '20 550
         If e.KeyCode = Keys.End Or e.KeyCode = Keys.E Then
-            If x >= 530 Then
+            If x >= 470 Then
                 doing = "jump"
             Else
                 doing = "jumpR"
@@ -199,7 +199,7 @@ Public Class Form1
             If x <= 40 Then
                 doing = "jump"
             Else
-                doing = "jumpR"
+                doing = "jumpL"
             End If
         End If
     End Sub
