@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
@@ -7,12 +8,54 @@ Public Class Form1
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL, indexBeeL, indexBeeR As Integer
     'what Ryu is doing
     Private doing As String
+    Private DLEFT As String = "LEFT"
+    Private DRIGHT As String = "RIGHT"
+    Private Direction As String = DRIGHT
     'location of Ryu
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
     Dim Bx As Integer = 500
     Dim By As Integer = 100
 
+    'ryu box
+    Public RyuBox As List(Of Point)
+
+    'Enemies box
+    Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
+    Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
+
+    Sub Emove(ke As String)
+        If (ke Is "Right") Then
+            For i = 0 To EnemiesBoxFromLeft.Count - 1
+                EnemiesBoxFromLeft(i) = GoMove(EnemiesBoxFromLeft(i), 1)
+            Next
+        Else
+            For i = 0 To EnemiesBoxFromRight.Count - 1
+                EnemiesBoxFromRight(i) = GoMove(EnemiesBoxFromRight(i), -1)
+            Next
+        End If
+    End Sub
+
+    Function GoMove(P As List(Of Point), count As Integer) As List(Of Point)
+        Dim TempPoint As Point
+        For index = 0 To P.Count - 1
+            TempPoint = P(index)
+            TempPoint.X = P(index).X + count
+            P(index) = TempPoint
+        Next
+        Return P
+    End Function
+
+    Sub InitRyuBox()
+        Dim A As Point
+        RyuBox = New List(Of Point)
+        A.X = 0
+        A.Y = 0
+        RyuBox.Add(A)
+        A.X = Rx
+        A.Y = Ry
+        RyuBox.Add(A)
+    End Sub
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -126,6 +169,11 @@ Public Class Form1
         Next
         Return a
     End Function
+
+    Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+    End Sub
+
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
@@ -176,6 +224,8 @@ Public Class Form1
         SetJumpL()
         SetBeeL()
         SetBeeR()
+        InitRyuBox()
+        'pbcanvas.Invalidate()
 
         Timer1.Interval = 100
         Timer2.Interval = 100
@@ -186,6 +236,7 @@ Public Class Form1
 
 
     End Sub
+
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
             doing = "walkL"
@@ -193,6 +244,9 @@ Public Class Form1
                 Rx = 20
             Else
                 Rx = Rx - 10
+                RyuBox = GoMove(RyuBox, -10)
+                pbcanvas.Invalidate()
+                Console.WriteLine(RyuBox.First.X)
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
@@ -201,6 +255,9 @@ Public Class Form1
                 Rx = 490
             Else
                 Rx = Rx + 10
+                RyuBox = GoMove(RyuBox, 10)
+                pbcanvas.Invalidate()
+                Console.WriteLine(RyuBox.First.X)
             End If
         End If
 
@@ -262,11 +319,9 @@ Public Class Form1
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
             indexStandL = indexStandL + 1
-
         ElseIf doing = "walkR" Then
             Ryu = standR(indexStandR)
             indexStandR = indexStandR + 1
-
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
