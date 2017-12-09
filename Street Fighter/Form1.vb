@@ -438,6 +438,7 @@ Public Class Form1
         bg = New Bitmap(My.Resources.background)
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
+        obsR = My.Resources.beeR0
 
         PutSprite(bg, Ryu, Rx, Ry)
     End Sub
