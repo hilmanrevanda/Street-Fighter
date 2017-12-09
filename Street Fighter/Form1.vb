@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
@@ -7,9 +8,53 @@ Public Class Form1
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL As Integer
     'what Ryu is doing
     Private doing As String
+    Private DLEFT As String = "LEFT"
+    Private DRIGHT As String = "RIGHT"
+    Private Direction As String = DRIGHT
     'location of Ryu
-    Dim x As Integer = 280
-    Dim y As Integer = 130
+    Public x As Integer = 280
+    Public y As Integer = 130
+
+    'ryu box
+    Public RyuBox As List(Of Point)
+
+    'Enemies box
+    Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
+    Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
+
+    Sub Emove(ke As String)
+        If (ke Is "Right") Then
+            For i = 0 To EnemiesBoxFromLeft.Count - 1
+                EnemiesBoxFromLeft(i) = GoMove(EnemiesBoxFromLeft(i), 1)
+            Next
+        Else
+            For i = 0 To EnemiesBoxFromRight.Count - 1
+                EnemiesBoxFromRight(i) = GoMove(EnemiesBoxFromRight(i), -1)
+            Next
+        End If
+    End Sub
+
+    Function GoMove(P As List(Of Point), count As Integer) As List(Of Point)
+        Dim TempPoint As Point
+        For index = 0 To P.Count - 1
+            TempPoint = P(index)
+            TempPoint.X = P(index).X + count
+            P(index) = TempPoint
+        Next
+        Return P
+    End Function
+
+    Sub InitRyuBox()
+        Dim A As Point
+        RyuBox = New List(Of Point)
+        A.X = 0
+        A.Y = 0
+        RyuBox.Add(A)
+        A.X = x
+        A.Y = y
+        RyuBox.Add(A)
+    End Sub
+
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -88,6 +133,7 @@ Public Class Form1
                 End If
             Next
         Next
+
         Return a
     End Function
     Function SpriteOf(b As Bitmap) As Bitmap
@@ -107,6 +153,11 @@ Public Class Form1
         Next
         Return a
     End Function
+
+    Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+    End Sub
+
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
@@ -153,6 +204,8 @@ Public Class Form1
         SetCrouch()
         SetJump()
         SetJumpL()
+        InitRyuBox()
+        'pbcanvas.Invalidate()
 
         Timer1.Interval = 100
         Timer2.Interval = 100
@@ -160,21 +213,28 @@ Public Class Form1
         bg = My.Resources.background
         pbcanvas.Image = bg
     End Sub
+
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            doing = "walkL"
+            doing = "walk"
             If x = 20 Then
                 x = 20
             Else
                 x = x - 10
+                RyuBox = GoMove(RyuBox, -10)
+                pbcanvas.Invalidate()
+                Console.WriteLine(RyuBox.First.X)
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            doing = "walkR"
+            doing = "walk"
             If x = 490 Then
                 x = 490
             Else
                 x = x + 10
+                RyuBox = GoMove(RyuBox, 10)
+                pbcanvas.Invalidate()
+                Console.WriteLine(RyuBox.First.X)
             End If
         End If
 
@@ -205,7 +265,7 @@ Public Class Form1
     End Sub
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
-            doing = "walkR"
+            doing = "walk"
             y = 130
         End If
     End Sub
@@ -219,7 +279,7 @@ Public Class Form1
         If indexIntro > 7 Then
             Timer1.Enabled = False
             Timer2.Enabled = True
-            doing = "walkR"
+            doing = "walk"
         End If
 
         indexIntro = indexIntro + 1
@@ -228,14 +288,13 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        If doing = "walkL" Then
-            Ryu = standL(indexStandL)
+        If doing = "walk" Then
+            If Direction Is DLEFT Then
+                Ryu = standL(indexStandL)
+            Else
+                Ryu = standR(indexStandR)
+            End If
             indexStandL = indexStandL + 1
-
-        ElseIf doing = "walkR" Then
-            Ryu = standR(indexStandR)
-            indexStandR = indexStandR + 1
-
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
@@ -249,7 +308,7 @@ Public Class Form1
             If indexJump = 5 Then y = y - 20
             If indexJump = 7 Then y = 130
             If indexJump > 7 Then
-                doing = "walkR"
+                doing = "walk"
                 indexJump = 0
             End If
 
