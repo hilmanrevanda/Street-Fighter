@@ -319,6 +319,9 @@ Public Class Form1
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
             indexStandL = indexStandL + 1
+        ElseIf doing = "walkR" Then
+            Ryu = standR(indexStandR)
+            indexStandR = indexStandR + 1
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
