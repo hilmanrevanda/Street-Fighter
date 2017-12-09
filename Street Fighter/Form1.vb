@@ -46,6 +46,24 @@ Public Class Form1
         Return P
     End Function
 
+    Sub InitEnemyBox()
+        Dim A As Point
+        EnemiesBoxFromLeft = New List(Of List(Of Point))
+        Dim box As List(Of Point) = New List(Of Point)
+        A.X = 606
+        A.Y = 133
+        box.Add(A)
+        A.X = 652
+        A.Y = 133
+        box.Add(A)
+        A.X = 652
+        A.Y = 161
+        box.Add(A)
+        A.X = 606
+        A.Y = 161
+        box.Add(A)
+        EnemiesBoxFromLeft.Add(box)
+    End Sub
     Sub InitRyuBox()
         Dim A As Point
         RyuBox = New List(Of Point)
@@ -62,6 +80,7 @@ Public Class Form1
         A.Y = 259
         RyuBox.Add(A)
     End Sub
+
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -183,6 +202,10 @@ Public Class Form1
 
     Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+
+        For Each enemy In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
     End Sub
 
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
@@ -236,10 +259,11 @@ Public Class Form1
         SetBeeL()
         SetBeeR()
         InitRyuBox()
+        InitEnemyBox()
         'pbcanvas.Invalidate()
 
-        Timer1.Interval = 100
-        Timer2.Interval = 100
+        Timer1.Interval = 50
+        Timer2.Interval = 50
         Timer3.Interval = 50
 
         bg = My.Resources.background
@@ -250,7 +274,7 @@ Public Class Form1
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+            If conditions() Then
                 doing = "walkL"
             End If
             If Rx = 20 Then
@@ -263,7 +287,7 @@ Public Class Form1
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+            If conditions() Then
                 doing = "walkR"
             End If
             If Rx = 490 Then
@@ -301,6 +325,12 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Function conditions() As Boolean
+        If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
+        Return False
+    End Function
+
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
             doing = "walkR"
