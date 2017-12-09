@@ -49,11 +49,17 @@ Public Class Form1
     Sub InitRyuBox()
         Dim A As Point
         RyuBox = New List(Of Point)
-        A.X = 0
-        A.Y = 0
+        A.X = 343
+        A.Y = 163
         RyuBox.Add(A)
-        A.X = Rx
-        A.Y = Ry
+        A.X = 398
+        A.Y = 163
+        RyuBox.Add(A)
+        A.X = 398
+        A.Y = 259
+        RyuBox.Add(A)
+        A.X = 343
+        A.Y = 259
         RyuBox.Add(A)
     End Sub
     Sub SetIntro()
@@ -110,6 +116,11 @@ Public Class Form1
         jumpL(7) = My.Resources.jumpL7
         jumpL(8) = My.Resources.jumpL8
     End Sub
+
+    Private Sub pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
+        Console.WriteLine(e.Location)
+    End Sub
+
     Sub SetBeeL()
         beeL(0) = My.Resources.bee0
         beeL(1) = My.Resources.bee1
@@ -239,7 +250,9 @@ Public Class Form1
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            doing = "walkL"
+            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+                doing = "walkL"
+            End If
             If Rx = 20 Then
                 Rx = 20
             Else
@@ -250,7 +263,9 @@ Public Class Form1
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            doing = "walkR"
+            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+                doing = "walkR"
+            End If
             If Rx = 490 Then
                 Rx = 490
             Else
