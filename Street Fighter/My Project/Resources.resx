@@ -220,6 +220,24 @@
   <data name="standR00" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\turn (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bee0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bee1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bee2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bee3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bee4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bee5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="jump0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -273,5 +291,23 @@
   </data>
   <data name="jumpL8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump81.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeR5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bee51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

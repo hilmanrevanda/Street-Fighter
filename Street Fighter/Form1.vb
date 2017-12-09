@@ -3,17 +3,19 @@ Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, intro(9), standR(4), standL(4), crouch(7), jump(9), jumpL(9) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouch(7), jump(9), jumpL(9), beeL(6), beeR(6) As Bitmap
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL, indexBeeL, indexBeeR As Integer
     'what Ryu is doing
     Private doing As String
     Private DLEFT As String = "LEFT"
     Private DRIGHT As String = "RIGHT"
     Private Direction As String = DRIGHT
     'location of Ryu
-    Public x As Integer = 280
-    Public y As Integer = 130
+    Dim Rx As Integer = 280
+    Dim Ry As Integer = 130
+    Dim Bx As Integer = 500
+    Dim By As Integer = 100
 
     'ryu box
     Public RyuBox As List(Of Point)
@@ -50,11 +52,10 @@ Public Class Form1
         A.X = 0
         A.Y = 0
         RyuBox.Add(A)
-        A.X = x
-        A.Y = y
+        A.X = Rx
+        A.Y = Ry
         RyuBox.Add(A)
     End Sub
-
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -109,6 +110,22 @@ Public Class Form1
         jumpL(7) = My.Resources.jumpL7
         jumpL(8) = My.Resources.jumpL8
     End Sub
+    Sub SetBeeL()
+        beeL(0) = My.Resources.bee0
+        beeL(1) = My.Resources.bee1
+        beeL(2) = My.Resources.bee2
+        beeL(3) = My.Resources.bee3
+        beeL(4) = My.Resources.bee4
+        beeL(5) = My.Resources.bee5
+    End Sub
+    Sub SetBeeR()
+        beeR(0) = My.Resources.beeR0
+        beeR(1) = My.Resources.beeR1
+        beeR(2) = My.Resources.beeR2
+        beeR(3) = My.Resources.beeR3
+        beeR(4) = My.Resources.beeR4
+        beeR(5) = My.Resources.beeR5
+    End Sub
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
@@ -133,7 +150,6 @@ Public Class Form1
                 End If
             Next
         Next
-
         Return a
     End Function
     Function SpriteOf(b As Bitmap) As Bitmap
@@ -191,47 +207,54 @@ Public Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PlayLoopingBackgroundSoundFile()
-
         indexIntro = 0
         indexStandR = 0
         indexStandR = 0
         indexCrouch = 0
         indexJump = 0
         indexJumpL = 0
+        indexBeeL = 0
+        indexBeeR = 0
+
         SetIntro()
         SetStandR()
         SetStandL()
         SetCrouch()
         SetJump()
         SetJumpL()
+        SetBeeL()
+        SetBeeR()
         InitRyuBox()
         'pbcanvas.Invalidate()
 
         Timer1.Interval = 100
         Timer2.Interval = 100
+        Timer3.Interval = 50
 
         bg = My.Resources.background
         pbcanvas.Image = bg
+
+
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            doing = "walk"
-            If x = 20 Then
-                x = 20
+            doing = "walkL"
+            If Rx = 20 Then
+                Rx = 20
             Else
-                x = x - 10
+                Rx = Rx - 10
                 RyuBox = GoMove(RyuBox, -10)
                 pbcanvas.Invalidate()
                 Console.WriteLine(RyuBox.First.X)
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            doing = "walk"
-            If x = 490 Then
-                x = 490
+            doing = "walkR"
+            If Rx = 490 Then
+                Rx = 490
             Else
-                x = x + 10
+                Rx = Rx + 10
                 RyuBox = GoMove(RyuBox, 10)
                 pbcanvas.Invalidate()
                 Console.WriteLine(RyuBox.First.X)
@@ -247,7 +270,7 @@ Public Class Form1
         End If
         '20 550
         If e.KeyCode = Keys.End Or e.KeyCode = Keys.E Then
-            If x >= 470 Then
+            If Rx >= 470 Then
                 doing = "jump"
             Else
                 doing = "jumpR"
@@ -255,8 +278,8 @@ Public Class Form1
         End If
 
 
-        If e.KeyCode = Keys.Q Then
-            If x <= 40 Then
+        If e.KeyCode = Keys.Q Or e.KeyCode = Keys.ShiftKey Then
+            If Rx <= 40 Then
                 doing = "jump"
             Else
                 doing = "jumpL"
@@ -265,13 +288,17 @@ Public Class Form1
     End Sub
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
-            doing = "walk"
-            y = 130
+            doing = "walkR"
+            Ry = 130
         End If
     End Sub
     Sub ReDraw()
         bg = New Bitmap(My.Resources.background)
-        PutSprite(bg, Ryu, x, y)
+        PutSprite(bg, Ryu, Rx, Ry)
+
+        If Timer3.Enabled = True Then
+            PutSprite(bg, obsL, Bx, By)
+        End If
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Ryu = intro(indexIntro)
@@ -279,7 +306,8 @@ Public Class Form1
         If indexIntro > 7 Then
             Timer1.Enabled = False
             Timer2.Enabled = True
-            doing = "walk"
+            doing = "walkR"
+            Timer3.Enabled = True
         End If
 
         indexIntro = indexIntro + 1
@@ -288,27 +316,23 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        If doing = "walk" Then
-            If Direction Is DLEFT Then
-                Ryu = standL(indexStandL)
-            Else
-                Ryu = standR(indexStandR)
-            End If
+        If doing = "walkL" Then
+            Ryu = standL(indexStandL)
             indexStandL = indexStandL + 1
         ElseIf doing = "crouch" Then
             Ryu = crouch(indexCrouch)
             indexCrouch = indexCrouch + 1
-            If indexCrouch > 3 Then y = 158
+            If indexCrouch > 3 Then Ry = 158
 
         ElseIf doing = "jump" Then
             Ryu = jump(indexJump)
             indexJump = indexJump + 1
-            If indexJump = 2 Then y = y - 10
-            If indexJump = 3 Or indexJump = 4 Or indexJump = 6 Then y = y - 15
-            If indexJump = 5 Then y = y - 20
-            If indexJump = 7 Then y = 130
+            If indexJump = 2 Then Ry = Ry - 10
+            If indexJump = 3 Or indexJump = 4 Or indexJump = 6 Then Ry = Ry - 15
+            If indexJump = 5 Then Ry = Ry - 20
+            If indexJump = 7 Then Ry = 130
             If indexJump > 7 Then
-                doing = "walk"
+                doing = "walkR"
                 indexJump = 0
             End If
 
@@ -316,20 +340,20 @@ Public Class Form1
             Ryu = jump(indexJump)
             indexJump = indexJump + 1
             If indexJump = 2 Or indexJump = 3 Then
-                x = x + 5
-                y = y - 10
+                Rx = Rx + 5
+                Ry = Ry - 10
             End If
             If indexJump = 4 Or indexJump = 5 Then
-                x = x + 10
-                y = y - 15
+                Rx = Rx + 10
+                Ry = Ry - 15
             End If
             If indexJump = 6 Then
-                x = x + 15
-                y = y - 20
+                Rx = Rx + 15
+                Ry = Ry - 20
             End If
             If indexJump = 7 Then
-                x = x + 20
-                y = 130
+                Rx = Rx + 20
+                Ry = 130
             End If
             If indexJump > 7 Then
                 doing = "walkR"
@@ -340,26 +364,27 @@ Public Class Form1
             Ryu = jumpL(indexJumpL)
             indexJumpL = indexJumpL + 1
             If indexJumpL = 2 Or indexJumpL = 3 Then
-                x = x - 5
-                y = y - 10
+                Rx = Rx - 5
+                Ry = Ry - 10
             End If
             If indexJumpL = 4 Or indexJumpL = 5 Then
-                x = x - 10
-                y = y - 15
+                Rx = Rx - 10
+                Ry = Ry - 15
             End If
             If indexJumpL = 6 Then
-                x = x - 15
-                y = y - 20
+                Rx = Rx - 15
+                Ry = Ry - 20
             End If
             If indexJumpL = 7 Then
-                x = x - 20
-                y = 130
+                Rx = Rx - 20
+                Ry = 130
             End If
             If indexJumpL > 7 Then
                 doing = "walkL"
                 indexJumpL = 0
             End If
         End If
+
 
         ReDraw()
         pbcanvas.Image = bg
@@ -376,6 +401,17 @@ Public Class Form1
 
     End Sub
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+        obsL = beeL(indexBeeL)
+        obsR = beeR(indexBeeR)
+
+        ReDraw()
+        pbcanvas.Image = bg
+
+        indexBeeL = indexBeeL + 1
+        indexBeeR = indexBeeR + 1
+
+        If indexBeeL > 4 Then indexBeeL = 0
+        If indexBeeR > 4 Then indexBeeR = 0
 
     End Sub
     Private Sub PbPlay_Click(sender As Object, e As EventArgs) Handles PbPlay.Click
@@ -383,8 +419,9 @@ Public Class Form1
         Timer1.Start()
         bg = New Bitmap(My.Resources.background)
         Ryu = My.Resources.standR0
+        obsL = My.Resources.bee0
 
-        PutSprite(bg, Ryu, x, y)
+        PutSprite(bg, Ryu, Rx, Ry)
     End Sub
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()

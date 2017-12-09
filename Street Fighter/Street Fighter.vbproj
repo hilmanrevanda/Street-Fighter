@@ -277,5 +277,41 @@
   <ItemGroup>
     <None Include="Resources\jump81.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bee51.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
