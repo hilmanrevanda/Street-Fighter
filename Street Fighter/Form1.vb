@@ -352,6 +352,9 @@ Public Class Form1
                 doing = "jumpFL"
             End If
         End If
+        If e.KeyCode = Keys.CapsLock Then
+            doing = "hadouken"
+        End If
     End Sub
 
     Function Conditions() As Boolean
@@ -381,6 +384,7 @@ Public Class Form1
             Timer1.Enabled = False
             Timer2.Enabled = True
             doing = "walkR"
+            facing = "right"
             Timer3.Enabled = True
         End If
 
@@ -443,8 +447,8 @@ Public Class Form1
 
             'jumps forward to right side
         ElseIf doing = "jumpFR" Then
-        Ryu = jumpL(indexJumpR)
-        indexJumpR = indexJumpR + 1
+            Ryu = jumpL(indexJumpR)
+            indexJumpR = indexJumpR + 1
             If indexJumpR = 2 Or indexJumpR = 3 Then
                 Rx = Rx + 5
                 Ry = Ry - 10
@@ -461,15 +465,15 @@ Public Class Form1
                 Rx = Rx + 20
                 Ry = 130
             End If
-        If indexJumpR > 7 Then
-            doing = "walkR"
-            indexJumpR = 0
-        End If
+            If indexJumpR > 7 Then
+                doing = "walkR"
+                indexJumpR = 0
+            End If
 
 
-        'jumps forward to left side
+            'jumps forward to left side
         ElseIf doing = "jumpFL" Then
-        Ryu = jumpL(indexJumpL)
+            Ryu = jumpL(indexJumpL)
             indexJumpL = indexJumpL + 1
             If indexJumpL = 2 Or indexJumpL = 3 Then
                 Rx = Rx - 5
@@ -490,6 +494,27 @@ Public Class Form1
             If indexJumpL > 7 Then
                 doing = "walkL"
                 indexJumpL = 0
+            End If
+
+            'hadouken
+        ElseIf doing = "hadouken" Then
+            'hadouken left
+            If facing = "left" Then
+                Ryu = hdkL(indexHdkL)
+                indexHdkL = indexHdkL + 1
+                If indexHdkL > 3 Then
+                    indexHdkL = 0
+                    doing = "walkL"
+                End If
+            End If
+            'hadouken right
+            If facing = "right" Then
+                Ryu = hdkR(indexHdkR)
+                indexHdkR = indexHdkR + 1
+                If indexHdkR > 3 Then
+                    indexHdkR = 0
+                    doing = "walkR"
+                End If
             End If
         End If
 
