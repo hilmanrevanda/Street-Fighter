@@ -46,6 +46,24 @@ Public Class Form1
         Return P
     End Function
 
+    Sub InitEnemyBox()
+        Dim A As Point
+        EnemiesBoxFromLeft = New List(Of List(Of Point))
+        Dim box As List(Of Point) = New List(Of Point)
+        A.X = 606
+        A.Y = 133
+        box.Add(A)
+        A.X = 652
+        A.Y = 133
+        box.Add(A)
+        A.X = 652
+        A.Y = 221
+        box.Add(A)
+        A.X = 606
+        A.Y = 221
+        box.Add(A)
+        EnemiesBoxFromLeft.Add(box)
+    End Sub
     Sub InitRyuBox()
         Dim A As Point
         RyuBox = New List(Of Point)
@@ -62,6 +80,7 @@ Public Class Form1
         A.Y = 259
         RyuBox.Add(A)
     End Sub
+
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -183,6 +202,10 @@ Public Class Form1
 
     Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+
+        For Each enemy In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
     End Sub
 
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
@@ -236,10 +259,11 @@ Public Class Form1
         SetBeeL()
         SetBeeR()
         InitRyuBox()
+        InitEnemyBox()
         'pbcanvas.Invalidate()
 
-        Timer1.Interval = 100
-        Timer2.Interval = 100
+        Timer1.Interval = 50
+        Timer2.Interval = 50
         Timer3.Interval = 50
 
         bg = My.Resources.background
@@ -250,7 +274,7 @@ Public Class Form1
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+            If conditions() Then
                 doing = "walkL"
             End If
             If Rx = 20 Then
@@ -260,10 +284,11 @@ Public Class Form1
                 RyuBox = GoMove(RyuBox, -10)
                 pbcanvas.Invalidate()
                 Console.WriteLine(RyuBox.First.X)
+                BoxsCheck()
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" Then
+            If conditions() Then
                 doing = "walkR"
             End If
             If Rx = 490 Then
@@ -273,6 +298,7 @@ Public Class Form1
                 RyuBox = GoMove(RyuBox, 10)
                 pbcanvas.Invalidate()
                 Console.WriteLine(RyuBox.First.X)
+                BoxsCheck()
             End If
         End If
 
@@ -301,6 +327,12 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Function conditions() As Boolean
+        If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
+        Return False
+    End Function
+
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
             doing = "walkR"
@@ -447,4 +479,87 @@ Public Class Form1
         Timer2.Stop()
         Close()
     End Sub
+
+
+
+    'check box
+
+    Function BoxsCheck() As Point
+        For Each Enemy In EnemiesBoxFromLeft
+            If IsBoxClip(Enemy) Then
+                Console.WriteLine("hit")
+                MsgBox("HIT!!")
+            Else
+                Console.WriteLine("not hit")
+            End If
+        Next
+    End Function
+
+    Function IsBoxClip(Enemy As List(Of Point)) As Boolean
+        Dim B, T As Integer
+        Dim NP, NW As Point
+        Dim IsAInside, IsBInside, TAisAcc, TBisAcc As Boolean
+
+        'NewPolygon = New List(Of Point)()
+        For A = 0 To RyuBox.Count - 1
+            B = NextPoint(A, RyuBox.Count)
+
+            For S = 0 To Enemy.Count - 1
+                T = NextPoint(S, Enemy.Count)
+                NW = Normal(Enemy(S), Enemy(T))
+                NP = Normal(RyuBox(A), RyuBox(B))
+
+                'Declare In Out
+                IsAInside = InsidePoint(Enemy(S), Enemy(T), RyuBox(B))
+                IsBInside = InsidePoint(Enemy(S), Enemy(T), RyuBox(A))
+
+                If IsAInside = Not IsBInside Then
+                    'Than In Out Validation
+                    TAisAcc = TisAcc(Tis(RyuBox(A), RyuBox(B), Enemy(S), NW))
+                    TBisAcc = TisAcc(Tis(Enemy(S), Enemy(T), RyuBox(A), NP))
+                    If TAisAcc And TBisAcc Then Return True
+                End If
+            Next
+        Next
+        Return False
+    End Function
+
+    Function NextPoint(Point As Integer, Total As Integer) As Integer
+        If Point + 1 = Total Then Return 0
+        Return Point + 1
+    End Function
+
+    Function Normal(WA As Point, WB As Point) As Point
+        Dim N As Point
+        N.X = WB.Y - WA.Y
+        N.Y = WB.X - WA.X
+        N.Y = N.Y * -1 'Clockwise
+        Return N
+    End Function
+
+    Function InsidePoint(WA As Point, WB As Point, S As Point) As Boolean
+        Dim N As Point
+        Dim D As Point
+
+        N = Normal(WA, WB)
+
+        D.X = (S.X - WA.X) * N.X
+        D.Y = (S.Y - WA.Y) * N.Y
+
+        Dim result = D.Y + D.X
+        If result >= 0 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Function Tis(A As Point, B As Point, P As Point, N As Point) As Decimal
+        Return ((((P.X - A.X) * N.X) + ((P.Y - A.Y) * N.Y)) / (((B.X - A.X) * N.X) + ((B.Y - A.Y) * N.Y))) * 1.0
+    End Function
+
+    Function TisAcc(X As Decimal) As Boolean
+        If X >= 0 And X <= 1 Then Return True
+        Return False
+    End Function
 End Class
