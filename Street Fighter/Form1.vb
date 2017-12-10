@@ -14,7 +14,6 @@ Public Class Form1
     'location of Ryu
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
-    'inital location of obstacle
     Dim Bx As Integer = 500
     Dim By As Integer = 100
 
@@ -185,6 +184,7 @@ Public Class Form1
     Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
     End Sub
+
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
