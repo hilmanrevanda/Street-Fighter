@@ -3,17 +3,19 @@ Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouch(7), jump(9), jumpL(9), beeL(6), beeR(6) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(5), hdkR(5), beeL(6), beeR(6) As Bitmap
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJump, indexJumpL, indexBeeL, indexBeeR As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
     'what Ryu is doing
     Private doing As String
+    Private facing As String
     Private DLEFT As String = "LEFT"
     Private DRIGHT As String = "RIGHT"
-    Private Direction As String = DRIGHT
+    Private Direction As String = "DRIGHT"
     'location of Ryu
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
+    'location of obstacle
     Dim Bx As Integer = 500
     Dim By As Integer = 100
 
@@ -80,7 +82,9 @@ Public Class Form1
         A.Y = 259
         RyuBox.Add(A)
     End Sub
-
+    Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
+        Console.WriteLine(e.Location)
+    End Sub
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -104,25 +108,30 @@ Public Class Form1
         standL(2) = My.Resources.standL2
         standL(3) = My.Resources.standL3
     End Sub
-    Sub SetCrouch()
-        crouch(0) = My.Resources.crouchR0
-        crouch(1) = My.Resources.crouchR1
-        crouch(2) = My.Resources.crouchR2
-        crouch(3) = My.Resources.crouchR3
-        crouch(4) = My.Resources.crouchR3
-        crouch(5) = My.Resources.crouchL3
-        crouch(6) = My.Resources.crouchL3
+    Sub SetCrouchR()
+        crouchR(0) = My.Resources.crouchR0
+        crouchR(1) = My.Resources.crouchR1
+        crouchR(2) = My.Resources.crouchR2
+        crouchR(3) = My.Resources.crouchR3
+        crouchR(4) = My.Resources.crouchR3
     End Sub
-    Sub SetJump()
-        jump(0) = My.Resources.jump0
-        jump(1) = My.Resources.jump1
-        jump(2) = My.Resources.jump2
-        jump(3) = My.Resources.jump3
-        jump(4) = My.Resources.jump4
-        jump(5) = My.Resources.jump5
-        jump(6) = My.Resources.jump6
-        jump(7) = My.Resources.jump7
-        jump(8) = My.Resources.jump8
+    Sub SetCrouchL()
+        crouchL(0) = My.Resources.crouchL0
+        crouchL(1) = My.Resources.crouchL1
+        crouchL(2) = My.Resources.crouchL2
+        crouchL(3) = My.Resources.crouchL3
+        crouchL(4) = My.Resources.crouchL3
+    End Sub
+    Sub SetJumpR()
+        JumpR(0) = My.Resources.jump0
+        JumpR(1) = My.Resources.jump1
+        JumpR(2) = My.Resources.jump2
+        JumpR(3) = My.Resources.jump3
+        JumpR(4) = My.Resources.jump4
+        JumpR(5) = My.Resources.jump5
+        JumpR(6) = My.Resources.jump6
+        JumpR(7) = My.Resources.jump7
+        JumpR(8) = My.Resources.jump8
     End Sub
     Sub SetJumpL()
         jumpL(0) = My.Resources.jumpL0
@@ -135,11 +144,20 @@ Public Class Form1
         jumpL(7) = My.Resources.jumpL7
         jumpL(8) = My.Resources.jumpL8
     End Sub
-
-    Private Sub pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
-        Console.WriteLine(e.Location)
+    Sub SethdkL()
+        hdkL(0) = My.Resources.hdkL0
+        hdkL(1) = My.Resources.hdkL1
+        hdkL(2) = My.Resources.hdkL2
+        hdkL(3) = My.Resources.hdkL3
+        hdkL(4) = My.Resources.hdkL4
     End Sub
-
+    Sub SethdkR()
+        hdkR(0) = My.Resources.hdkR0
+        hdkR(1) = My.Resources.hdkR1
+        hdkR(2) = My.Resources.hdkR2
+        hdkR(3) = My.Resources.hdkR3
+        hdkR(4) = My.Resources.hdkR4
+    End Sub
     Sub SetBeeL()
         beeL(0) = My.Resources.bee0
         beeL(1) = My.Resources.bee1
@@ -171,6 +189,7 @@ Public Class Form1
 
         a = b.Clone
         c = a.GetPixel(0, 0) ' color of bg of sprite
+
         For i = 0 To b.Width - 1
             For j = 0 To b.Height - 1
                 If a.GetPixel(i, j) = c Then
@@ -200,7 +219,7 @@ Public Class Form1
         Return a
     End Function
 
-    Private Sub pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
 
         For Each enemy In EnemiesBoxFromLeft
@@ -245,19 +264,24 @@ Public Class Form1
         indexStandR = 0
         indexStandR = 0
         indexCrouch = 0
-        indexJump = 0
         indexJumpL = 0
+        indexJumpR = 0
         indexBeeL = 0
         indexBeeR = 0
+        indexHdkR = 0
+        indexHdkL = 0
 
         SetIntro()
         SetStandR()
         SetStandL()
-        SetCrouch()
-        SetJump()
+        SetCrouchL()
+        SetCrouchR()
+        SetJumpR()
         SetJumpL()
         SetBeeL()
         SetBeeR()
+        SethdkR()
+        SethdkL()
         InitRyuBox()
         InitEnemyBox()
         'pbcanvas.Invalidate()
@@ -269,13 +293,15 @@ Public Class Form1
         bg = My.Resources.background
         pbcanvas.Image = bg
 
-
+        If doing = "walkR" Then facing = "right"
+        If doing = "walkL" Then facing = "left"
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
-            If conditions() Then
+            If Conditions() Then
                 doing = "walkL"
+                facing = "left"
             End If
             If Rx = 20 Then
                 Rx = 20
@@ -288,8 +314,9 @@ Public Class Form1
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
-            If conditions() Then
+            If Conditions() Then
                 doing = "walkR"
+                facing = "right"
             End If
             If Rx = 490 Then
                 Rx = 490
@@ -314,28 +341,28 @@ Public Class Form1
             If Rx >= 470 Then
                 doing = "jump"
             Else
-                doing = "jumpR"
+                doing = "jumpFR"
             End If
         End If
-
 
         If e.KeyCode = Keys.Q Or e.KeyCode = Keys.ShiftKey Then
             If Rx <= 40 Then
                 doing = "jump"
             Else
-                doing = "jumpL"
+                doing = "jumpFL"
             End If
         End If
     End Sub
 
-    Function conditions() As Boolean
-        If doing IsNot "jump" And doing IsNot "jumpL" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
+    Function Conditions() As Boolean
+        If doing IsNot "jumpR" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
         Return False
     End Function
 
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
-            doing = "walkR"
+            If facing = "right" Then doing = "walkR"
+            If facing = "left" Then doing = "walkL"
             Ry = 130
         End If
     End Sub
@@ -363,55 +390,86 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        'walks to left side
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
             indexStandL = indexStandL + 1
+
+            'walks to right side
         ElseIf doing = "walkR" Then
             Ryu = standR(indexStandR)
             indexStandR = indexStandR + 1
+
+            'crouchs
         ElseIf doing = "crouch" Then
-            Ryu = crouch(indexCrouch)
-            indexCrouch = indexCrouch + 1
+            'crouchs facing right
+            If facing = "right" Then
+                Ryu = crouchR(indexCrouch)
+                indexCrouch = indexCrouch + 1
+                'crouchs facing right
+            ElseIf facing = "left" Then
+                Ryu = crouchL(indexCrouch)
+                indexCrouch = indexCrouch + 1
+            End If
             If indexCrouch > 3 Then Ry = 158
 
+            'jumps 
         ElseIf doing = "jump" Then
-            Ryu = jump(indexJump)
-            indexJump = indexJump + 1
-            If indexJump = 2 Then Ry = Ry - 10
-            If indexJump = 3 Or indexJump = 4 Or indexJump = 6 Then Ry = Ry - 15
-            If indexJump = 5 Then Ry = Ry - 20
-            If indexJump = 7 Then Ry = 130
-            If indexJump > 7 Then
-                doing = "walkR"
-                indexJump = 0
+            'jumps facing right
+            If facing = "right" Then
+                Ryu = JumpR(indexJumpR)
+                If indexJumpR > 7 Then
+                    doing = "walkR"
+                    indexJumpR = 0
+                End If
+                indexJumpR = indexJumpR + 1
+                If indexJumpR = 2 Then Ry = Ry - 10
+                If indexJumpR = 3 Or indexJumpR = 4 Or indexJumpR = 6 Then Ry = Ry - 15
+                If indexJumpR = 5 Then Ry = Ry - 20
+                If indexJumpR = 7 Then Ry = 130
+                'jumps facing left
+            ElseIf facing = "left" Then
+                Ryu = jumpL(indexJumpL)
+                If indexJumpL > 7 Then
+                    doing = "walkL"
+                    indexJumpL = 0
+                End If
+                indexJumpL = indexJumpL + 1
+                If indexJumpL = 2 Then Ry = Ry - 10
+                If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
+                If indexJumpL = 5 Then Ry = Ry - 20
+                If indexJumpL = 7 Then Ry = 130
             End If
 
-        ElseIf doing = "jumpR" Then
-            Ryu = jump(indexJump)
-            indexJump = indexJump + 1
-            If indexJump = 2 Or indexJump = 3 Then
+            'jumps forward to right side
+        ElseIf doing = "jumpFR" Then
+        Ryu = jumpL(indexJumpR)
+        indexJumpR = indexJumpR + 1
+            If indexJumpR = 2 Or indexJumpR = 3 Then
                 Rx = Rx + 5
                 Ry = Ry - 10
             End If
-            If indexJump = 4 Or indexJump = 5 Then
+            If indexJumpR = 4 Or indexJumpR = 5 Then
                 Rx = Rx + 10
                 Ry = Ry - 15
             End If
-            If indexJump = 6 Then
+            If indexJumpR = 6 Then
                 Rx = Rx + 15
                 Ry = Ry - 20
             End If
-            If indexJump = 7 Then
+            If indexJumpR = 7 Then
                 Rx = Rx + 20
                 Ry = 130
             End If
-            If indexJump > 7 Then
-                doing = "walkR"
-                indexJump = 0
-            End If
+        If indexJumpR > 7 Then
+            doing = "walkR"
+            indexJumpR = 0
+        End If
 
-        ElseIf doing = "jumpL" Then
-            Ryu = jumpL(indexJumpL)
+
+        'jumps forward to left side
+        ElseIf doing = "jumpFL" Then
+        Ryu = jumpL(indexJumpL)
             indexJumpL = indexJumpL + 1
             If indexJumpL = 2 Or indexJumpL = 3 Then
                 Rx = Rx - 5
@@ -445,8 +503,8 @@ Public Class Form1
             indexStandL = 0
         End If
 
-        If indexCrouch > 6 Then
-            indexCrouch = 4
+        If indexCrouch > 4 Then
+            indexCrouch = 3
         End If
 
     End Sub

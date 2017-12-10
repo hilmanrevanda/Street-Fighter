@@ -293,6 +293,126 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property hdk() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdk", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL0() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL0", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkL4() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkL4", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkR0() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkR0", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkR1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkR1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkR2() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkR2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkR3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkR3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property hdkR4() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("hdkR4", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property intro0() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("intro0", resourceCulture)

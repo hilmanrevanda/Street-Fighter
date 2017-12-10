@@ -313,5 +313,68 @@
   <ItemGroup>
     <None Include="Resources\bee51.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %288%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %289%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hadoken %2810%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %283%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %284%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %285%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %286%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdk %287%291.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
