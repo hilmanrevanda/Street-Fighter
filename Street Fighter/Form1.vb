@@ -284,10 +284,22 @@ Public Class Form1
         BoxsCheck()
     End Sub
 
+    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point))) As List(Of List(Of Point))
+        For i = 0 To Enemies.Count - 1
+            EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), -10, 0)
+        Next
+        Return Enemies
+    End Function
+
+    Sub MoveAllEnemies()
+        EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft)
+        'EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight)
+    End Sub
+
     'init random enemy coordinate
     Function RandomEnemy() As Point
         Dim A As Point
-        A.X = Rx
+        A.X = pbcanvas.Width + 100
         A.Y = CInt(Math.Ceiling(Rnd() * 258)) + 61
         Return A
     End Function
@@ -323,16 +335,10 @@ Public Class Form1
         SethdkL()
         InitRyuBox()
         InitEnemyBox()
-        'Console.WriteLine(EnemiesBoxFromLeft.Count)
-        'For i = 0 To 6
-        'CreateEnemy()
-        'Next
-        'Console.WriteLine(EnemiesBoxFromLeft.Count)
-        'pbcanvas.Invalidate()
 
-        Timer1.Interval = 50
-        Timer2.Interval = 50
-        Timer3.Interval = 50
+        'test
+        'init new enemy
+        CreateEnemy()
 
         bg = My.Resources.background
         pbcanvas.Image = bg
@@ -426,6 +432,7 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        MoveAllEnemies()
         'walks to left side
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
@@ -603,7 +610,7 @@ Public Class Form1
         For Each Enemy In EnemiesBoxFromLeft
             If IsBoxClip(Enemy) Then
                 Console.WriteLine("hit")
-                MsgBox("HIT!!")
+                'MsgBox("HIT!!")
             Else
                 Console.WriteLine("not hit")
             End If
