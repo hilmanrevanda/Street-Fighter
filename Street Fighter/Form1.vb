@@ -26,71 +26,52 @@ Public Class Form1
     Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
     Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
 
-    Sub Emove(ke As String)
-        If (ke Is "Right") Then
-            For i = 0 To EnemiesBoxFromLeft.Count - 1
-                EnemiesBoxFromLeft(i) = GoMove(EnemiesBoxFromLeft(i), 1)
-            Next
-        Else
-            For i = 0 To EnemiesBoxFromRight.Count - 1
-                EnemiesBoxFromRight(i) = GoMove(EnemiesBoxFromRight(i), -1)
-            Next
-        End If
+    'Init box
+    Sub InitEnemyBox()
+        EnemiesBoxFromLeft = New List(Of List(Of Point))
+        Dim point As Point
+        point.X = Bx
+        point.Y = By
+        EnemiesBoxFromLeft.Add(CreateBox(point))
     End Sub
 
-    Function GoMove(P As List(Of Point), count As Integer) As List(Of Point)
+    Sub InitRyuBox()
+        RyuBox = New List(Of Point)
+        Dim point As Point
+        point.X = Rx
+        point.Y = Ry
+        RyuBox = CreateBox(point)
+    End Sub
+
+    'Creating box by single point
+    Function CreateBox(point As Point) As List(Of Point)
         Dim TempPoint As Point
-        For index = 0 To P.Count - 1
-            TempPoint = P(index)
-            TempPoint.X = P(index).X + count
-            P(index) = TempPoint
-        Next
-        Return P
+        Dim box As List(Of Point) = New List(Of Point)
+        Dim x, y, nx, ny As Integer
+
+        x = point.X
+        y = point.Y
+        nx = x + 100
+        ny = y + 100
+
+        TempPoint.X = x
+        TempPoint.Y = y
+        box.Add(TempPoint)
+        TempPoint.X = nx
+        TempPoint.Y = y
+        box.Add(TempPoint)
+        TempPoint.X = nx
+        TempPoint.Y = ny
+        box.Add(TempPoint)
+        TempPoint.X = x
+        TempPoint.Y = ny
+        box.Add(TempPoint)
+        Return box
     End Function
 
-    Sub InitEnemyBox()
-        Dim A As Point
-        EnemiesBoxFromLeft = New List(Of List(Of Point))
-        Dim box As List(Of Point) = New List(Of Point)
-        A.X = 606
-        A.Y = 133
-        box.Add(A)
-        A.X = 652
-        A.Y = 133
-        box.Add(A)
-        A.X = 652
-        A.Y = 221
-        box.Add(A)
-        A.X = 606
-        A.Y = 221
-        box.Add(A)
-        EnemiesBoxFromLeft.Add(box)
-    End Sub
-    Sub InitRyuBox()
-        Dim A As Point
-        RyuBox = New List(Of Point)
-        A.X = 343
-        A.Y = 163
-        RyuBox.Add(A)
-        A.X = 398
-        A.Y = 163
-        RyuBox.Add(A)
-        A.X = 398
-        A.Y = 259
-        RyuBox.Add(A)
-        A.X = 343
-        A.Y = 259
-        RyuBox.Add(A)
-    End Sub
+    'just for checking position with click the picture box
     Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
         Console.WriteLine(e.Location)
-    End Sub
-    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
-        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
-
-        For Each enemy In EnemiesBoxFromLeft
-            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
-        Next
     End Sub
     Sub SetIntro()
         intro(0) = My.Resources.intro0
@@ -103,18 +84,21 @@ Public Class Form1
         intro(7) = My.Resources.intro7
         intro(8) = My.Resources.intro8
     End Sub
+
     Sub SetStandR()
         standR(0) = My.Resources.standR0
         standR(1) = My.Resources.standR1
         standR(2) = My.Resources.standR2
         standR(3) = My.Resources.standR3
     End Sub
+
     Sub SetStandL()
         standL(0) = My.Resources.standL0
         standL(1) = My.Resources.standL1
         standL(2) = My.Resources.standL2
         standL(3) = My.Resources.standL3
     End Sub
+
     Sub SetCrouchR()
         crouchR(0) = My.Resources.crouchR0
         crouchR(1) = My.Resources.crouchR1
@@ -122,6 +106,7 @@ Public Class Form1
         crouchR(3) = My.Resources.crouchR3
         crouchR(4) = My.Resources.crouchR3
     End Sub
+
     Sub SetCrouchL()
         crouchL(0) = My.Resources.crouchL0
         crouchL(1) = My.Resources.crouchL1
@@ -129,6 +114,7 @@ Public Class Form1
         crouchL(3) = My.Resources.crouchL3
         crouchL(4) = My.Resources.crouchL3
     End Sub
+
     Sub SetJumpR()
         JumpR(0) = My.Resources.jump0
         JumpR(1) = My.Resources.jump1
@@ -140,6 +126,7 @@ Public Class Form1
         JumpR(7) = My.Resources.jump7
         JumpR(8) = My.Resources.jump8
     End Sub
+
     Sub SetJumpL()
         jumpL(0) = My.Resources.jumpL0
         jumpL(1) = My.Resources.jumpL1
@@ -151,6 +138,7 @@ Public Class Form1
         jumpL(7) = My.Resources.jumpL7
         jumpL(8) = My.Resources.jumpL8
     End Sub
+
     Sub SethdkL()
         hdkL(0) = My.Resources.hdkL0
         hdkL(1) = My.Resources.hdkL1
@@ -165,6 +153,7 @@ Public Class Form1
         hdkR(3) = My.Resources.hdkR3
         hdkR(4) = My.Resources.hdkR4
     End Sub
+
     Sub SetBeeL()
         beeL(0) = My.Resources.bee0
         beeL(1) = My.Resources.bee1
@@ -181,6 +170,7 @@ Public Class Form1
         beeR(4) = My.Resources.beeR4
         beeR(5) = My.Resources.beeR5
     End Sub
+
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
@@ -188,6 +178,7 @@ Public Class Form1
         Spriteand(bg, mask, x, y)
         Spriteor(bg, sprite, x, y)
     End Sub
+
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
         Dim a As Bitmap
@@ -208,6 +199,7 @@ Public Class Form1
         Next
         Return a
     End Function
+
     Function SpriteOf(b As Bitmap) As Bitmap
         'Bg = black
         Dim a As Bitmap
@@ -239,6 +231,7 @@ Public Class Form1
             Next
         Next
     End Sub
+
     Sub Spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'give color to the black sprite using or operation bcs d is sprite(white)
         Dim i, j, a, r, g, b As Integer
@@ -253,9 +246,58 @@ Public Class Form1
             Next
         Next
     End Sub
+
+    'audio
     Sub PlayLoopingBackgroundSoundFile()
         My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.BackgroundLoop)
     End Sub
+
+    'box sprite move
+    Function MoveBox(P As List(Of Point), x As Integer, y As Integer) As List(Of Point)
+        Dim TempPoint As Point
+        For index = 0 To P.Count - 1
+            TempPoint = P(index)
+            TempPoint.X = P(index).X + x
+            TempPoint.Y = P(index).Y + y
+            P(index) = TempPoint
+        Next
+        Return P
+    End Function
+
+    Sub MoveRyuSpriteAndBox(nx As Integer, ny As Integer)
+        RyuBox = MoveBox(RyuBox, nx, ny)
+        Rx = Rx + nx
+        Ry = Ry + ny
+        pbcanvas.Invalidate()
+        Console.WriteLine(RyuBox.First.X)
+        BoxsCheck()
+    End Sub
+
+    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point))) As List(Of List(Of Point))
+        For i = 0 To Enemies.Count - 1
+            EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), -10, 0)
+        Next
+        Return Enemies
+    End Function
+
+    Sub MoveAllEnemies()
+        EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft)
+        'EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight)
+    End Sub
+
+    'init random enemy coordinate
+    Function RandomEnemy() As Point
+        Dim A As Point
+        A.X = pbcanvas.Width + 100
+        A.Y = CInt(Math.Ceiling(Rnd() * 258)) + 61
+        Return A
+    End Function
+
+    Sub CreateEnemy()
+        EnemiesBoxFromLeft.Add(CreateBox(RandomEnemy()))
+    End Sub
+
+    'Init while the program start
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PlayLoopingBackgroundSoundFile()
         indexIntro = 0
@@ -282,11 +324,10 @@ Public Class Form1
         SethdkL()
         InitRyuBox()
         InitEnemyBox()
-        'pbcanvas.Invalidate()
 
-        Timer1.Interval = 50
-        Timer2.Interval = 50
-        Timer3.Interval = 50
+        'test
+        'init new enemy
+        CreateEnemy()
 
         bg = My.Resources.background
         pbcanvas.Image = bg
@@ -304,14 +345,8 @@ Public Class Form1
                 doing = "walkL"
                 facing = "left"
             End If
-            If Rx = 20 Then
-                Rx = 20
-            Else
-                Rx = Rx - 10
-                RyuBox = GoMove(RyuBox, -10)
-                pbcanvas.Invalidate()
-                Console.WriteLine(RyuBox.First.X)
-                BoxsCheck()
+            If (Rx >= 20) Then
+                MoveRyuSpriteAndBox(-10, 0)
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
@@ -319,14 +354,8 @@ Public Class Form1
                 doing = "walkR"
                 facing = "right"
             End If
-            If Rx = 490 Then
-                Rx = 490
-            Else
-                Rx = Rx + 10
-                RyuBox = GoMove(RyuBox, 10)
-                pbcanvas.Invalidate()
-                Console.WriteLine(RyuBox.First.X)
-                BoxsCheck()
+            If (Rx <= 490) Then
+                MoveRyuSpriteAndBox(10, 0)
             End If
         End If
 
@@ -358,6 +387,12 @@ Public Class Form1
             doing = "hadouken"
         End If
     End Sub
+
+    Function Conditions() As Boolean
+        If doing IsNot "jumpR" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
+        Return False
+    End Function
+
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
             If facing = "right" Then doing = "walkR"
@@ -390,6 +425,7 @@ Public Class Form1
         pbcanvas.Image = bg
     End Sub
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        MoveAllEnemies()
         'walks to left side
         If doing = "walkL" Then
             Ryu = standL(indexStandL)
@@ -566,7 +602,7 @@ Public Class Form1
         For Each Enemy In EnemiesBoxFromLeft
             If IsBoxClip(Enemy) Then
                 Console.WriteLine("hit")
-                MsgBox("HIT!!")
+                'MsgBox("HIT!!")
             Else
                 Console.WriteLine("not hit")
             End If

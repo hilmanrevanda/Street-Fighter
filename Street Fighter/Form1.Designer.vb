@@ -38,12 +38,15 @@ Partial Class Form1
         '
         'Timer1
         '
+        Me.Timer1.Interval = 5
         '
         'Timer2
         '
+        Me.Timer2.Interval = 5
         '
         'Timer3
         '
+        Me.Timer3.Interval = 5
         '
         'PbPlay
         '
