@@ -28,40 +28,46 @@ Public Class Form1
 
     'Init box
     Sub InitEnemyBox()
-        Dim A As Point
         EnemiesBoxFromLeft = New List(Of List(Of Point))
-        Dim box As List(Of Point) = New List(Of Point)
-        A.X = 606
-        A.Y = 133
-        box.Add(A)
-        A.X = 652
-        A.Y = 133
-        box.Add(A)
-        A.X = 652
-        A.Y = 221
-        box.Add(A)
-        A.X = 606
-        A.Y = 221
-        box.Add(A)
-        EnemiesBoxFromLeft.Add(box)
+        Dim point As Point
+        point.X = Bx
+        point.Y = By
+        EnemiesBoxFromLeft.Add(CreateBox(point))
     End Sub
 
     Sub InitRyuBox()
-        Dim A As Point
         RyuBox = New List(Of Point)
-        A.X = 343
-        A.Y = 163
-        RyuBox.Add(A)
-        A.X = 398
-        A.Y = 163
-        RyuBox.Add(A)
-        A.X = 398
-        A.Y = 259
-        RyuBox.Add(A)
-        A.X = 343
-        A.Y = 259
-        RyuBox.Add(A)
+        Dim point As Point
+        point.X = Rx
+        point.Y = Ry
+        RyuBox = CreateBox(point)
     End Sub
+
+    'Creating box by single point
+    Function CreateBox(point As Point) As List(Of Point)
+        Dim TempPoint As Point
+        Dim box As List(Of Point) = New List(Of Point)
+        Dim x, y, nx, ny As Integer
+
+        x = point.X
+        y = point.Y
+        nx = x + 100
+        ny = y + 100
+
+        TempPoint.X = x
+        TempPoint.Y = y
+        box.Add(TempPoint)
+        TempPoint.X = nx
+        TempPoint.Y = y
+        box.Add(TempPoint)
+        TempPoint.X = nx
+        TempPoint.Y = ny
+        box.Add(TempPoint)
+        TempPoint.X = x
+        TempPoint.Y = ny
+        box.Add(TempPoint)
+        Return box
+    End Function
 
     'just for checking position with click the picture box
     Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
@@ -273,6 +279,21 @@ Public Class Form1
         RyuBox = MoveBox(RyuBox, nx, ny)
         Rx = Rx + nx
         Ry = Ry + ny
+        pbcanvas.Invalidate()
+        Console.WriteLine(RyuBox.First.X)
+        BoxsCheck()
+    End Sub
+
+    'init random enemy coordinate
+    Function RandomEnemy() As Point
+        Dim A As Point
+        A.X = Rx
+        A.Y = CInt(Math.Ceiling(Rnd() * 258)) + 61
+        Return A
+    End Function
+
+    Sub CreateEnemy()
+        EnemiesBoxFromLeft.Add(CreateBox(RandomEnemy()))
     End Sub
 
     'Init while the program start
@@ -302,6 +323,11 @@ Public Class Form1
         SethdkL()
         InitRyuBox()
         InitEnemyBox()
+        'Console.WriteLine(EnemiesBoxFromLeft.Count)
+        'For i = 0 To 6
+        'CreateEnemy()
+        'Next
+        'Console.WriteLine(EnemiesBoxFromLeft.Count)
         'pbcanvas.Invalidate()
 
         Timer1.Interval = 50
@@ -323,9 +349,6 @@ Public Class Form1
             End If
             If (Rx >= 20) Then
                 MoveRyuSpriteAndBox(-10, 0)
-                pbcanvas.Invalidate()
-                Console.WriteLine(RyuBox.First.X)
-                BoxsCheck()
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
@@ -335,9 +358,6 @@ Public Class Form1
             End If
             If (Rx <= 490) Then
                 MoveRyuSpriteAndBox(10, 0)
-                pbcanvas.Invalidate()
-                Console.WriteLine(RyuBox.First.X)
-                BoxsCheck()
             End If
         End If
 
