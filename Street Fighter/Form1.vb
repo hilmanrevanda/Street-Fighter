@@ -85,6 +85,13 @@ Public Class Form1
     Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
         Console.WriteLine(e.Location)
     End Sub
+    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+
+        For Each enemy In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
+    End Sub
     Sub SetIntro()
         intro(0) = My.Resources.intro0
         intro(1) = My.Resources.intro1
@@ -218,15 +225,6 @@ Public Class Form1
         Next
         Return a
     End Function
-
-    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
-        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
-
-        For Each enemy In EnemiesBoxFromLeft
-            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
-        Next
-    End Sub
-
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
@@ -296,7 +294,10 @@ Public Class Form1
         If doing = "walkR" Then facing = "right"
         If doing = "walkL" Then facing = "left"
     End Sub
-
+    Function Conditions() As Boolean
+        If doing IsNot "jumpR" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
+        Return False
+    End Function
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
             If Conditions() Then
@@ -352,16 +353,11 @@ Public Class Form1
                 doing = "jumpFL"
             End If
         End If
+
         If e.KeyCode = Keys.CapsLock Then
             doing = "hadouken"
         End If
     End Sub
-
-    Function Conditions() As Boolean
-        If doing IsNot "jumpR" And doing IsNot "jumpR" And doing IsNot "crouch" Then Return True
-        Return False
-    End Function
-
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
             If facing = "right" Then doing = "walkR"
@@ -470,7 +466,6 @@ Public Class Form1
                 indexJumpR = 0
             End If
 
-
             'jumps forward to left side
         ElseIf doing = "jumpFL" Then
             Ryu = jumpL(indexJumpL)
@@ -518,13 +513,13 @@ Public Class Form1
             End If
         End If
 
-
         ReDraw()
         pbcanvas.Image = bg
 
         If indexStandR > 3 Then
             indexStandR = 0
-        ElseIf indexStandL > 3 Then
+        End If
+        If indexStandL > 3 Then
             indexStandL = 0
         End If
 
