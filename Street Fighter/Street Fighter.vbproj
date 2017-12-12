@@ -376,5 +376,17 @@
   <ItemGroup>
     <None Include="Resources\hdk %287%291.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airdmg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down %283%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

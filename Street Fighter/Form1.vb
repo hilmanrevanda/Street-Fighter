@@ -300,7 +300,9 @@ Public Class Form1
     Function RandomEnemy() As Point
         Dim A As Point
         A.X = pbcanvas.Width + 100
+        'Bx = A.X
         A.Y = CInt(Math.Ceiling(Rnd() * 258)) + 61
+        'By=A.y 
         Return A
     End Function
 
@@ -486,7 +488,7 @@ Public Class Form1
 
             'jumps forward to right side
         ElseIf doing = "jumpFR" Then
-            Ryu = jumpL(indexJumpR)
+            Ryu = JumpR(indexJumpR)
             indexJumpR = indexJumpR + 1
             If indexJumpR = 2 Or indexJumpR = 3 Then
                 Rx = Rx + 5
