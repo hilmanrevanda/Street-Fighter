@@ -412,5 +412,11 @@
   <ItemGroup>
     <None Include="Resources\blankaelc %282%2911.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %286%2911.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neutral %286%292.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

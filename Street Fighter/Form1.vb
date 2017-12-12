@@ -3,18 +3,28 @@ Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(5), hdkR(5), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
+
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
+
     'what Ryu is doing
     Private doing As String
+
+    'where Ryu is facing
     Private facing As String
+
+    'phase
+    Private phase As String
+
     Private DLEFT As String = "LEFT"
     Private DRIGHT As String = "RIGHT"
     Private Direction As String = "DRIGHT"
+
     'location of Ryu
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
+
     'location of obstacle
     Dim Bx As Integer = 500
     Dim By As Integer = 100
@@ -140,6 +150,7 @@ Public Class Form1
         hdkL(2) = My.Resources.hdkL2
         hdkL(3) = My.Resources.hdkL3
         hdkL(4) = My.Resources.hdkL4
+        hdkL(5) = My.Resources.hdkL4
     End Sub
     Sub SethdkR()
         hdkR(0) = My.Resources.hdkR0
@@ -147,6 +158,7 @@ Public Class Form1
         hdkR(2) = My.Resources.hdkR2
         hdkR(3) = My.Resources.hdkR3
         hdkR(4) = My.Resources.hdkR4
+        hdkR(5) = My.Resources.hdkR4
     End Sub
     Sub SetDeadR()
         deadR(0) = My.Resources.dead0
@@ -190,6 +202,7 @@ Public Class Form1
         Spriteand(bg, mask, x, y)
         Spriteor(bg, sprite, x, y)
     End Sub
+
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
         Dim a As Bitmap
@@ -255,6 +268,7 @@ Public Class Form1
             Next
         Next
     End Sub
+
     Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
 
@@ -347,6 +361,8 @@ Public Class Form1
         InitRyuBox()
         InitEnemyBox()
 
+        Timer1.Interval = 75
+
         'test
         'init new enemy
         CreateEnemy()
@@ -422,179 +438,189 @@ Public Class Form1
         bg = New Bitmap(My.Resources.background)
         PutSprite(bg, Ryu, Rx, Ry)
 
-        If Timer3.Enabled = True Then
+        If phase = "play" Then
             PutSprite(bg, obsL, Bx, By)
         End If
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Ryu = intro(indexIntro)
-
-        If indexIntro > 7 Then
-            Timer1.Enabled = False
-            Timer2.Enabled = True
-            doing = "walkR"
-            facing = "right"
-            Timer3.Enabled = True
-        End If
-
-        indexIntro = indexIntro + 1
-
-        ReDraw()
-        pbcanvas.Image = bg
-    End Sub
-    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-        MoveAllEnemies()
-        'walks to left side
-        If doing = "walkL" Then
-            Ryu = standL(indexStandL)
-            indexStandL = indexStandL + 1
-
-            'walks to right side
-        ElseIf doing = "walkR" Then
-            Ryu = standR(indexStandR)
-            indexStandR = indexStandR + 1
-
-            'crouchs
-        ElseIf doing = "crouch" Then
-            'crouchs facing right
-            If facing = "right" Then
-                Ryu = crouchR(indexCrouch)
-                indexCrouch = indexCrouch + 1
-                'crouchs facing right
-            ElseIf facing = "left" Then
-                Ryu = crouchL(indexCrouch)
-                indexCrouch = indexCrouch + 1
-            End If
-            If indexCrouch > 3 Then Ry = 158
-
-            'jumps 
-        ElseIf doing = "jump" Then
-            'jumps facing right
-            If facing = "right" Then
-                Ryu = JumpR(indexJumpR)
-                If indexJumpR > 7 Then
-                    doing = "walkR"
-                    indexJumpR = 0
-                End If
-                indexJumpR = indexJumpR + 1
-                If indexJumpR = 2 Then Ry = Ry - 10
-                If indexJumpR = 3 Or indexJumpR = 4 Or indexJumpR = 6 Then Ry = Ry - 15
-                If indexJumpR = 5 Then Ry = Ry - 20
-                If indexJumpR = 7 Then Ry = 130
-                'jumps facing left
-            ElseIf facing = "left" Then
-                Ryu = jumpL(indexJumpL)
-                If indexJumpL > 7 Then
-                    doing = "walkL"
-                    indexJumpL = 0
-                End If
-                indexJumpL = indexJumpL + 1
-                If indexJumpL = 2 Then Ry = Ry - 10
-                If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
-                If indexJumpL = 5 Then Ry = Ry - 20
-                If indexJumpL = 7 Then Ry = 130
-            End If
-
-            'jumps forward to right side
-        ElseIf doing = "jumpFR" Then
-            Ryu = JumpR(indexJumpR)
-            indexJumpR = indexJumpR + 1
-            If indexJumpR = 2 Or indexJumpR = 3 Then
-                Rx = Rx + 5
-                Ry = Ry - 10
-            End If
-            If indexJumpR = 4 Or indexJumpR = 5 Then
-                Rx = Rx + 10
-                Ry = Ry - 15
-            End If
-            If indexJumpR = 6 Then
-                Rx = Rx + 15
-                Ry = Ry - 20
-            End If
-            If indexJumpR = 7 Then
-                Rx = Rx + 20
-                Ry = 130
-            End If
-            If indexJumpR > 7 Then
+        If phase = "intro" Then
+            Ryu = intro(indexIntro)
+            indexIntro = indexIntro + 1
+            If indexIntro > 8 Then
+                phase = "play"
                 doing = "walkR"
-                indexJumpR = 0
+                facing = "right"
             End If
 
 
-            'jumps forward to left side
-        ElseIf doing = "jumpFL" Then
-            Ryu = jumpL(indexJumpL)
-            indexJumpL = indexJumpL + 1
-            If indexJumpL = 2 Or indexJumpL = 3 Then
-                Rx = Rx - 5
-                Ry = Ry - 10
-            End If
-            If indexJumpL = 4 Or indexJumpL = 5 Then
-                Rx = Rx - 10
-                Ry = Ry - 15
-            End If
-            If indexJumpL = 6 Then
-                Rx = Rx - 15
-                Ry = Ry - 20
-            End If
-            If indexJumpL = 7 Then
-                Rx = Rx - 20
-                Ry = 130
-            End If
-            If indexJumpL > 7 Then
-                doing = "walkL"
-                indexJumpL = 0
-            End If
+        ElseIf phase = "play" Then
+            MoveAllEnemies()
+            'walks to left side
+            If doing = "walkL" Then
+                Ryu = standL(indexStandL)
+                indexStandL = indexStandL + 1
 
-            'hadouken
-        ElseIf doing = "hadouken" Then
-            'hadouken left
-            If facing = "left" Then
-                Ryu = hdkL(indexHdkL)
-                indexHdkL = indexHdkL + 1
-                If indexHdkL > 3 Then
-                    indexHdkL = 0
-                    doing = "walkL"
+                'walks to right side
+            ElseIf doing = "walkR" Then
+                Ryu = standR(indexStandR)
+                indexStandR = indexStandR + 1
+
+                'crouchs
+            ElseIf doing = "crouch" Then
+                'crouchs facing right
+                If facing = "right" Then
+                    Ryu = crouchR(indexCrouch)
+                    indexCrouch = indexCrouch + 1
+                    'crouchs facing right
+                ElseIf facing = "left" Then
+                    Ryu = crouchL(indexCrouch)
+                    indexCrouch = indexCrouch + 1
                 End If
-            End If
-            'hadouken right
-            If facing = "right" Then
-                Ryu = hdkR(indexHdkR)
-                indexHdkR = indexHdkR + 1
-                If indexHdkR > 3 Then
-                    indexHdkR = 0
-                    doing = "walkR"
-                End If
-            End If
-
-            'dead
-        ElseIf doing = "dead" Then
-            'facing left
-            If facing = "left" Then
-                Ryu = deadL(indexDeadL)
-                indexDeadL = indexDeadL + 1
-                If indexDeadL = 6 Then
-                    Ry = Ry + 15
-                    Timer2.Enabled = False
-                    Timer3.Enabled = False
+                If indexCrouch > 4 Then
+                    Ry = 158
+                    indexCrouch = 3
                 End If
 
-            ElseIf facing = "right" Then
-            'facing right
-            Ryu = deadR(indexDeadR)
-            indexDeadR = indexDeadR + 1
+                    'jumps 
+                ElseIf doing = "jump" Then
+                    'jumps facing right
+                    If facing = "right" Then
+                        Ryu = JumpR(indexJumpR)
+                        indexJumpR = indexJumpR + 1
+                        If indexJumpR > 8 Then
+                            doing = "walkR"
+                            indexJumpR = 0
+                        End If
+                        If indexJumpR = 2 Or indexJumpR = 7 Then Ry = Ry - 10
+                        If indexJumpR = 3 Or indexJumpR = 6 Then Ry = Ry - 15
+                        If indexJumpR = 4 Or indexJumpR = 5 Then Ry = Ry - 20
+                        If indexJumpR = 8 Then Ry = 130
+                        'jumps facing left
+                    ElseIf facing = "left" Then
+                        Ryu = jumpL(indexJumpL)
+                        indexJumpL = indexJumpL + 1
+                        If indexJumpL > 8 Then
+                            doing = "walkL"
+                            indexJumpL = 0
+                        End If
+                        If indexJumpL = 2 Or indexJumpL = 7 Then Ry = Ry - 10
+                        If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
+                        If indexJumpL = 4 Or indexJumpL = 5 Then Ry = Ry - 20
+                        If indexJumpL = 8 Then Ry = 130
+                    End If
 
-            If indexDeadR = 6 Then
-                Ry = Ry + 15
-                Timer2.Enabled = False
-                Timer3.Enabled = False
+                    'jumps forward to right side
+                ElseIf doing = "jumpFR" Then
+                    Ryu = JumpR(indexJumpR)
+                    indexJumpR = indexJumpR + 1
+                    If indexJumpR = 2 Or indexJumpR = 3 Then
+                        Rx = Rx + 10
+                        Ry = Ry - 10
+                    End If
+                    If indexJumpR = 4 Or indexJumpR = 5 Then
+                        Rx = Rx + 20
+                        Ry = Ry - 15
+                    End If
+                    If indexJumpR = 6 Then
+                        Rx = Rx + 25
+                        Ry = Ry - 20
+                    End If
+                    If indexJumpR = 7 Then
+                        Rx = Rx + 30
+                        Ry = 130
+                    End If
+                    If indexJumpR = 8 Then
+                        Rx = Rx + 32
+                        Ry = 130
+                    End If
+                    If indexJumpR > 8 Then
+                        doing = "walkR"
+                        indexJumpR = 0
+                    End If
+
+                    'jumps forward to left side
+                ElseIf doing = "jumpFL" Then
+                    Ryu = jumpL(indexJumpL)
+                    indexJumpL = indexJumpL + 1
+                    If indexJumpL = 2 Or indexJumpL = 3 Then
+                        Rx = Rx - 10
+                        Ry = Ry - 10
+                    End If
+                    If indexJumpL = 4 Or indexJumpL = 5 Then
+                        Rx = Rx - 20
+                        Ry = Ry - 15
+                    End If
+                    If indexJumpL = 6 Then
+                        Rx = Rx - 25
+                        Ry = Ry - 20
+                    End If
+                    If indexJumpL = 7 Then
+                        Rx = Rx - 30
+                        Ry = 130
+                    End If
+                    If indexJumpL = 7 Then
+                        Rx = Rx - 32
+                        Ry = 130
+                    End If
+                    If indexJumpL > 8 Then
+                        doing = "walkL"
+                        indexJumpL = 0
+                    End If
+
+                    'hadouken
+                ElseIf doing = "hadouken" Then
+                    'hadouken left
+                    If facing = "left" Then
+                        Ryu = hdkL(indexHdkL)
+                        indexHdkL = indexHdkL + 1
+                        If indexHdkL > 6 Then
+                            indexHdkL = 0
+                            doing = "walkL"
+                        End If
+                    End If
+                    'hadouken right
+                    If facing = "right" Then
+                        Ryu = hdkR(indexHdkR)
+                        indexHdkR = indexHdkR + 1
+                        If indexHdkR > 6 Then
+                            indexHdkR = 0
+                            doing = "walkR"
+                        End If
+                    End If
+
+                    'dead
+                ElseIf doing = "dead" Then
+                    'facing left
+                    If facing = "left" Then
+                    Ryu = deadL(indexDeadL)
+                    indexDeadL = indexDeadL + 1
+                    If indexDeadL = 5 Or indexDeadL = 6 Then
+                        Ry = Ry + 15
+                        Timer1.Enabled = False
+                    End If
+
+                ElseIf facing = "right" Then
+                    'facing right
+                    Ryu = deadR(indexDeadR)
+                    indexDeadR = indexDeadR + 1
+
+                    If indexDeadR = 5 Or indexDeadR = 6 Then
+                        Ry = Ry + 15
+                        Timer1.Enabled = False
+                    End If
+                End If
             End If
+            'obstacle
+            obsL = beeL(indexBeeL)
+            obsR = beeR(indexBeeR)
+
+            indexBeeL = indexBeeL + 1
+            indexBeeR = indexBeeR + 1
+
+            If indexBeeL > 5 Then indexBeeL = 0
+            If indexBeeR > 5 Then indexBeeR = 0
+
         End If
-
-
-        End If
-
-
 
         ReDraw()
         pbcanvas.Image = bg
@@ -604,29 +630,12 @@ Public Class Form1
         ElseIf indexStandL > 3 Then
             indexStandL = 0
         End If
-
-        If indexCrouch > 4 Then
-            indexCrouch = 3
-        End If
-
     End Sub
-    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
-        obsL = beeL(indexBeeL)
-        obsR = beeR(indexBeeR)
 
-        ReDraw()
-        pbcanvas.Image = bg
-
-        indexBeeL = indexBeeL + 1
-        indexBeeR = indexBeeR + 1
-
-        If indexBeeL > 4 Then indexBeeL = 0
-        If indexBeeR > 4 Then indexBeeR = 0
-
-    End Sub
     Private Sub PbPlay_Click(sender As Object, e As EventArgs) Handles PbPlay.Click
         PbPlay.Hide()
         Timer1.Start()
+        phase = "intro"
         bg = New Bitmap(My.Resources.background)
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
@@ -636,14 +645,9 @@ Public Class Form1
     End Sub
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()
-        Timer2.Stop()
         Close()
     End Sub
-
-
-
     'check box
-
     Function BoxsCheck() As Point
         For Each Enemy In EnemiesBoxFromLeft
             If IsBoxClip(Enemy) Then

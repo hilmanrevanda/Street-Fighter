@@ -382,4 +382,10 @@
   <data name="deadL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\down (3)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="standL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\neutral (6)11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="standR4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\neutral (6)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

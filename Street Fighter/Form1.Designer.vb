@@ -24,8 +24,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
-        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.PbPlay = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Pbexit = New System.Windows.Forms.PictureBox()
@@ -40,18 +38,10 @@ Partial Class Form1
         '
         Me.Timer1.Interval = 5
         '
-        'Timer2
-        '
-        Me.Timer2.Interval = 5
-        '
-        'Timer3
-        '
-        Me.Timer3.Interval = 5
-        '
         'PbPlay
         '
         Me.PbPlay.Image = Global.Street_Fighter.My.Resources.Resources.btnPlay
-        Me.PbPlay.Location = New System.Drawing.Point(256, 237)
+        Me.PbPlay.Location = New System.Drawing.Point(179, 205)
         Me.PbPlay.Name = "PbPlay"
         Me.PbPlay.Size = New System.Drawing.Size(293, 103)
         Me.PbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -61,7 +51,7 @@ Partial Class Form1
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.Street_Fighter.My.Resources.Resources.SF_logo
-        Me.PictureBox2.Location = New System.Drawing.Point(302, 1)
+        Me.PictureBox2.Location = New System.Drawing.Point(239, 1)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(181, 76)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -71,7 +61,7 @@ Partial Class Form1
         'Pbexit
         '
         Me.Pbexit.Image = Global.Street_Fighter.My.Resources.Resources._exit
-        Me.Pbexit.Location = New System.Drawing.Point(765, 1)
+        Me.Pbexit.Location = New System.Drawing.Point(649, 1)
         Me.Pbexit.Name = "Pbexit"
         Me.Pbexit.Size = New System.Drawing.Size(45, 39)
         Me.Pbexit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -82,7 +72,7 @@ Partial Class Form1
         '
         Me.pbcanvas.Location = New System.Drawing.Point(35, 83)
         Me.pbcanvas.Name = "pbcanvas"
-        Me.pbcanvas.Size = New System.Drawing.Size(742, 406)
+        Me.pbcanvas.Size = New System.Drawing.Size(620, 339)
         Me.pbcanvas.TabIndex = 0
         Me.pbcanvas.TabStop = False
         '
@@ -91,7 +81,7 @@ Partial Class Form1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Honeydew
-        Me.ClientSize = New System.Drawing.Size(811, 535)
+        Me.ClientSize = New System.Drawing.Size(696, 457)
         Me.ControlBox = False
         Me.Controls.Add(Me.PbPlay)
         Me.Controls.Add(Me.PictureBox2)
@@ -110,9 +100,7 @@ Partial Class Form1
 
     Friend WithEvents pbcanvas As PictureBox
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Timer2 As Timer
     Friend WithEvents Pbexit As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PbPlay As PictureBox
-    Friend WithEvents Timer3 As Timer
 End Class
