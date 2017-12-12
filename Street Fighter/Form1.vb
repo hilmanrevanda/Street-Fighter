@@ -573,20 +573,20 @@ Public Class Form1
                     If facing = "left" Then
                         Ryu = hdkL(indexHdkL)
                         indexHdkL = indexHdkL + 1
-                        If indexHdkL > 6 Then
-                            indexHdkL = 0
-                            doing = "walkL"
-                        End If
+                    If indexHdkL > 5 Then
+                        indexHdkL = 0
+                        doing = "walkL"
                     End If
+                End If
                     'hadouken right
                     If facing = "right" Then
                         Ryu = hdkR(indexHdkR)
                         indexHdkR = indexHdkR + 1
-                        If indexHdkR > 6 Then
-                            indexHdkR = 0
-                            doing = "walkR"
-                        End If
+                    If indexHdkR > 5 Then
+                        indexHdkR = 0
+                        doing = "walkR"
                     End If
+                End If
 
                     'dead
                 ElseIf doing = "dead" Then
