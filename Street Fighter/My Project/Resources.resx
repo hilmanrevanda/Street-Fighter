@@ -352,10 +352,34 @@
   <data name="dead1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blankaelc (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dead2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="dead4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\airdmg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dead3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="dead5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\down (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dead2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dead3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (2)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (1)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (2)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (1)11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blankaelc (2)11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\airdmg1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deadL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\down (3)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -388,5 +388,29 @@
   <ItemGroup>
     <None Include="Resources\down %283%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %281%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %282%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airdmg1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down %283%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %281%2911.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blankaelc %282%2911.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

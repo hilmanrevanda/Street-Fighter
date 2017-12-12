@@ -3,9 +3,9 @@ Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(5), hdkR(5), beeL(6), beeR(6) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(5), hdkR(5), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
     'what Ryu is doing
     Private doing As String
     Private facing As String
@@ -86,21 +86,18 @@ Public Class Form1
         intro(7) = My.Resources.intro7
         intro(8) = My.Resources.intro8
     End Sub
-
     Sub SetStandR()
         standR(0) = My.Resources.standR0
         standR(1) = My.Resources.standR1
         standR(2) = My.Resources.standR2
         standR(3) = My.Resources.standR3
     End Sub
-
     Sub SetStandL()
         standL(0) = My.Resources.standL0
         standL(1) = My.Resources.standL1
         standL(2) = My.Resources.standL2
         standL(3) = My.Resources.standL3
     End Sub
-
     Sub SetCrouchR()
         crouchR(0) = My.Resources.crouchR0
         crouchR(1) = My.Resources.crouchR1
@@ -108,7 +105,6 @@ Public Class Form1
         crouchR(3) = My.Resources.crouchR3
         crouchR(4) = My.Resources.crouchR3
     End Sub
-
     Sub SetCrouchL()
         crouchL(0) = My.Resources.crouchL0
         crouchL(1) = My.Resources.crouchL1
@@ -116,7 +112,6 @@ Public Class Form1
         crouchL(3) = My.Resources.crouchL3
         crouchL(4) = My.Resources.crouchL3
     End Sub
-
     Sub SetJumpR()
         JumpR(0) = My.Resources.jump0
         JumpR(1) = My.Resources.jump1
@@ -128,7 +123,6 @@ Public Class Form1
         JumpR(7) = My.Resources.jump7
         JumpR(8) = My.Resources.jump8
     End Sub
-
     Sub SetJumpL()
         jumpL(0) = My.Resources.jumpL0
         jumpL(1) = My.Resources.jumpL1
@@ -140,7 +134,6 @@ Public Class Form1
         jumpL(7) = My.Resources.jumpL7
         jumpL(8) = My.Resources.jumpL8
     End Sub
-
     Sub SethdkL()
         hdkL(0) = My.Resources.hdkL0
         hdkL(1) = My.Resources.hdkL1
@@ -154,6 +147,24 @@ Public Class Form1
         hdkR(2) = My.Resources.hdkR2
         hdkR(3) = My.Resources.hdkR3
         hdkR(4) = My.Resources.hdkR4
+    End Sub
+    Sub SetDeadR()
+        deadR(0) = My.Resources.dead0
+        deadR(1) = My.Resources.dead1
+        deadR(2) = My.Resources.dead2
+        deadR(3) = My.Resources.dead3
+        deadR(4) = My.Resources.dead4
+        deadR(5) = My.Resources.dead5
+        deadR(6) = My.Resources.dead5
+    End Sub
+    Sub SetDeadL()
+        deadL(0) = My.Resources.deadL0
+        deadL(1) = My.Resources.deadL1
+        deadL(2) = My.Resources.deadL2
+        deadL(3) = My.Resources.deadL3
+        deadL(4) = My.Resources.deadL4
+        deadL(5) = My.Resources.deadL5
+        deadL(6) = My.Resources.deadL5
     End Sub
 
     Sub SetBeeL()
@@ -172,7 +183,6 @@ Public Class Form1
         beeR(4) = My.Resources.beeR4
         beeR(5) = My.Resources.beeR5
     End Sub
-
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
@@ -180,7 +190,6 @@ Public Class Form1
         Spriteand(bg, mask, x, y)
         Spriteor(bg, sprite, x, y)
     End Sub
-
     Function MaskOf(b As Bitmap) As Bitmap
         'Bg = white, sprite = black
         Dim a As Bitmap
@@ -201,7 +210,6 @@ Public Class Form1
         Next
         Return a
     End Function
-
     Function SpriteOf(b As Bitmap) As Bitmap
         'Bg = black
         Dim a As Bitmap
@@ -219,15 +227,6 @@ Public Class Form1
         Next
         Return a
     End Function
-
-    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
-        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
-
-        For Each enemy In EnemiesBoxFromLeft
-            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
-        Next
-    End Sub
-
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
@@ -242,7 +241,6 @@ Public Class Form1
             Next
         Next
     End Sub
-
     Sub Spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'give color to the black sprite using or operation bcs d is sprite(white)
         Dim i, j, a, r, g, b As Integer
@@ -255,6 +253,13 @@ Public Class Form1
                 b = c.GetPixel(i + x, j + y).B Or d.GetPixel(i, j).B
                 c.SetPixel(i + x, j + y, Color.FromArgb(a, r, g, b))
             Next
+        Next
+    End Sub
+    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+
+        For Each enemy In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
         Next
     End Sub
 
@@ -323,6 +328,8 @@ Public Class Form1
         indexBeeR = 0
         indexHdkR = 0
         indexHdkL = 0
+        indexDeadL = 0
+        indexDeadR = 0
 
         SetIntro()
         SetStandR()
@@ -335,6 +342,8 @@ Public Class Form1
         SetBeeR()
         SethdkR()
         SethdkL()
+        SetDeadL()
+        SetDeadR()
         InitRyuBox()
         InitEnemyBox()
 
@@ -557,7 +566,34 @@ Public Class Form1
                     doing = "walkR"
                 End If
             End If
+
+            'dead
+        ElseIf doing = "dead" Then
+            'facing left
+            If facing = "left" Then
+                Ryu = deadL(indexDeadL)
+                indexDeadL = indexDeadL + 1
+                If indexDeadL = 6 Then
+                    Ry = Ry + 15
+                    Timer2.Enabled = False
+                    Timer3.Enabled = False
+                End If
+
+            ElseIf facing = "right" Then
+            'facing right
+            Ryu = deadR(indexDeadR)
+            indexDeadR = indexDeadR + 1
+
+            If indexDeadR = 6 Then
+                Ry = Ry + 15
+                Timer2.Enabled = False
+                Timer3.Enabled = False
+            End If
         End If
+
+
+        End If
+
 
 
         ReDraw()
@@ -613,6 +649,7 @@ Public Class Form1
             If IsBoxClip(Enemy) Then
                 Console.WriteLine("hit")
                 'MsgBox("HIT!!")
+                doing = "dead"
             Else
                 Console.WriteLine("not hit")
             End If
