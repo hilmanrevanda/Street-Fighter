@@ -83,7 +83,6 @@ Partial Class Form1
         Me.pbcanvas.Location = New System.Drawing.Point(35, 83)
         Me.pbcanvas.Name = "pbcanvas"
         Me.pbcanvas.Size = New System.Drawing.Size(742, 406)
-        Me.pbcanvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbcanvas.TabIndex = 0
         Me.pbcanvas.TabStop = False
         '
