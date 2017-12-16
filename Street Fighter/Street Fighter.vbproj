@@ -481,5 +481,23 @@
   <ItemGroup>
     <None Include="Resources\jumps61.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punchCR21.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

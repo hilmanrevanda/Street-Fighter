@@ -4,11 +4,13 @@ Imports System.Math
 Public Class Form1
     'sprites
     Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
-        JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3) As Bitmap
+        JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3),
+        punchCR(3), punchCL(3) As Bitmap
 
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
-        indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR As Integer
+        indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR,
+        indexpunchCL, indexPunchCR As Integer
 
     'what Ryu is doing
     Private doing As String
@@ -190,6 +192,16 @@ Public Class Form1
         punchR(0) = My.Resources.punchR2
         punchR(1) = My.Resources.punchR1
         punchR(2) = My.Resources.punchR0
+    End Sub
+    Sub SetPunchCL()
+        punchCL(0) = My.Resources.punchCL0
+        punchCL(1) = My.Resources.punchCL1
+        punchCL(2) = My.Resources.punchCL2
+    End Sub
+    Sub SetPunchCR()
+        punchCR(0) = My.Resources.punchCR2
+        punchCR(1) = My.Resources.punchCR1
+        punchCR(2) = My.Resources.punchCR0
     End Sub
     Sub SetDeadR()
         deadR(0) = My.Resources.dead0
@@ -379,6 +391,8 @@ Public Class Form1
         indexJumpR = 0
         indexPunchL = 0
         indexPunchR = 0
+        indexPunchCR = 0
+        indexpunchCL = 0
 
         SetIntro()
         SetStandR()
@@ -395,6 +409,8 @@ Public Class Form1
         SethdkL()
         SetPunchL()
         SetPunchR()
+        SetPunchCL()
+        SetPunchCR()
         SetDeadL()
         SetDeadR()
         InitRyuBox()
@@ -529,12 +545,30 @@ Public Class Form1
                 If facing = "right" Then
                     Ryu = crouchR(indexCrouch)
                     indexCrouch = indexCrouch + 1
-                    'crouchs facing right
-                ElseIf facing = "left" Then
+                    If punch = True Then
+                        Ryu = punchCR(indexPunchCR)
+                        indexPunchCR = indexPunchCR + 1
+                        If indexPunchCR > 2 Then
+                            doing = "crouch"
+                            indexPunchCR = 0
+                            punch = False
+                        End If
+                    End If
+                End If
+                'crouchs facing right
+            ElseIf facing = "left" Then
                     Ryu = crouchL(indexCrouch)
                     indexCrouch = indexCrouch + 1
-                End If
-                If indexCrouch > 4 Then
+                    If punch = True Then
+                        Ryu = punchCL(indexpunchCL)
+                        indexpunchCL = indexpunchCL + 1
+                        If indexpunchCL > 2 Then
+                            doing = "crouch"
+                            indexpunchCL = 0
+                            punch = False
+                        End If
+                    End If
+                    If indexCrouch > 4 Then
                     Ry = 158
                     indexCrouch = 3
                 End If

@@ -433,6 +433,24 @@
   <data name="jumpR6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jumps6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="punchCL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchCL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchCL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchCR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchCR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchCR2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\punchCR2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="punchL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lp (2)11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
