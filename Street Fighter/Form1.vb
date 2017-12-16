@@ -44,6 +44,10 @@ Public Class Form1
     'ryu box
     Public RyuBox As List(Of Point) = New List(Of Point)
 
+    'ryu attack box
+    Public RyuAttack As List(Of Point) = New List(Of Point)
+    Public RyuFireball As List(Of Point) = New List(Of Point)
+
     'Enemies box
     Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
     Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
@@ -324,7 +328,9 @@ Public Class Form1
     Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         If RyuBox.Count > 0 Then e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
 
-        For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+        If RyuAttack.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuAttack.ToArray)
+
+        For Each enemy As List(Of Point) In EnemiesBoxFromRight
             e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
         Next
     End Sub
@@ -484,6 +490,7 @@ Public Class Form1
         End If
     End Sub
 
+    'dalam kondisi ini dia masi bisa gerak kiri kanan
     Function Conditions() As Boolean
         If doing IsNot "jump" And doing IsNot "jumpR" And doing IsNot "jumpL" And doing IsNot "crouch" Then Return True
         Return False
@@ -495,9 +502,23 @@ Public Class Form1
         PutSprite(bg, Ryu, Rx, Ry)
         RyuBox = CreateBox(Rx, Ry, Ryu.Width, Ryu.Height)
 
+        If attack Then
+            RyuAttack = New List(Of Point)
+            If facing Is "left" Then
+                RyuAttack = CreateBox(Rx - 20, Ry + 10, Ryu.Width, 20)
+            ElseIf facing Is "right" Then
+                RyuAttack = CreateBox(Rx, Ry + 10, Ryu.Width + 20, 20)
+            End If
+        Else
+            RyuAttack = New List(Of Point)
+        End If
+
+
         If phase = "play" Then
+            EnemiesBoxFromRight = New List(Of List(Of Point))
             If Bx >= bg.Width - obsR.Width Then Bx = 0
             PutSprite(bg, obsR, Bx, By)
+            EnemiesBoxFromRight.Add(CreateBox(Bx, By, obsR.Width, obsR.Height))
         End If
     End Sub
 
@@ -788,38 +809,47 @@ Public Class Form1
     'check box
     Function BoxsCheck() As Point
         For Each Enemy As List(Of Point) In EnemiesBoxFromLeft
-            If IsBoxClip(Enemy) Then
+            If IsBoxClip(Enemy, RyuBox) Then
                 Console.WriteLine("hit")
-                'MsgBox("HIT!!")
                 doing = "dead"
-            Else
-                Console.WriteLine("not hit")
+            ElseIf IsBoxClip(Enemy, RyuAttack) Then
+                Console.WriteLine("attack")
+            End If
+        Next
+
+        For Each Enemy As List(Of Point) In EnemiesBoxFromRight
+            If IsBoxClip(Enemy, RyuBox) Then
+                Console.WriteLine("hit")
+                doing = "dead"
+            ElseIf IsBoxClip(Enemy, RyuAttack) Then
+                Console.WriteLine("attack")
+                Timer1.Enabled = False
             End If
         Next
     End Function
 
-    Function IsBoxClip(Enemy As List(Of Point)) As Boolean
+    Function IsBoxClip(Enemy As List(Of Point), Box As List(Of Point)) As Boolean
         Dim B, T As Integer
         Dim NP, NW As Point
         Dim IsAInside, IsBInside, TAisAcc, TBisAcc As Boolean
 
         'NewPolygon = New List(Of Point)()
-        For A As Integer = 0 To RyuBox.Count - 1
-            B = NextPoint(A, RyuBox.Count)
+        For A As Integer = 0 To Box.Count - 1
+            B = NextPoint(A, Box.Count)
 
             For S As Integer = 0 To Enemy.Count - 1
                 T = NextPoint(S, Enemy.Count)
                 NW = Normal(Enemy(S), Enemy(T))
-                NP = Normal(RyuBox(A), RyuBox(B))
+                NP = Normal(Box(A), Box(B))
 
                 'Declare In Out
-                IsAInside = InsidePoint(Enemy(S), Enemy(T), RyuBox(B))
-                IsBInside = InsidePoint(Enemy(S), Enemy(T), RyuBox(A))
+                IsAInside = InsidePoint(Enemy(S), Enemy(T), Box(B))
+                IsBInside = InsidePoint(Enemy(S), Enemy(T), Box(A))
 
                 If IsAInside = Not IsBInside Then
                     'Than In Out Validation
-                    TAisAcc = TisAcc(Tis(RyuBox(A), RyuBox(B), Enemy(S), NW))
-                    TBisAcc = TisAcc(Tis(Enemy(S), Enemy(T), RyuBox(A), NP))
+                    TAisAcc = TisAcc(Tis(Box(A), Box(B), Enemy(S), NW))
+                    TBisAcc = TisAcc(Tis(Enemy(S), Enemy(T), Box(A), NP))
                     If TAisAcc And TBisAcc Then Return True
                 End If
             Next
