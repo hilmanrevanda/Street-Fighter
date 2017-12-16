@@ -391,6 +391,27 @@
   <data name="ALL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ALL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="beed0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beed6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beed6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="jumpL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jumps01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

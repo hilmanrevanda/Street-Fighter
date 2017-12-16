@@ -547,5 +547,26 @@
   <ItemGroup>
     <None Include="Resources\kick71.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed6.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
