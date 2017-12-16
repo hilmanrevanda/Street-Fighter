@@ -1,6 +1,11 @@
-﻿Imports System.Drawing
+﻿Imports System
+Imports System.Collections.Generic
+Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Math
+Imports System.Windows.Forms
+Imports Microsoft.VisualBasic
+
 Public Class Form1
     'sprites
     Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
@@ -209,7 +214,7 @@ Public Class Form1
         Dim c As Color
         Dim i, j As Integer
 
-        a = b.Clone
+        a = CType(b.Clone, Bitmap)
         c = a.GetPixel(0, 0) ' color of bg of sprite
 
         For i = 0 To b.Width - 1
@@ -229,7 +234,7 @@ Public Class Form1
         Dim c As Color
         Dim i, j As Integer
 
-        a = b.Clone
+        a = CType(b.Clone, Bitmap)
         c = a.GetPixel(0, 0) ' color of bg of sprite
         For i = 0 To b.Width - 1
             For j = 0 To b.Height - 1
@@ -272,7 +277,7 @@ Public Class Form1
     Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
         e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
 
-        For Each enemy In EnemiesBoxFromLeft
+        For Each enemy As List(Of Point) In EnemiesBoxFromLeft
             e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
         Next
     End Sub
@@ -285,7 +290,7 @@ Public Class Form1
     'box sprite move
     Function MoveBox(P As List(Of Point), x As Integer, y As Integer) As List(Of Point)
         Dim TempPoint As Point
-        For index = 0 To P.Count - 1
+        For index As Integer = 0 To P.Count - 1
             TempPoint = P(index)
             TempPoint.X = P(index).X + x
             TempPoint.Y = P(index).Y + y
@@ -299,12 +304,11 @@ Public Class Form1
         Rx = Rx + nx
         Ry = Ry + ny
         pbcanvas.Invalidate()
-        Console.WriteLine(RyuBox.First.X)
         BoxsCheck()
     End Sub
 
     Function MoveEnemiesFrom(Enemies As List(Of List(Of Point))) As List(Of List(Of Point))
-        For i = 0 To Enemies.Count - 1
+        For i As Integer = 0 To Enemies.Count - 1
             EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), -10, 0)
         Next
         Return Enemies
@@ -481,117 +485,117 @@ Public Class Form1
                     indexCrouch = 3
                 End If
 
-                    'jumps 
-                ElseIf doing = "jump" Then
-                    'jumps facing right
-                    If facing = "right" Then
-                        Ryu = JumpR(indexJumpR)
-                        indexJumpR = indexJumpR + 1
-                        If indexJumpR > 8 Then
-                            doing = "walkR"
-                            indexJumpR = 0
-                        End If
-                        If indexJumpR = 2 Or indexJumpR = 7 Then Ry = Ry - 10
-                        If indexJumpR = 3 Or indexJumpR = 6 Then Ry = Ry - 15
-                        If indexJumpR = 4 Or indexJumpR = 5 Then Ry = Ry - 20
-                        If indexJumpR = 8 Then Ry = 130
-                        'jumps facing left
-                    ElseIf facing = "left" Then
-                        Ryu = jumpL(indexJumpL)
-                        indexJumpL = indexJumpL + 1
-                        If indexJumpL > 8 Then
-                            doing = "walkL"
-                            indexJumpL = 0
-                        End If
-                        If indexJumpL = 2 Or indexJumpL = 7 Then Ry = Ry - 10
-                        If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
-                        If indexJumpL = 4 Or indexJumpL = 5 Then Ry = Ry - 20
-                        If indexJumpL = 8 Then Ry = 130
-                    End If
-
-                    'jumps forward to right side
-                ElseIf doing = "jumpFR" Then
+                'jumps 
+            ElseIf doing = "jump" Then
+                'jumps facing right
+                If facing = "right" Then
                     Ryu = JumpR(indexJumpR)
                     indexJumpR = indexJumpR + 1
-                    If indexJumpR = 2 Or indexJumpR = 3 Then
-                        Rx = Rx + 10
-                        Ry = Ry - 10
-                    End If
-                    If indexJumpR = 4 Or indexJumpR = 5 Then
-                        Rx = Rx + 20
-                        Ry = Ry - 15
-                    End If
-                    If indexJumpR = 6 Then
-                        Rx = Rx + 25
-                        Ry = Ry - 20
-                    End If
-                    If indexJumpR = 7 Then
-                        Rx = Rx + 30
-                        Ry = 130
-                    End If
-                    If indexJumpR = 8 Then
-                        Rx = Rx + 32
-                        Ry = 130
-                    End If
                     If indexJumpR > 8 Then
                         doing = "walkR"
                         indexJumpR = 0
                     End If
-
-                    'jumps forward to left side
-                ElseIf doing = "jumpFL" Then
+                    If indexJumpR = 2 Or indexJumpR = 7 Then Ry = Ry - 10
+                    If indexJumpR = 3 Or indexJumpR = 6 Then Ry = Ry - 15
+                    If indexJumpR = 4 Or indexJumpR = 5 Then Ry = Ry - 20
+                    If indexJumpR = 8 Then Ry = 130
+                    'jumps facing left
+                ElseIf facing = "left" Then
                     Ryu = jumpL(indexJumpL)
                     indexJumpL = indexJumpL + 1
-                    If indexJumpL = 2 Or indexJumpL = 3 Then
-                        Rx = Rx - 10
-                        Ry = Ry - 10
-                    End If
-                    If indexJumpL = 4 Or indexJumpL = 5 Then
-                        Rx = Rx - 20
-                        Ry = Ry - 15
-                    End If
-                    If indexJumpL = 6 Then
-                        Rx = Rx - 25
-                        Ry = Ry - 20
-                    End If
-                    If indexJumpL = 7 Then
-                        Rx = Rx - 30
-                        Ry = 130
-                    End If
-                    If indexJumpL = 7 Then
-                        Rx = Rx - 32
-                        Ry = 130
-                    End If
                     If indexJumpL > 8 Then
                         doing = "walkL"
                         indexJumpL = 0
                     End If
+                    If indexJumpL = 2 Or indexJumpL = 7 Then Ry = Ry - 10
+                    If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
+                    If indexJumpL = 4 Or indexJumpL = 5 Then Ry = Ry - 20
+                    If indexJumpL = 8 Then Ry = 130
+                End If
 
-                    'hadouken
-                ElseIf doing = "hadouken" Then
-                    'hadouken left
-                    If facing = "left" Then
-                        Ryu = hdkL(indexHdkL)
-                        indexHdkL = indexHdkL + 1
+                'jumps forward to right side
+            ElseIf doing = "jumpFR" Then
+                Ryu = JumpR(indexJumpR)
+                indexJumpR = indexJumpR + 1
+                If indexJumpR = 2 Or indexJumpR = 3 Then
+                    Rx = Rx + 10
+                    Ry = Ry - 10
+                End If
+                If indexJumpR = 4 Or indexJumpR = 5 Then
+                    Rx = Rx + 20
+                    Ry = Ry - 15
+                End If
+                If indexJumpR = 6 Then
+                    Rx = Rx + 25
+                    Ry = Ry - 20
+                End If
+                If indexJumpR = 7 Then
+                    Rx = Rx + 30
+                    Ry = 130
+                End If
+                If indexJumpR = 8 Then
+                    Rx = Rx + 32
+                    Ry = 130
+                End If
+                If indexJumpR > 8 Then
+                    doing = "walkR"
+                    indexJumpR = 0
+                End If
+
+                'jumps forward to left side
+            ElseIf doing = "jumpFL" Then
+                Ryu = jumpL(indexJumpL)
+                indexJumpL = indexJumpL + 1
+                If indexJumpL = 2 Or indexJumpL = 3 Then
+                    Rx = Rx - 10
+                    Ry = Ry - 10
+                End If
+                If indexJumpL = 4 Or indexJumpL = 5 Then
+                    Rx = Rx - 20
+                    Ry = Ry - 15
+                End If
+                If indexJumpL = 6 Then
+                    Rx = Rx - 25
+                    Ry = Ry - 20
+                End If
+                If indexJumpL = 7 Then
+                    Rx = Rx - 30
+                    Ry = 130
+                End If
+                If indexJumpL = 7 Then
+                    Rx = Rx - 32
+                    Ry = 130
+                End If
+                If indexJumpL > 8 Then
+                    doing = "walkL"
+                    indexJumpL = 0
+                End If
+
+                'hadouken
+            ElseIf doing = "hadouken" Then
+                'hadouken left
+                If facing = "left" Then
+                    Ryu = hdkL(indexHdkL)
+                    indexHdkL = indexHdkL + 1
                     If indexHdkL > 5 Then
                         indexHdkL = 0
                         doing = "walkL"
                     End If
                 End If
-                    'hadouken right
-                    If facing = "right" Then
-                        Ryu = hdkR(indexHdkR)
-                        indexHdkR = indexHdkR + 1
+                'hadouken right
+                If facing = "right" Then
+                    Ryu = hdkR(indexHdkR)
+                    indexHdkR = indexHdkR + 1
                     If indexHdkR > 5 Then
                         indexHdkR = 0
                         doing = "walkR"
                     End If
                 End If
 
-                    'dead
-                ElseIf doing = "dead" Then
-                    'facing left
-                    If facing = "left" Then
+                'dead
+            ElseIf doing = "dead" Then
+                'facing left
+                If facing = "left" Then
                     Ryu = deadL(indexDeadL)
                     indexDeadL = indexDeadL + 1
                     If indexDeadL = 5 Or indexDeadL = 6 Then
@@ -649,7 +653,7 @@ Public Class Form1
     End Sub
     'check box
     Function BoxsCheck() As Point
-        For Each Enemy In EnemiesBoxFromLeft
+        For Each Enemy As List(Of Point) In EnemiesBoxFromLeft
             If IsBoxClip(Enemy) Then
                 Console.WriteLine("hit")
                 'MsgBox("HIT!!")
@@ -666,10 +670,10 @@ Public Class Form1
         Dim IsAInside, IsBInside, TAisAcc, TBisAcc As Boolean
 
         'NewPolygon = New List(Of Point)()
-        For A = 0 To RyuBox.Count - 1
+        For A As Integer = 0 To RyuBox.Count - 1
             B = NextPoint(A, RyuBox.Count)
 
-            For S = 0 To Enemy.Count - 1
+            For S As Integer = 0 To Enemy.Count - 1
                 T = NextPoint(S, Enemy.Count)
                 NW = Normal(Enemy(S), Enemy(T))
                 NP = Normal(RyuBox(A), RyuBox(B))
@@ -711,7 +715,7 @@ Public Class Form1
         D.X = (S.X - WA.X) * N.X
         D.Y = (S.Y - WA.Y) * N.Y
 
-        Dim result = D.Y + D.X
+        Dim result As Integer = D.Y + D.X
         If result >= 0 Then
             Return True
         Else
@@ -719,11 +723,11 @@ Public Class Form1
         End If
     End Function
 
-    Function Tis(A As Point, B As Point, P As Point, N As Point) As Decimal
+    Function Tis(A As Point, B As Point, P As Point, N As Point) As Double
         Return ((((P.X - A.X) * N.X) + ((P.Y - A.Y) * N.Y)) / (((B.X - A.X) * N.X) + ((B.Y - A.Y) * N.Y))) * 1.0
     End Function
 
-    Function TisAcc(X As Decimal) As Boolean
+    Function TisAcc(X As Double) As Boolean
         If X >= 0 And X <= 1 Then Return True
         Return False
     End Function
