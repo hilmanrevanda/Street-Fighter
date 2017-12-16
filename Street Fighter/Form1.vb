@@ -489,13 +489,6 @@ Public Class Form1
         Return False
     End Function
 
-    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
-        If e.KeyCode = Keys.Down Or e.KeyCode = Keys.W Then
-            If facing = "right" Then doing = "walkR"
-            If facing = "left" Then doing = "walkL"
-            Ry = 130
-        End If
-    End Sub
     Sub ReDraw()
         bg = New Bitmap(My.Resources.background)
         PutSprite(bg, Ryu, Rx, Ry)
@@ -558,21 +551,24 @@ Public Class Form1
                             punch = False
                         End If
                     End If
-                End If
-                'crouchs facing right
-            ElseIf facing = "left" Then
+                    'crouchs facing right
+                ElseIf facing = "left" Then
                     Ryu = crouchL(indexCrouch)
                     indexCrouch = indexCrouch + 1
                     If punch = True Then
                         Ryu = punchCL(indexpunchCL)
                         indexpunchCL = indexpunchCL + 1
+                        If indexpunchCL = 2 Then Rx = Rx - 20
                         If indexpunchCL > 2 Then
                             doing = "crouch"
                             indexpunchCL = 0
                             punch = False
+                            Rx = Rx + 20
                         End If
+
                     End If
-                    If indexCrouch > 4 Then
+                End If
+                If indexCrouch > 4 Then
                     Ry = 158
                     indexCrouch = 3
                 End If
