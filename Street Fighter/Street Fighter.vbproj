@@ -439,5 +439,47 @@
   <ItemGroup>
     <None Include="Resources\ALL.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumps61.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
