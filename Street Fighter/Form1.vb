@@ -8,10 +8,10 @@ Imports Microsoft.VisualBasic
 
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), JumpR(9), jumpL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7), JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
 
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL, indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
 
     'what Ryu is doing
     Private doing As String
@@ -127,27 +127,45 @@ Public Class Form1
         crouchL(3) = My.Resources.crouchL3
         crouchL(4) = My.Resources.crouchL3
     End Sub
-    Sub SetJumpR()
-        JumpR(0) = My.Resources.jumpF0
-        JumpR(1) = My.Resources.jumpF1
-        JumpR(2) = My.Resources.jumpF2
-        JumpR(3) = My.Resources.jumpF3
-        JumpR(4) = My.Resources.jumpF4
-        JumpR(5) = My.Resources.jumpF5
-        JumpR(6) = My.Resources.jumpF6
-        JumpR(7) = My.Resources.jumpF7
-        JumpR(8) = My.Resources.jumpF8
-    End Sub
     Sub SetJumpL()
-        jumpL(0) = My.Resources.jumpFL0
-        jumpL(1) = My.Resources.jumpFL1
-        jumpL(2) = My.Resources.jumpFL2
-        jumpL(3) = My.Resources.jumpFL3
-        jumpL(4) = My.Resources.jumpFL4
-        jumpL(5) = My.Resources.jumpFL5
-        jumpL(6) = My.Resources.jumpFL6
-        jumpL(7) = My.Resources.jumpFL7
-        jumpL(8) = My.Resources.jumpFL8
+        jumpL(0) = My.Resources.jumpL0
+        jumpL(1) = My.Resources.jumpL1
+        jumpL(2) = My.Resources.jumpL2
+        jumpL(3) = My.Resources.jumpL3
+        jumpL(4) = My.Resources.jumpL4
+        jumpL(5) = My.Resources.jumpL5
+        jumpL(6) = My.Resources.jumpL6
+    End Sub
+    Sub SetJumpR()
+        jumpR(0) = My.Resources.jumpR0
+        jumpR(1) = My.Resources.jumpR1
+        jumpR(2) = My.Resources.jumpR1
+        jumpR(3) = My.Resources.jumpR2
+        jumpR(4) = My.Resources.jumpR4
+        jumpR(5) = My.Resources.jumpR5
+        jumpR(6) = My.Resources.jumpR6
+    End Sub
+    Sub SetJumpFR()
+        JumpFR(0) = My.Resources.jumpF0
+        JumpFR(1) = My.Resources.jumpF1
+        JumpFR(2) = My.Resources.jumpF2
+        JumpFR(3) = My.Resources.jumpF3
+        JumpFR(4) = My.Resources.jumpF4
+        JumpFR(5) = My.Resources.jumpF5
+        JumpFR(6) = My.Resources.jumpF6
+        JumpFR(7) = My.Resources.jumpF7
+        JumpFR(8) = My.Resources.jumpF8
+    End Sub
+    Sub SetJumpFL()
+        jumpFL(0) = My.Resources.jumpFL0
+        jumpFL(1) = My.Resources.jumpFL1
+        jumpFL(2) = My.Resources.jumpFL2
+        jumpFL(3) = My.Resources.jumpFL3
+        jumpFL(4) = My.Resources.jumpFL4
+        jumpFL(5) = My.Resources.jumpFL5
+        jumpFL(6) = My.Resources.jumpFL6
+        jumpFL(7) = My.Resources.jumpFL7
+        jumpFL(8) = My.Resources.jumpFL8
     End Sub
     Sub SethdkL()
         hdkL(0) = My.Resources.hdkL0
@@ -348,14 +366,18 @@ Public Class Form1
         indexHdkL = 0
         indexDeadL = 0
         indexDeadR = 0
+        indexJumpL = 0
+        indexJumpR = 0
 
         SetIntro()
         SetStandR()
         SetStandL()
         SetCrouchL()
         SetCrouchR()
-        SetJumpR()
         SetJumpL()
+        SetJumpR()
+        SetJumpFR()
+        SetJumpFL()
         SetBeeL()
         SetBeeR()
         SethdkR()
@@ -489,86 +511,87 @@ Public Class Form1
             ElseIf doing = "jump" Then
                 'jumps facing right
                 If facing = "right" Then
-                    Ryu = JumpR(indexJumpR)
+                    Ryu = jumpR(indexJumpR)
                     indexJumpR = indexJumpR + 1
-                    If indexJumpR > 8 Then
+                    If indexJumpR = 0 Or indexJumpR = 6 Then Ry = 130
+                    If indexJumpR = 1 Or indexJumpR = 5 Then Ry = Ry - 13
+                    If indexJumpR = 2 Or indexJumpR = 4 Then Ry = Ry - 26
+                    If indexJumpR = 3 Then Ry = Ry - 39
+                    If indexJumpR > 6 Then
                         doing = "walkR"
                         indexJumpR = 0
                     End If
-                    If indexJumpR = 2 Or indexJumpR = 7 Then Ry = Ry - 10
-                    If indexJumpR = 3 Or indexJumpR = 6 Then Ry = Ry - 15
-                    If indexJumpR = 4 Or indexJumpR = 5 Then Ry = Ry - 20
-                    If indexJumpR = 8 Then Ry = 130
+
                     'jumps facing left
                 ElseIf facing = "left" Then
                     Ryu = jumpL(indexJumpL)
                     indexJumpL = indexJumpL + 1
-                    If indexJumpL > 8 Then
+                    If indexJumpL = 0 Or indexJumpL = 6 Then Ry = 130
+                    If indexJumpL = 1 Or indexJumpL = 5 Then Ry = Ry - 13
+                    If indexJumpL = 2 Or indexJumpL = 4 Then Ry = Ry - 26
+                    If indexJumpL = 3 Then Ry = Ry - 39
+                    If indexJumpL > 6 Then
                         doing = "walkL"
                         indexJumpL = 0
                     End If
-                    If indexJumpL = 2 Or indexJumpL = 7 Then Ry = Ry - 10
-                    If indexJumpL = 3 Or indexJumpL = 4 Or indexJumpL = 6 Then Ry = Ry - 15
-                    If indexJumpL = 4 Or indexJumpL = 5 Then Ry = Ry - 20
-                    If indexJumpL = 8 Then Ry = 130
                 End If
 
                 'jumps forward to right side
             ElseIf doing = "jumpFR" Then
-                Ryu = JumpR(indexJumpR)
-                indexJumpR = indexJumpR + 1
-                If indexJumpR = 2 Or indexJumpR = 3 Then
+                Ryu = JumpFR(indexJumpFR)
+                indexJumpFR = indexJumpFR + 1
+                If indexJumpFR = 2 Or indexJumpFR = 3 Then
                     Rx = Rx + 10
                     Ry = Ry - 10
                 End If
-                If indexJumpR = 4 Or indexJumpR = 5 Then
+                If indexJumpFR = 4 Or indexJumpFR = 5 Then
                     Rx = Rx + 20
                     Ry = Ry - 15
                 End If
-                If indexJumpR = 6 Then
+                If indexJumpFR = 6 Then
                     Rx = Rx + 25
                     Ry = Ry - 20
                 End If
-                If indexJumpR = 7 Then
+                If indexJumpFR = 7 Then
                     Rx = Rx + 30
                     Ry = 130
                 End If
-                If indexJumpR = 8 Then
+                If indexJumpFR = 8 Then
                     Rx = Rx + 32
                     Ry = 130
                 End If
-                If indexJumpR > 8 Then
+                If indexJumpFR > 8 Then
                     doing = "walkR"
-                    indexJumpR = 0
+                    indexJumpFR = 0
                 End If
 
                 'jumps forward to left side
             ElseIf doing = "jumpFL" Then
-                Ryu = jumpL(indexJumpL)
-                indexJumpL = indexJumpL + 1
-                If indexJumpL = 2 Or indexJumpL = 3 Then
+                Ryu = jumpFL(indexJumpFL)
+                indexJumpFL = indexJumpFL + 1
+                If indexJumpFL = 2 Or indexJumpFL = 3 Then
                     Rx = Rx - 10
                     Ry = Ry - 10
                 End If
-                If indexJumpL = 4 Or indexJumpL = 5 Then
+                If indexJumpFL = 4 Or indexJumpFL = 5 Then
                     Rx = Rx - 20
                     Ry = Ry - 15
                 End If
-                If indexJumpL = 6 Then
+                If indexJumpFL = 6 Then
                     Rx = Rx - 25
                     Ry = Ry - 20
                 End If
-                If indexJumpL = 7 Then
+                If indexJumpFL = 7 Then
                     Rx = Rx - 30
                     Ry = 130
                 End If
-                If indexJumpL = 7 Then
+                If indexJumpFL = 7 Then
                     Rx = Rx - 32
                     Ry = 130
                 End If
-                If indexJumpL > 8 Then
+                If indexJumpFL > 8 Then
                     doing = "walkL"
-                    indexJumpL = 0
+                    indexJumpFL = 0
                 End If
 
                 'hadouken

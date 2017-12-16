@@ -391,6 +391,48 @@
   <data name="ALL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ALL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="jumpL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpL6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps61.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumpR6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumps6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="punchL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lp (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
