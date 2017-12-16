@@ -589,5 +589,17 @@
   <ItemGroup>
     <None Include="Resources\beed61.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Game_Over_Screen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ww fist up ryu %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ww fist up ryu %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ww fist up ryu %284%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
