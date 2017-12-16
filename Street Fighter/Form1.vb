@@ -40,51 +40,34 @@ Public Class Form1
     Dim By As Integer = 100
 
     'ryu box
-    Public RyuBox As List(Of Point)
+    Public RyuBox As List(Of Point) = New List(Of Point)
 
     'Enemies box
     Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
     Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
 
-    'Init box
-    Sub InitEnemyBox()
-        EnemiesBoxFromLeft = New List(Of List(Of Point))
-        Dim point As Point
-        point.X = Bx
-        point.Y = By
-        EnemiesBoxFromLeft.Add(CreateBox(point))
-    End Sub
-
-    Sub InitRyuBox()
-        RyuBox = New List(Of Point)
-        Dim point As Point
-        point.X = Rx
-        point.Y = Ry
-        RyuBox = CreateBox(point)
-    End Sub
-
     'Creating box by single point
-    Function CreateBox(point As Point) As List(Of Point)
+    Function CreateBox(X As Integer, Y As Integer, NX As Integer, NY As Integer) As List(Of Point)
         Dim TempPoint As Point
         Dim box As List(Of Point) = New List(Of Point)
-        Dim x, y, nx, ny As Integer
 
-        x = point.X
-        y = point.Y
-        nx = x + 100
-        ny = y + 100
+        If punch Then
+            If facing Is "right" Then NX = NX -20
+        End If
+        NX = X + NX
+        NY = Y + NY
 
-        TempPoint.X = x
-        TempPoint.Y = y
+        TempPoint.X = X
+        TempPoint.Y = Y
         box.Add(TempPoint)
-        TempPoint.X = nx
-        TempPoint.Y = y
+        TempPoint.X = NX
+        TempPoint.Y = Y
         box.Add(TempPoint)
-        TempPoint.X = nx
-        TempPoint.Y = ny
+        TempPoint.X = NX
+        TempPoint.Y = NY
         box.Add(TempPoint)
-        TempPoint.X = x
-        TempPoint.Y = ny
+        TempPoint.X = X
+        TempPoint.Y = NY
         box.Add(TempPoint)
         Return box
     End Function
@@ -243,6 +226,7 @@ Public Class Form1
         beeR(4) = My.Resources.beeR4
         beeR(5) = My.Resources.beeR5
     End Sub
+
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
@@ -318,7 +302,7 @@ Public Class Form1
     End Sub
 
     Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
-        e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+        If RyuBox.Count > 0 Then e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
 
         For Each enemy As List(Of Point) In EnemiesBoxFromLeft
             e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
@@ -341,14 +325,6 @@ Public Class Form1
         Next
         Return P
     End Function
-
-    Sub MoveRyuSpriteAndBox(nx As Integer, ny As Integer)
-        RyuBox = MoveBox(RyuBox, nx, ny)
-        Rx = Rx + nx
-        Ry = Ry + ny
-        pbcanvas.Invalidate()
-        BoxsCheck()
-    End Sub
 
     Function MoveEnemiesFrom(Enemies As List(Of List(Of Point))) As List(Of List(Of Point))
         For i As Integer = 0 To Enemies.Count - 1
@@ -373,7 +349,7 @@ Public Class Form1
     End Function
 
     Sub CreateEnemy()
-        EnemiesBoxFromLeft.Add(CreateBox(RandomEnemy()))
+        'EnemiesBoxFromLeft.Add(CreateBox(RandomEnemy()))
     End Sub
 
     'Init while the program start
@@ -417,8 +393,6 @@ Public Class Form1
         SetPunchCR()
         SetDeadL()
         SetDeadR()
-        InitRyuBox()
-        InitEnemyBox()
 
         Timer1.Interval = 75
 
@@ -440,7 +414,8 @@ Public Class Form1
                 facing = "left"
             End If
             If (Rx >= 20) Then
-                MoveRyuSpriteAndBox(-10, 0)
+                'MoveRyuSpriteAndBox(-10, 0)
+                Rx = Rx - 10
             End If
 
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
@@ -449,7 +424,8 @@ Public Class Form1
                 facing = "right"
             End If
             If (Rx <= 490) Then
-                MoveRyuSpriteAndBox(10, 0)
+                'MoveRyuSpriteAndBox(10, 0)
+                Rx = Rx + 10
             End If
         End If
 
@@ -491,12 +467,15 @@ Public Class Form1
 
     Sub ReDraw()
         bg = New Bitmap(My.Resources.background)
+
         PutSprite(bg, Ryu, Rx, Ry)
+        RyuBox = CreateBox(Rx, Ry, Ryu.Width, Ryu.Height)
 
         If phase = "play" Then
             PutSprite(bg, obsL, Bx, By)
         End If
     End Sub
+
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If phase = "intro" Then
             Ryu = intro(indexIntro)
@@ -717,6 +696,8 @@ Public Class Form1
 
         ReDraw()
         pbcanvas.Image = bg
+        pbcanvas.Invalidate()
+        BoxsCheck()
 
         If indexStandR > 3 Then
             indexStandR = 0
