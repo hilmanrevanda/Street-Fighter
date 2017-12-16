@@ -3,14 +3,17 @@ Imports System.Drawing.Drawing2D
 Imports System.Math
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7), JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6) As Bitmap
+    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
+        JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3) As Bitmap
 
     'index of activity
-    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL, indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR As Integer
+    Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
+        indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR As Integer
 
     'what Ryu is doing
     Private doing As String
 
+    Private punch As Boolean
     'where Ryu is facing
     Private facing As String
 
@@ -177,6 +180,16 @@ Public Class Form1
         hdkR(3) = My.Resources.hdkR3
         hdkR(4) = My.Resources.hdkR4
         hdkR(5) = My.Resources.hdkR4
+    End Sub
+    Sub SetPunchL()
+        punchL(0) = My.Resources.punchL0
+        punchL(1) = My.Resources.punchL1
+        punchL(2) = My.Resources.punchL2
+    End Sub
+    Sub SetPunchR()
+        punchR(0) = My.Resources.punchR2
+        punchR(1) = My.Resources.punchR1
+        punchR(2) = My.Resources.punchR0
     End Sub
     Sub SetDeadR()
         deadR(0) = My.Resources.dead0
@@ -364,6 +377,8 @@ Public Class Form1
         indexDeadR = 0
         indexJumpL = 0
         indexJumpR = 0
+        indexPunchL = 0
+        indexPunchR = 0
 
         SetIntro()
         SetStandR()
@@ -378,6 +393,8 @@ Public Class Form1
         SetBeeR()
         SethdkR()
         SethdkL()
+        SetPunchL()
+        SetPunchR()
         SetDeadL()
         SetDeadR()
         InitRyuBox()
@@ -442,6 +459,9 @@ Public Class Form1
         If e.KeyCode = Keys.CapsLock Then
             doing = "hadouken"
         End If
+        If e.KeyCode = Keys.Tab Then
+            punch = True
+        End If
     End Sub
 
     Function Conditions() As Boolean
@@ -474,19 +494,35 @@ Public Class Form1
                 facing = "right"
             End If
 
-
         ElseIf phase = "play" Then
             MoveAllEnemies()
             'walks to left side
             If doing = "walkL" Then
                 Ryu = standL(indexStandL)
                 indexStandL = indexStandL + 1
+                If punch = True Then
+                    Ryu = punchL(indexPunchL)
+                    indexPunchL = indexPunchL + 1
+                    If indexPunchL > 2 Then
+                        doing = "walkL"
+                        indexPunchL = 0
+                        punch = False
+                    End If
+                End If
 
                 'walks to right side
             ElseIf doing = "walkR" Then
                 Ryu = standR(indexStandR)
                 indexStandR = indexStandR + 1
-
+                If punch = True Then
+                    Ryu = punchR(indexPunchR)
+                    indexPunchR = indexPunchR + 1
+                    If indexPunchR > 2 Then
+                        doing = "walkR"
+                        indexPunchR = 0
+                        punch = False
+                    End If
+                End If
                 'crouchs
             ElseIf doing = "crouch" Then
                 'crouchs facing right
