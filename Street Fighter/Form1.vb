@@ -123,26 +123,26 @@ Public Class Form1
         crouchL(4) = My.Resources.crouchL3
     End Sub
     Sub SetJumpR()
-        JumpR(0) = My.Resources.jump0
-        JumpR(1) = My.Resources.jump1
-        JumpR(2) = My.Resources.jump2
-        JumpR(3) = My.Resources.jump3
-        JumpR(4) = My.Resources.jump4
-        JumpR(5) = My.Resources.jump5
-        JumpR(6) = My.Resources.jump6
-        JumpR(7) = My.Resources.jump7
-        JumpR(8) = My.Resources.jump8
+        JumpR(0) = My.Resources.jumpF0
+        JumpR(1) = My.Resources.jumpF1
+        JumpR(2) = My.Resources.jumpF2
+        JumpR(3) = My.Resources.jumpF3
+        JumpR(4) = My.Resources.jumpF4
+        JumpR(5) = My.Resources.jumpF5
+        JumpR(6) = My.Resources.jumpF6
+        JumpR(7) = My.Resources.jumpF7
+        JumpR(8) = My.Resources.jumpF8
     End Sub
     Sub SetJumpL()
-        jumpL(0) = My.Resources.jumpL0
-        jumpL(1) = My.Resources.jumpL1
-        jumpL(2) = My.Resources.jumpL2
-        jumpL(3) = My.Resources.jumpL3
-        jumpL(4) = My.Resources.jumpL4
-        jumpL(5) = My.Resources.jumpL5
-        jumpL(6) = My.Resources.jumpL6
-        jumpL(7) = My.Resources.jumpL7
-        jumpL(8) = My.Resources.jumpL8
+        jumpL(0) = My.Resources.jumpFL0
+        jumpL(1) = My.Resources.jumpFL1
+        jumpL(2) = My.Resources.jumpFL2
+        jumpL(3) = My.Resources.jumpFL3
+        jumpL(4) = My.Resources.jumpFL4
+        jumpL(5) = My.Resources.jumpFL5
+        jumpL(6) = My.Resources.jumpFL6
+        jumpL(7) = My.Resources.jumpFL7
+        jumpL(8) = My.Resources.jumpFL8
     End Sub
     Sub SethdkL()
         hdkL(0) = My.Resources.hdkL0

@@ -238,58 +238,58 @@
   <data name="bee5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bee5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jump8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpF8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump61.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump71.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jumpL8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="jumpFL8" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump81.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="beeR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -387,5 +387,29 @@
   </data>
   <data name="standR4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\neutral (6)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ALL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ALL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (2)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchR0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (2)2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchR1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (1)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="punchR2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lp (2)11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>punchR</value>
   </data>
 </root>

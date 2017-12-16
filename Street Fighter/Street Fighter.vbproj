@@ -418,5 +418,26 @@
   <ItemGroup>
     <None Include="Resources\neutral %286%292.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %282%292.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lp %282%2911.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ALL.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
