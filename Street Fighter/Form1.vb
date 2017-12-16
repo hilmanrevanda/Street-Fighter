@@ -10,12 +10,12 @@ Public Class Form1
     'sprites
     Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
         JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3),
-        punchCR(3), punchCL(3), kickR(8), kickL(8), beeDL(7), beeDR(7) As Bitmap
+        punchCR(3), punchCL(3), kickR(8), kickL(8), beeDL(7), beeDR(7), win(3) As Bitmap
 
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
         indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR,
-        indexpunchCL, indexPunchCR, indexKickL, indexKickR, indexBeeDL, indexBeeDR As Integer
+        indexpunchCL, indexPunchCR, indexKickL, indexKickR, indexBeeDL, indexBeeDR, indexWin As Integer
 
     'what Ryu is doing
     Private doing As String
@@ -25,12 +25,14 @@ Public Class Form1
 
     'Determine whether Bee is attacked
     Private attacked As Boolean
+    Private count As Integer = 1
 
     'where Ryu is facing
     Private facing As String
 
     'direction of bee
     Private BeeDir As String
+
     'phase
     Private phase As String
 
@@ -238,7 +240,11 @@ Public Class Form1
         deadL(5) = My.Resources.deadL5
         deadL(6) = My.Resources.deadL5
     End Sub
-
+    Sub SetWin()
+        win(0) = My.Resources.win0
+        win(1) = My.Resources.win1
+        win(2) = My.Resources.win2
+    End Sub
     Sub SetBeeL()
         beeL(0) = My.Resources.bee0
         beeL(1) = My.Resources.bee1
@@ -425,6 +431,7 @@ Public Class Form1
         indexKickR = 0
         indexBeeDL = 0
         indexBeeDR = 0
+        indexWin = 0
 
         SetIntro()
         SetStandR()
@@ -449,6 +456,7 @@ Public Class Form1
         SetDeadR()
         SetBeeDL()
         SetBeeDR()
+        SetWin()
 
         Timer1.Interval = 75
 
@@ -461,6 +469,8 @@ Public Class Form1
 
         If doing = "walkR" Then facing = "right"
         If doing = "walkL" Then facing = "left"
+
+        If count = 20 Then phase = "win"
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -779,7 +789,7 @@ Public Class Form1
                     indexDeadL = indexDeadL + 1
                     If indexDeadL = 5 Or indexDeadL = 6 Then
                         Ry = Ry + 15
-                        Timer1.Enabled = False
+                        Ryu = My.Resources.Game_Over_Screen
                     End If
 
                 ElseIf facing = "right" Then
@@ -789,16 +799,22 @@ Public Class Form1
 
                     If indexDeadR = 5 Or indexDeadR = 6 Then
                         Ry = Ry + 15
-                        Timer1.Enabled = False
+                        Ryu = My.Resources.Game_Over_Screen
                     End If
                 End If
+            ElseIf phase = "win" Then
+                Ryu = win(indexWin)
+                indexWin = indexWin + 1
+                If indexWin > 2 Then indexWin = 0
             End If
+
             'obstacle
             If BeeDir = "left" Then
                 obsL = beeL(indexBeeL)
                 Bx = Bx + 10
                 indexBeeL = indexBeeL + 1
                 If attacked = True Then
+                    count = count + 1
                     obsL = beeDL(indexBeeDL)
                     indexBeeDL = indexBeeDL + 1
                     By = By + 5
@@ -811,6 +827,7 @@ Public Class Form1
                 Bx = Bx - 10
                 indexBeeR = indexBeeR + 1
                 If attacked = True Then
+                    count = count + 1
                     obsL = beeDR(indexBeeDR)
                     indexBeeDR = indexBeeDR + 1
                     By = By + 5
