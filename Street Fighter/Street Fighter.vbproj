@@ -499,5 +499,53 @@
   <ItemGroup>
     <None Include="Resources\punchCR21.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick61.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kick71.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

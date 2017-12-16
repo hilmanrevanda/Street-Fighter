@@ -433,6 +433,54 @@
   <data name="jumpR6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jumps6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="kick0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick51.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick61.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kickL7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kick71.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="punchCL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\punchCR01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
