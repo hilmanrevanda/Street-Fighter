@@ -10,12 +10,12 @@ Public Class Form1
     'sprites
     Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
         JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3),
-        punchCR(3), punchCL(3), kickR(8), kickL(8) As Bitmap
+        punchCR(3), punchCL(3), kickR(8), kickL(8), beeDL(7), beeDR(7) As Bitmap
 
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
         indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR,
-        indexpunchCL, indexPunchCR, indexKickL, indexKickR As Integer
+        indexpunchCL, indexPunchCR, indexKickL, indexKickR, indexBeeDL, indexBeeDR As Integer
 
     'what Ryu is doing
     Private doing As String
@@ -23,9 +23,14 @@ Public Class Form1
     'Determine whether Ryu attacks or not
     Private attack As Boolean
 
+    'Determine whether Bee is attacked
+    Private attacked As Boolean
+
     'where Ryu is facing
     Private facing As String
 
+    'direction of bee
+    Private BeeDir As String
     'phase
     Private phase As String
 
@@ -246,7 +251,24 @@ Public Class Form1
         beeR(4) = My.Resources.beeR4
         beeR(5) = My.Resources.beeR5
     End Sub
-
+    Sub SetBeeDL()
+        beeDL(0) = My.Resources.beedl0
+        beeDL(1) = My.Resources.beedl1
+        beeDL(2) = My.Resources.beedl2
+        beeDL(3) = My.Resources.beedl3
+        beeDL(4) = My.Resources.beedl4
+        beeDL(5) = My.Resources.beedl5
+        beeDL(6) = My.Resources.beedl6
+    End Sub
+    Sub SetBeeDR()
+        beeDR(0) = My.Resources.bee0
+        beeDR(1) = My.Resources.bee1
+        beeDR(2) = My.Resources.bee2
+        beeDR(3) = My.Resources.bee3
+        beeDR(4) = My.Resources.bee4
+        beeDR(5) = My.Resources.beeR5
+        beeDR(5) = My.Resources.bee5
+    End Sub
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
@@ -395,6 +417,8 @@ Public Class Form1
         indexpunchCL = 0
         indexKickL = 0
         indexKickR = 0
+        indexBeeDL = 0
+        indexBeeDR = 0
 
         SetIntro()
         SetStandR()
@@ -417,6 +441,8 @@ Public Class Form1
         SetKickL()
         SetDeadL()
         SetDeadR()
+        SetBeeDL()
+        SetBeeDR()
 
         Timer1.Interval = 75
 
@@ -497,7 +523,11 @@ Public Class Form1
 
         If phase = "play" Then
             If Bx >= bg.Width - obsR.Width Then Bx = 0
-            PutSprite(bg, obsR, Bx, By)
+            If BeeDir = "left" Then
+                PutSprite(bg, obsL, Bx, By)
+            ElseIf BeeDir = "right" Then
+                PutSprite(bg, obsR, Bx, By)
+            End If
         End If
     End Sub
 
@@ -744,15 +774,29 @@ Public Class Form1
                 End If
             End If
             'obstacle
-            obsL = beeL(indexBeeL)
-            obsR = beeR(indexBeeR)
-            Bx = Bx + 10
-            indexBeeL = indexBeeL + 1
-            indexBeeR = indexBeeR + 1
-
-            If indexBeeL > 5 Then indexBeeL = 0
-            If indexBeeR > 5 Then indexBeeR = 0
-
+            If BeeDir = "left" Then
+                obsL = beeL(indexBeeL)
+                Bx = Bx + 10
+                indexBeeL = indexBeeL + 1
+                If attacked = True Then
+                    obsL = beeDL(indexBeeDL)
+                    indexBeeDL = indexBeeDL + 1
+                    By = By + 5
+                End If
+                If indexBeeL > 5 Then
+                    indexBeeL = 0
+                End If
+            ElseIf BeeDir = "right" Then
+                obsR = beeR(indexBeeR)
+                Bx = Bx - 10
+                indexBeeR = indexBeeR + 1
+                If attacked = True Then
+                    obsL = beeDR(indexBeeDR)
+                    indexBeeDR = indexBeeDR + 1
+                    By = By + 5
+                End If
+                If indexBeeR > 5 Then indexBeeR = 0
+            End If
         End If
 
         ReDraw()
@@ -780,6 +824,7 @@ Public Class Form1
         Bx = 20
         By = 100
         PutSprite(bg, Ryu, Rx, Ry)
+        BeeDir = "left"
     End Sub
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()

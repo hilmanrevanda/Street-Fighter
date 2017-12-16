@@ -568,5 +568,26 @@
   <ItemGroup>
     <None Include="Resources\beed6.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beed61.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
