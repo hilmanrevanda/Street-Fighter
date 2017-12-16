@@ -53,9 +53,6 @@ Public Class Form1
         Dim TempPoint As Point
         Dim box As List(Of Point) = New List(Of Point)
 
-        If punch Then
-            If facing Is "right" Then NX = NX -20
-        End If
         NX = X + NX
         NY = Y + NY
 
@@ -499,6 +496,7 @@ Public Class Form1
         RyuBox = CreateBox(Rx, Ry, Ryu.Width, Ryu.Height)
 
         If phase = "play" Then
+            If Bx >= bg.Width - obsR.Width Then Bx = 0
             PutSprite(bg, obsR, Bx, By)
         End If
     End Sub
