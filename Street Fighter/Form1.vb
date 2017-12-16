@@ -10,17 +10,19 @@ Public Class Form1
     'sprites
     Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
         JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3),
-        punchCR(3), punchCL(3) As Bitmap
+        punchCR(3), punchCL(3), kickR(8), kickL(8) As Bitmap
 
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
         indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR,
-        indexpunchCL, indexPunchCR As Integer
+        indexpunchCL, indexPunchCR, indexKickL, indexKickR As Integer
 
     'what Ryu is doing
     Private doing As String
 
-    Private punch As Boolean
+    'Determine whether Ryu attacks or not
+    Private attack As Boolean
+
     'where Ryu is facing
     Private facing As String
 
@@ -208,6 +210,27 @@ Public Class Form1
         punchCR(1) = My.Resources.punchCR1
         punchCR(2) = My.Resources.punchCR0
     End Sub
+    Sub SetKickL()
+        kickL(0) = My.Resources.kickL0
+        kickL(1) = My.Resources.kickL1
+        kickL(2) = My.Resources.kickL2
+        kickL(3) = My.Resources.kickL3
+        kickL(4) = My.Resources.kickL4
+        kickL(5) = My.Resources.kickL5
+        kickL(6) = My.Resources.kickL6
+        kickL(7) = My.Resources.kickL7
+    End Sub
+    Sub SetKickR()
+        kickR(0) = My.Resources.kick0
+        kickR(1) = My.Resources.kick1
+        kickR(2) = My.Resources.kick2
+        kickR(3) = My.Resources.kick3
+        kickR(4) = My.Resources.kick4
+        kickR(5) = My.Resources.kick5
+        kickR(6) = My.Resources.kick6
+        kickR(7) = My.Resources.kick7
+    End Sub
+
     Sub SetDeadR()
         deadR(0) = My.Resources.dead0
         deadR(1) = My.Resources.dead1
@@ -397,6 +420,8 @@ Public Class Form1
         indexPunchR = 0
         indexPunchCR = 0
         indexpunchCL = 0
+        indexKickL = 0
+        indexKickR = 0
 
         SetIntro()
         SetStandR()
@@ -415,6 +440,8 @@ Public Class Form1
         SetPunchR()
         SetPunchCL()
         SetPunchCR()
+        SetKickR()
+        SetKickL()
         SetDeadL()
         SetDeadR()
         InitRyuBox()
@@ -480,7 +507,7 @@ Public Class Form1
             doing = "hadouken"
         End If
         If e.KeyCode = Keys.Tab Then
-            punch = True
+            attack = True
         End If
     End Sub
 
@@ -513,13 +540,13 @@ Public Class Form1
             If doing = "walkL" Then
                 Ryu = standL(indexStandL)
                 indexStandL = indexStandL + 1
-                If punch = True Then
+                If attack = True Then
                     Ryu = punchL(indexPunchL)
                     indexPunchL = indexPunchL + 1
                     If indexPunchL > 2 Then
                         doing = "walkL"
                         indexPunchL = 0
-                        punch = False
+                        attack = False
                     End If
                 End If
 
@@ -527,13 +554,13 @@ Public Class Form1
             ElseIf doing = "walkR" Then
                 Ryu = standR(indexStandR)
                 indexStandR = indexStandR + 1
-                If punch = True Then
+                If attack = True Then
                     Ryu = punchR(indexPunchR)
                     indexPunchR = indexPunchR + 1
                     If indexPunchR > 2 Then
                         doing = "walkR"
                         indexPunchR = 0
-                        punch = False
+                        attack = False
                     End If
                 End If
                 'crouchs
@@ -542,27 +569,27 @@ Public Class Form1
                 If facing = "right" Then
                     Ryu = crouchR(indexCrouch)
                     indexCrouch = indexCrouch + 1
-                    If punch = True Then
+                    If attack = True Then
                         Ryu = punchCR(indexPunchCR)
                         indexPunchCR = indexPunchCR + 1
                         If indexPunchCR > 2 Then
                             doing = "crouch"
                             indexPunchCR = 0
-                            punch = False
+                            attack = False
                         End If
                     End If
                     'crouchs facing right
                 ElseIf facing = "left" Then
                     Ryu = crouchL(indexCrouch)
                     indexCrouch = indexCrouch + 1
-                    If punch = True Then
+                    If attack = True Then
                         Ryu = punchCL(indexpunchCL)
                         indexpunchCL = indexpunchCL + 1
                         If indexpunchCL = 2 Then Rx = Rx - 20
                         If indexpunchCL > 2 Then
                             doing = "crouch"
                             indexpunchCL = 0
-                            punch = False
+                            attack = False
                             Rx = Rx + 20
                         End If
 
@@ -579,6 +606,24 @@ Public Class Form1
                 If facing = "right" Then
                     Ryu = jumpR(indexJumpR)
                     indexJumpR = indexJumpR + 1
+                    If attack = True Then
+                        Ryu = kickR(indexKickR)
+                        indexKickR = indexKickR + 1
+                        If indexKickR = 1 Then Rx = Rx + 3
+                        If indexKickR = 2 Then Rx = Rx + 6
+                        If indexKickR = 3 Then Rx = Rx + 9
+                        If indexKickR = 4 Then Rx = Rx + 12
+                        If indexKickR = 5 Then Rx = Rx + 15
+                        If indexKickR = 6 Then Rx = Rx + 18
+                        If indexKickR = 7 Then Rx = Rx + 21
+
+                        If indexKickR > 7 Then
+                            doing = "walkR"
+                            indexKickR = 0
+                            indexJumpR = 0
+                            attack = False
+                        End If
+                    End If
                     If indexJumpR = 0 Or indexJumpR = 6 Then Ry = 130
                     If indexJumpR = 1 Or indexJumpR = 5 Then Ry = Ry - 13
                     If indexJumpR = 2 Or indexJumpR = 4 Then Ry = Ry - 26
@@ -592,6 +637,24 @@ Public Class Form1
                 ElseIf facing = "left" Then
                     Ryu = jumpL(indexJumpL)
                     indexJumpL = indexJumpL + 1
+                    If attack = True Then
+                        Ryu = kickL(indexKickL)
+                        indexKickL = indexKickL + 1
+                        If indexKickL = 1 Then Rx = Rx + 3
+                        If indexKickL = 2 Then Rx = Rx + 6
+                        If indexKickL = 3 Then Rx = Rx + 9
+                        If indexKickL = 4 Then Rx = Rx + 12
+                        If indexKickL = 5 Then Rx = Rx + 15
+                        If indexKickL = 6 Then Rx = Rx + 18
+                        If indexKickL = 7 Then Rx = Rx + 21
+
+                        If indexKickL > 7 Then
+                            doing = "walkL"
+                            indexKickL = 0
+                            indexJumpL = 0
+                            attack = False
+                        End If
+                    End If
                     If indexJumpL = 0 Or indexJumpL = 6 Then Ry = 130
                     If indexJumpL = 1 Or indexJumpL = 5 Then Ry = Ry - 13
                     If indexJumpL = 2 Or indexJumpL = 4 Then Ry = Ry - 26
