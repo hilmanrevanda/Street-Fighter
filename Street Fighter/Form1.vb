@@ -38,8 +38,8 @@ Public Class Form1
     Dim Ry As Integer = 130
 
     'location of obstacle
-    Dim Bx As Integer = 500
-    Dim By As Integer = 100
+    Dim Bx As Integer
+    Dim By As Integer
 
     'ryu box
     Public RyuBox As List(Of Point)
@@ -521,7 +521,7 @@ Public Class Form1
         PutSprite(bg, Ryu, Rx, Ry)
 
         If phase = "play" Then
-            PutSprite(bg, obsL, Bx, By)
+            PutSprite(bg, obsR, Bx, By)
         End If
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -769,7 +769,7 @@ Public Class Form1
             'obstacle
             obsL = beeL(indexBeeL)
             obsR = beeR(indexBeeR)
-
+            Bx = Bx + 10
             indexBeeL = indexBeeL + 1
             indexBeeR = indexBeeR + 1
 
@@ -796,7 +796,10 @@ Public Class Form1
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
         obsR = My.Resources.beeR0
-
+        'MAAN, INI AWALNYA
+        'X >> 20,550
+        Bx = 20
+        By = 100
         PutSprite(bg, Ryu, Rx, Ry)
     End Sub
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
