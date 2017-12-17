@@ -574,4 +574,28 @@
   <data name="win2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ww fist up ryu (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hd0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hd1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hd2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hd3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hdL0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hdL1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hdL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hdL3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hd31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

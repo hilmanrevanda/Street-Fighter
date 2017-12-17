@@ -8,20 +8,22 @@ Imports Microsoft.VisualBasic
 
 Public Class Form1
     'sprites
-    Private bg, Ryu, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
+    Private bg, Ryu, hdk, obsR, obsL, intro(9), standR(4), standL(4), crouchL(5), crouchR(5), jumpL(7), jumpR(7),
         JumpFR(9), jumpFL(9), hdkL(6), hdkR(6), deadR(7), deadL(7), beeL(6), beeR(6), punchL(3), punchR(3),
-        punchCR(3), punchCL(3), kickR(8), kickL(8), beeDL(7), beeDR(7), win(3) As Bitmap
+        punchCR(3), punchCL(3), kickR(8), kickL(8), beeDL(7), beeDR(7), win(3), hdR(4), hdL(4) As Bitmap
 
     'index of activity
     Private indexIntro, indexStandR, indexStandL, indexCrouch, indexJumpL, indexJumpR, indexJumpFR, indexJumpFL,
         indexDeadL, indexDeadR, indexBeeR, indexBeeL, indexHdkL, indexHdkR, indexPunchL, indexPunchR,
-        indexpunchCL, indexPunchCR, indexKickL, indexKickR, indexBeeDL, indexBeeDR, indexWin As Integer
+        indexpunchCL, indexPunchCR, indexKickL, indexKickR, indexBeeDL, indexBeeDR, indexWin,
+        indexHdR, indexHdL As Integer
 
     'what Ryu is doing
     Private doing As String
 
     'Determine whether Ryu attacks or not
     Private attack As Boolean
+    Private hadouken As Boolean
 
     'Determine whether Bee is attacked
     Private attacked As Boolean
@@ -43,6 +45,9 @@ Public Class Form1
     'location of Ryu
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
+
+    'location of hadouken ball
+    Dim hx, hy As Integer
 
     'location of obstacle
     Dim Bx As Integer
@@ -180,6 +185,18 @@ Public Class Form1
         hdkR(3) = My.Resources.hdkR3
         hdkR(4) = My.Resources.hdkR4
         hdkR(5) = My.Resources.hdkR4
+    End Sub
+    Sub SethdL()
+        hdL(0) = My.Resources.hdL0
+        hdL(1) = My.Resources.hdL1
+        hdL(2) = My.Resources.hdL2
+        hdL(3) = My.Resources.hdL3
+    End Sub
+    Sub SethdR()
+        hdR(0) = My.Resources.hd0
+        hdR(1) = My.Resources.hd1
+        hdR(2) = My.Resources.hd2
+        hdR(3) = My.Resources.hd3
     End Sub
     Sub SetPunchL()
         punchL(0) = My.Resources.punchL0
@@ -419,6 +436,8 @@ Public Class Form1
         indexBeeR = 0
         indexHdkR = 0
         indexHdkL = 0
+        indexHdL = 0
+        indexHdR = 0
         indexDeadL = 0
         indexDeadR = 0
         indexJumpL = 0
@@ -446,6 +465,8 @@ Public Class Form1
         SetBeeR()
         SethdkR()
         SethdkL()
+        SethdL()
+        SethdR()
         SetPunchL()
         SetPunchR()
         SetPunchCL()
@@ -471,6 +492,7 @@ Public Class Form1
         If doing = "walkL" Then facing = "left"
 
         If count = 20 Then phase = "win"
+
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -537,6 +559,9 @@ Public Class Form1
 
         PutSprite(bg, Ryu, Rx, Ry)
         RyuBox = CreateBox(Rx, Ry, Ryu.Width, Ryu.Height)
+        If hadouken = True Then
+            PutSprite(bg, hdk, hx, hy)
+        End If
 
         If attack Then
             RyuAttack = New List(Of Point)
@@ -562,6 +587,8 @@ Public Class Form1
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim Temphx As Integer
+
         If phase = "intro" Then
             Ryu = intro(indexIntro)
             indexIntro = indexIntro + 1
@@ -646,13 +673,7 @@ Public Class Form1
                     If attack = True Then
                         Ryu = kickR(indexKickR)
                         indexKickR = indexKickR + 1
-                        If indexKickR = 1 Then Rx = Rx + 3
-                        If indexKickR = 2 Then Rx = Rx + 6
-                        If indexKickR = 3 Then Rx = Rx + 9
-                        If indexKickR = 4 Then Rx = Rx + 12
-                        If indexKickR = 5 Then Rx = Rx + 15
-                        If indexKickR = 6 Then Rx = Rx + 18
-                        If indexKickR = 7 Then Rx = Rx + 21
+                        Rx = Rx + 5
 
                         If indexKickR > 7 Then
                             doing = "walkR"
@@ -677,14 +698,7 @@ Public Class Form1
                     If attack = True Then
                         Ryu = kickL(indexKickL)
                         indexKickL = indexKickL + 1
-                        If indexKickL = 1 Then Rx = Rx + 3
-                        If indexKickL = 2 Then Rx = Rx + 6
-                        If indexKickL = 3 Then Rx = Rx + 9
-                        If indexKickL = 4 Then Rx = Rx + 12
-                        If indexKickL = 5 Then Rx = Rx + 15
-                        If indexKickL = 6 Then Rx = Rx + 18
-                        If indexKickL = 7 Then Rx = Rx + 21
-
+                        Rx = Rx - 5
                         If indexKickL > 7 Then
                             doing = "walkL"
                             indexKickL = 0
@@ -767,8 +781,11 @@ Public Class Form1
                     Ryu = hdkL(indexHdkL)
                     indexHdkL = indexHdkL + 1
                     If indexHdkL > 5 Then
+                        hadouken = True
                         indexHdkL = 0
                         doing = "walkL"
+
+
                     End If
                 End If
                 'hadouken right
@@ -776,6 +793,7 @@ Public Class Form1
                     Ryu = hdkR(indexHdkR)
                     indexHdkR = indexHdkR + 1
                     If indexHdkR > 5 Then
+                        hadouken = True
                         indexHdkR = 0
                         doing = "walkR"
                     End If
@@ -836,6 +854,34 @@ Public Class Form1
             End If
         End If
 
+        If hadouken = True And facing = "left" Then
+            hdk = hdL(indexHdL)
+            indexHdL = indexHdL + 1
+            Temphx = Rx - 20
+            hy = Ry
+            hx = Temphx - 20
+
+            If indexHdL > 3 Then indexHdL = 2
+            If hx = Bx Or hx <= 20 Then
+                hadouken = False
+                hx = Temphx
+                indexHdL = 0
+            End If
+        ElseIf hadouken = True And facing = "right" Then
+            hdk = hdR(indexHdR)
+            indexHdR = indexHdR + 1
+            Temphx = Rx + 100
+            hy = Ry
+            hx = hx + 20
+
+            If indexHdR > 3 Then indexHdR = 2
+            If hx = Bx Or hx >= 550 Then
+                hadouken = False
+                hx = Temphx
+                indexHdR = 0
+            End If
+        End If
+
         ReDraw()
         pbcanvas.Image = bg
         pbcanvas.Invalidate()
@@ -856,7 +902,7 @@ Public Class Form1
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
         obsR = My.Resources.beeR0
-        'MAAN, INI AWALNYA
+
         'X >> 20,550
         Bx = 20
         By = 100
