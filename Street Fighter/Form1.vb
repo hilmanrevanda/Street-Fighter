@@ -823,9 +823,9 @@ Public Class Form1
                 If facing = "left" Then
                     Ryu = deadL(indexDeadL)
                     indexDeadL = indexDeadL + 1
-                    If indexDeadL = 5 Or indexDeadL = 6 Then
-                        Ry = Ry + 15
-                        Ryu = My.Resources.Game_Over_Screen
+                    If indexDeadL > 5 Then
+                        Timer1.Enabled = False
+                        'Ryu = My.Resources.Game_Over_Screen
                     End If
 
                 ElseIf facing = "right" Then
@@ -833,9 +833,9 @@ Public Class Form1
                     Ryu = deadR(indexDeadR)
                     indexDeadR = indexDeadR + 1
 
-                    If indexDeadR = 5 Or indexDeadR = 6 Then
-                        Ry = Ry + 15
-                        Ryu = My.Resources.Game_Over_Screen
+                    If indexDeadL > 5 Then
+                        Timer1.Enabled = False
+                        'Ryu = My.Resources.Game_Over_Screen
                     End If
                 End If
             ElseIf phase = "win" Then
@@ -861,7 +861,7 @@ Public Class Form1
             hx = hx - 20
 
             If indexHdL > 3 Then indexHdL = 2
-            If hx = Bx Or hx <= 20 Then
+            If hx <= 20 Then
                 hadouken = False
                 hx = Temphx
                 indexHdL = 0
@@ -874,7 +874,7 @@ Public Class Form1
             hx = hx + 20
 
             If indexHdR > 3 Then indexHdR = 2
-            If hx = Bx Or hx >= 550 Then
+            If hx >= 550 Then
                 hadouken = False
                 hx = Temphx
                 indexHdR = 0
@@ -902,6 +902,7 @@ Public Class Form1
         obsL = My.Resources.bee0
         obsR = My.Resources.beeR0
     End Sub
+
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()
         Close()
