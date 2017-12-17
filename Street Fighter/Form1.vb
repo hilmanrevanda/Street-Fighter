@@ -819,39 +819,14 @@ Public Class Form1
                     End If
                 End If
 
-                'dead
-            ElseIf doing = "dead" Then
-                'facing left
-                If facing = "left" Then
-                    Ryu = deadL(indexDeadL)
-                    indexDeadL = indexDeadL + 1
-                    If indexDeadL > 5 Then
-                        Timer1.Enabled = False
-                        'Ryu = My.Resources.Game_Over_Screen
-                    End If
 
-                ElseIf facing = "right" Then
-                    'facing right
-                    Ryu = deadR(indexDeadR)
-                    indexDeadR = indexDeadR + 1
-
-                    If indexDeadL > 5 Then
-                        Timer1.Enabled = False
-                        'Ryu = My.Resources.Game_Over_Screen
-                    End If
+                obsL = beeL(indexBeeL)
+                obsR = beeR(indexBeeL)
+                If indexBeeL >= 5 Then
+                    indexBeeL = 0
+                Else
+                    indexBeeL = indexBeeL + 1
                 End If
-            ElseIf phase = "win" Then
-                Ryu = win(indexWin)
-                indexWin = indexWin + 1
-                If indexWin > 2 Then indexWin = 0
-            End If
-
-            obsL = beeL(indexBeeL)
-            obsR = beeR(indexBeeL)
-            If indexBeeL >= 5 Then
-                indexBeeL = 0
-            Else
-                indexBeeL = indexBeeL + 1
             End If
         End If
 
@@ -881,6 +856,34 @@ Public Class Form1
                 hadouken = "nothing"
                 hx = Rx
                 indexHdR = 0
+            End If
+        ElseIf phase = "end" Then
+                'dead
+                If doing = "dead" Then
+                    'facing left
+                    If facing = "left" Then
+                        Ryu = deadL(indexDeadL)
+                        indexDeadL = indexDeadL + 1
+                        If indexDeadL > 5 Then
+                            Ryu = My.Resources.Game_Over_Screen
+                            Timer1.Enabled = False
+                        End If
+
+                    ElseIf facing = "right" Then
+                        'facing right
+                        Ryu = deadR(indexDeadR)
+                        indexDeadR = indexDeadR + 1
+
+                        If indexDeadL > 5 Then
+                            Ryu = My.Resources.Game_Over_Screen
+                            Timer1.Enabled = False
+                        End If
+                    End If
+                    'win
+                ElseIf phase = "win" Then
+                    Ryu = win(indexWin)
+                indexWin = indexWin + 1
+                If indexWin > 2 Then indexWin = 0
             End If
         End If
 
@@ -916,6 +919,7 @@ Public Class Form1
         For i As Integer = 0 To EnemiesBoxFromLeft.Count - 1
             If IsBoxClip(EnemiesBoxFromLeft(i), RyuBox) Then
                 Console.WriteLine("hit")
+                phase = "end"
                 doing = "dead"
             ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Then
                 Console.WriteLine("attack")
