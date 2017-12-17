@@ -578,8 +578,10 @@ Public Class Form1
     Sub ReDraw()
         bg = New Bitmap(My.Resources.background)
 
-        PutSprite(bg, Ryu, Rx, Ry)
-        RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
+        If Ryu IsNot Nothing Then
+            PutSprite(bg, Ryu, Rx, Ry)
+            RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
+        End If
 
         If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
             PutSprite(bg, hdk, hx, hy)
@@ -908,7 +910,7 @@ Public Class Form1
                         'facing right
                         Ryu = deadR(indexDeadR)
                     indexDeadR = indexDeadR + 1
-                    If indexDeadL > 5 Then
+                    If indexDeadR > 5 Then
                         'Rx = 200
                         'Ry = 100
                         Ryu = My.Resources.game_over
