@@ -877,13 +877,21 @@ Public Class Form1
 
 
                 obsL = beeL(indexBeeL)
-                obsR = beeR(indexBeeL)
+
                 If indexBeeL >= 5 Then
                     indexBeeL = 0
                 Else
                     indexBeeL = indexBeeL + 1
                 End If
+
+                obsR = beeR(indexBeeL)
+                If indexBeeR >= 5 Then
+                    indexBeeR = 0
+                Else
+                    indexBeeR = indexBeeR + 1
+                End If
             End If
+
         End If
 
         If hadouken = "hadouken left" Then
