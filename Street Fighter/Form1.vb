@@ -586,20 +586,22 @@ Public Class Form1
                 Next
                 MaxEnemies = 0
             End If
+            'draw enemy
+
+            If EnemiesBoxFromRight.Count > 0 Then
+                For Each enemy As List(Of Point) In EnemiesBoxFromRight
+                    PutSprite(bg, obsL, enemy.First.X, enemy.First.Y)
+                Next
+            End If
+
+            If EnemiesBoxFromLeft.Count > 0 Then
+                For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+                    PutSprite(bg, obsR, enemy.First.X, enemy.First.Y)
+                Next
+            End If
         End If
 
-        'draw enemy
-        If EnemiesBoxFromRight.Count > 0 Then
-            For Each enemy As List(Of Point) In EnemiesBoxFromRight
-                PutSprite(bg, obsL, enemy.First.X, enemy.First.Y)
-            Next
-        End If
 
-        If EnemiesBoxFromLeft.Count > 0 Then
-            For Each enemy As List(Of Point) In EnemiesBoxFromLeft
-                PutSprite(bg, obsR, enemy.First.X, enemy.First.Y)
-            Next
-        End If
     End Sub
 
     Public Function CP(x As Integer, y As Integer) As Point
