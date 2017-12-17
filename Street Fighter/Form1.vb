@@ -27,7 +27,7 @@ Public Class Form1
 
     'Determine whether Bee is attacked
     Private attacked As Boolean
-    Private count As Integer = 1
+    Private count As Integer = 0
 
     'where Ryu is facing
     Private facing As String
@@ -69,6 +69,22 @@ Public Class Form1
     Public DIFF As Integer = 1
     Public MaxEnemies As Integer = 1
     Public TempMaxEnemies As Integer
+
+    Private Sub restart_Click(sender As Object, e As EventArgs) Handles restart.Click
+        EnemiesBoxFromLeft = New List(Of List(Of Point))
+        EnemiesBoxFromRight = New List(Of List(Of Point))
+        Rx = 280
+        Ry = 130
+        restart.Hide()
+        phase = "play"
+        MaxEnemies = 1
+        Ryu = My.Resources.standR0
+        obsL = My.Resources.bee0
+        obsR = My.Resources.beeR0
+        bg = My.Resources.background
+        pbcanvas.Image = bg
+        Timer1.Enabled = True
+    End Sub
 
     'Creating box by single point
     Function CreateBox(X As Integer, Y As Integer, NX As Integer, NY As Integer) As List(Of Point)
@@ -517,7 +533,6 @@ Public Class Form1
         If doing = "walkR" Then facing = "right"
         If doing = "walkL" Then facing = "left"
 
-        If count = 20 Then phase = "win"
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -607,14 +622,15 @@ Public Class Form1
 
         If phase = "play" Then
             'set level
-            If DIFF = 1 And MaxEnemies > 0 Then
+            If MaxEnemies > 0 Then
                 TempMaxEnemies = MaxEnemies
+                If count Mod 5 = 0 And count > 0 Then
+                    MaxEnemies = MaxEnemies * (count / 5)
+                End If
                 For i As Integer = 0 To MaxEnemies - 1
-                    Dim randomObject As New Random()
-                    Dim side As Integer = randomObject.Next(0, 1)
                     Dim X As Integer
 
-                    If randomObject.Next(0, 1) = 0 Then
+                    If RandomEnemyY() Mod 2 = 0 Then
                         X = bg.Width - 20
                         EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
                     Else
@@ -901,18 +917,19 @@ Public Class Form1
             End If
 
         ElseIf phase = "end" Then
-                'dead
-                If doing = "dead" Then
-                    'facing left
-                    If facing = "left" Then
+            'dead
+            If doing = "dead" Then
+                'facing left
+                If facing = "left" Then
                     Ryu = deadL(indexDeadL)
                     indexDeadL = indexDeadL + 1
-                        If indexDeadL > 5 Then
+                    If indexDeadL > 5 Then
                         Ryu = My.Resources.game_over
                         Timer1.Enabled = False
-                        End If
+                        restart.Show()
+                    End If
 
-                    ElseIf facing = "right" Then
+                ElseIf facing = "right" Then
                     'facing right
                     Ryu = deadR(indexDeadR)
                     indexDeadR = indexDeadR + 1
@@ -921,18 +938,20 @@ Public Class Form1
                         'Ry = 100
                         Ryu = My.Resources.game_over
                         Timer1.Enabled = False
+                        restart.Show()
                     End If
                 End If
-                    'win
-                ElseIf phase = "win" Then
-                    Ryu = win(indexWin)
-                indexWin = indexWin + 1
-                If indexWin > 2 Then
-                    'Rx = 200
-                    'Ry = 100
-                    Ryu = My.Resources.win
-                    Timer1.Enabled = False
-                End If
+            End If
+            'win
+        ElseIf phase = "win" Then
+            Ryu = win(indexWin)
+            indexWin = indexWin + 1
+            If indexWin > 2 Then
+                'Rx = 200
+                'Ry = 100
+                Ryu = My.Resources.win
+                Timer1.Enabled = False
+                restart.Show()
             End If
         End If
 
@@ -966,26 +985,38 @@ Public Class Form1
     Function BoxsCheck() As Integer
 
         For i As Integer = 0 To EnemiesBoxFromLeft.Count - 1
-            If IsBoxClip(EnemiesBoxFromLeft(i), RyuBox) Then
-                Console.WriteLine("hit")
-                phase = "end"
-                doing = "dead"
-            ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromLeft(i), RyuFireball) Then
-                Console.WriteLine("attack")
-                EnemiesBoxFromLeft.RemoveAt(i)
-                MaxEnemies = MaxEnemies + 1
+            If i < EnemiesBoxFromLeft.Count Then
+                If IsBoxClip(EnemiesBoxFromLeft(i), RyuBox) Then
+                    Console.WriteLine("hit")
+                    phase = "end"
+                    doing = "dead"
+                ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromLeft(i), RyuFireball) Then
+                    count = count + 1
+                    If count = 20 Then phase = "win"
+                    Console.WriteLine(count)
+                    EnemiesBoxFromLeft.RemoveAt(i)
+                    MaxEnemies = MaxEnemies + 1
+                    i = i - 1
+                    If EnemiesBoxFromLeft.Count - 1 < 0 Or i >= EnemiesBoxFromLeft.Count Then Exit For
+                End If
             End If
         Next
 
         For i As Integer = 0 To EnemiesBoxFromRight.Count - 1
-            If IsBoxClip(EnemiesBoxFromRight(i), RyuBox) Then
-                Console.WriteLine("hit")
-                phase = "end"
-                doing = "dead"
-            ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromRight(i), RyuFireball) Then
-                Console.WriteLine("attack")
-                EnemiesBoxFromRight.RemoveAt(i)
-                MaxEnemies = MaxEnemies + 1
+            If i < EnemiesBoxFromRight.Count Then
+                If IsBoxClip(EnemiesBoxFromRight(i), RyuBox) Then
+                    Console.WriteLine("hit")
+                    phase = "end"
+                    doing = "dead"
+                ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromRight(i), RyuFireball) Then
+                    count = count + 1
+                    If count = 20 Then phase = "win"
+                    Console.WriteLine(count)
+                    EnemiesBoxFromRight.RemoveAt(i)
+                    MaxEnemies = MaxEnemies + 1
+                    i = i - 1
+                    If EnemiesBoxFromRight.Count - 1 < 0 Or i >= EnemiesBoxFromRight.Count Then Exit For
+                End If
             End If
         Next
 

@@ -30,10 +30,12 @@ Partial Class Form1
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Pbexit = New System.Windows.Forms.PictureBox()
         Me.pbcanvas = New System.Windows.Forms.PictureBox()
+        Me.restart = New System.Windows.Forms.PictureBox()
         CType(Me.PbPlay, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pbexit, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbcanvas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.restart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -78,6 +80,17 @@ Partial Class Form1
         Me.pbcanvas.TabIndex = 0
         Me.pbcanvas.TabStop = False
         '
+        'restart
+        '
+        Me.restart.Image = Global.Street_Fighter.My.Resources.Resources.btnPlay
+        Me.restart.Location = New System.Drawing.Point(275, 353)
+        Me.restart.Name = "restart"
+        Me.restart.Size = New System.Drawing.Size(112, 56)
+        Me.restart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.restart.TabIndex = 6
+        Me.restart.TabStop = False
+        Me.restart.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -85,6 +98,7 @@ Partial Class Form1
         Me.BackColor = System.Drawing.Color.Honeydew
         Me.ClientSize = New System.Drawing.Size(696, 457)
         Me.ControlBox = False
+        Me.Controls.Add(Me.restart)
         Me.Controls.Add(Me.PbPlay)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Pbexit)
@@ -96,6 +110,7 @@ Partial Class Form1
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Pbexit, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbcanvas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.restart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -105,4 +120,5 @@ Partial Class Form1
     Friend WithEvents Pbexit As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PbPlay As PictureBox
+    Friend WithEvents restart As PictureBox
 End Class
