@@ -625,5 +625,11 @@
   <ItemGroup>
     <None Include="Resources\hd31.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game_over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\win.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

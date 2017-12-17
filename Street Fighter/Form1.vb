@@ -867,25 +867,32 @@ Public Class Form1
                         Ryu = deadL(indexDeadL)
                         indexDeadL = indexDeadL + 1
                         If indexDeadL > 5 Then
-                            Ryu = My.Resources.Game_Over_Screen
-                            Timer1.Enabled = False
+                        Ryu = My.Resources.game_over
+
+                        Timer1.Enabled = False
                         End If
 
                     ElseIf facing = "right" Then
                         'facing right
                         Ryu = deadR(indexDeadR)
-                        indexDeadR = indexDeadR + 1
-
-                        If indexDeadL > 5 Then
-                            Ryu = My.Resources.Game_Over_Screen
-                            Timer1.Enabled = False
-                        End If
+                    indexDeadR = indexDeadR + 1
+                    If indexDeadL > 5 Then
+                        'Rx = 200
+                        'Ry = 100
+                        Ryu = My.Resources.game_over
+                        Timer1.Enabled = False
                     End If
+                End If
                     'win
                 ElseIf phase = "win" Then
                     Ryu = win(indexWin)
                 indexWin = indexWin + 1
-                If indexWin > 2 Then indexWin = 0
+                If indexWin > 2 Then
+                    'Rx = 200
+                    'Ry = 100
+                    Ryu = My.Resources.win
+                    Timer1.Enabled = False
+                End If
             End If
         End If
 
