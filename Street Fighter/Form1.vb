@@ -784,8 +784,6 @@ Public Class Form1
                         hadouken = True
                         indexHdkL = 0
                         doing = "walkL"
-
-
                     End If
                 End If
                 'hadouken right
@@ -859,7 +857,7 @@ Public Class Form1
             indexHdL = indexHdL + 1
             Temphx = Rx - 20
             hy = Ry
-            hx = Temphx - 20
+            hx = hx - 20
 
             If indexHdL > 3 Then indexHdL = 2
             If hx = Bx Or hx <= 20 Then
@@ -870,7 +868,7 @@ Public Class Form1
         ElseIf hadouken = True And facing = "right" Then
             hdk = hdR(indexHdR)
             indexHdR = indexHdR + 1
-            Temphx = Rx + 100
+            Temphx = Rx + 50
             hy = Ry
             hx = hx + 20
 
