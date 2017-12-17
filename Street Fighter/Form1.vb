@@ -44,10 +44,6 @@ Public Class Form1
     Dim Rx As Integer = 280
     Dim Ry As Integer = 130
 
-    'location of obstacle
-    Dim Bx As Integer
-    Dim By As Integer
-
     'ryu box
     Public RyuBox As List(Of Point) = New List(Of Point)
 
@@ -55,9 +51,18 @@ Public Class Form1
     Public RyuAttack As List(Of Point) = New List(Of Point)
     Public RyuFireball As List(Of Point) = New List(Of Point)
 
+    'Enemies
+    Public EnemiesR As List(Of Bitmap) = New List(Of Bitmap)
+    Public EnemiesL As List(Of Bitmap) = New List(Of Bitmap)
+
     'Enemies box
     Public EnemiesBoxFromRight As List(Of List(Of Point)) = New List(Of List(Of Point))
     Public EnemiesBoxFromLeft As List(Of List(Of Point)) = New List(Of List(Of Point))
+
+    'diff
+    Public DIFF As Integer = 1
+    Public MaxEnemies As Integer = 1
+    Public TempMaxEnemies As Integer
 
     'Creating box by single point
     Function CreateBox(X As Integer, Y As Integer, NX As Integer, NY As Integer) As List(Of Point)
@@ -361,6 +366,10 @@ Public Class Form1
         For Each enemy As List(Of Point) In EnemiesBoxFromRight
             e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
         Next
+
+        For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
     End Sub
 
     'audio
@@ -380,31 +389,22 @@ Public Class Form1
         Return P
     End Function
 
-    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point))) As List(Of List(Of Point))
+    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point)), X As Integer) As List(Of List(Of Point))
         For i As Integer = 0 To Enemies.Count - 1
-            EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), -10, 0)
+            EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), X, 0)
         Next
         Return Enemies
     End Function
 
     Sub MoveAllEnemies()
-        EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft)
+        If EnemiesBoxFromLeft.Count > 0 Then EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft, 10)
         'EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight)
     End Sub
 
     'init random enemy coordinate
-    Function RandomEnemy() As Point
-        Dim A As Point
-        A.X = pbcanvas.Width + 100
-        'Bx = A.X
-        A.Y = CInt(Math.Ceiling(Rnd() * 258)) + 61
-        'By=A.y 
-        Return A
+    Function RandomEnemyY() As Integer
+        Return CInt(Math.Ceiling(Rnd() * 140)) + 67
     End Function
-
-    Sub CreateEnemy()
-        'EnemiesBoxFromLeft.Add(CreateBox(RandomEnemy()))
-    End Sub
 
     'Init while the program start
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -462,7 +462,6 @@ Public Class Form1
 
         'test
         'init new enemy
-        CreateEnemy()
 
         bg = My.Resources.background
         pbcanvas.Image = bg
@@ -536,7 +535,7 @@ Public Class Form1
         bg = New Bitmap(My.Resources.background)
 
         PutSprite(bg, Ryu, Rx, Ry)
-        RyuBox = CreateBox(Rx, Ry, Ryu.Width, Ryu.Height)
+        RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
 
         If attack Then
             RyuAttack = New List(Of Point)
@@ -549,17 +548,40 @@ Public Class Form1
             RyuAttack = New List(Of Point)
         End If
 
-
         If phase = "play" Then
-            EnemiesBoxFromRight = New List(Of List(Of Point))
-            If Bx >= bg.Width - obsR.Width Then Bx = 0
-            If BeeDir = "left" Then
-                PutSprite(bg, obsL, Bx, By)
-            ElseIf BeeDir = "right" Then
-                PutSprite(bg, obsR, Bx, By)
+            'set level
+            If DIFF = 1 And MaxEnemies > 0 Then
+                TempMaxEnemies = MaxEnemies
+                For i As Integer = 0 To MaxEnemies - 1
+                    Dim X As Integer = (bg.Width-20) - beeDL(0).Width
+                    EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    X = 20
+                    EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                Next
+                MaxEnemies = 0
             End If
         End If
+
+        'draw enemy
+        If EnemiesBoxFromRight.Count > 0 Then
+            For Each enemy As List(Of Point) In EnemiesBoxFromRight
+                PutSprite(bg, obsL, enemy.First.X, enemy.First.Y)
+            Next
+        End If
+
+        If EnemiesBoxFromLeft.Count > 0 Then
+            For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+                PutSprite(bg, obsR, enemy.First.X, enemy.First.Y)
+            Next
+        End If
     End Sub
+
+    Public Function CP(x As Integer, y As Integer) As Point
+        Dim R As Point
+        R.X = x
+        R.Y = y
+        Return R
+    End Function
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If phase = "intro" Then
@@ -808,31 +830,12 @@ Public Class Form1
                 If indexWin > 2 Then indexWin = 0
             End If
 
-            'obstacle
-            If BeeDir = "left" Then
-                obsL = beeL(indexBeeL)
-                Bx = Bx + 10
+            obsL = beeL(indexBeeL)
+            obsR = beeR(indexBeeL)
+            If indexBeeL >= 5 Then
+                indexBeeL = 0
+            Else
                 indexBeeL = indexBeeL + 1
-                If attacked = True Then
-                    count = count + 1
-                    obsL = beeDL(indexBeeDL)
-                    indexBeeDL = indexBeeDL + 1
-                    By = By + 5
-                End If
-                If indexBeeL > 5 Then
-                    indexBeeL = 0
-                End If
-            ElseIf BeeDir = "right" Then
-                obsR = beeR(indexBeeR)
-                Bx = Bx - 10
-                indexBeeR = indexBeeR + 1
-                If attacked = True Then
-                    count = count + 1
-                    obsL = beeDR(indexBeeDR)
-                    indexBeeDR = indexBeeDR + 1
-                    By = By + 5
-                End If
-                If indexBeeR > 5 Then indexBeeR = 0
             End If
         End If
 
@@ -856,35 +859,31 @@ Public Class Form1
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
         obsR = My.Resources.beeR0
-        'MAAN, INI AWALNYA
-        'X >> 20,550
-        Bx = 20
-        By = 100
-        PutSprite(bg, Ryu, Rx, Ry)
-        BeeDir = "left"
     End Sub
     Private Sub PbExit_Click(sender As Object, e As EventArgs) Handles Pbexit.Click
         My.Computer.Audio.Stop()
         Close()
     End Sub
     'check box
-    Function BoxsCheck() As Point
-        For Each Enemy As List(Of Point) In EnemiesBoxFromLeft
-            If IsBoxClip(Enemy, RyuBox) Then
+    Function BoxsCheck() As Integer
+
+        For i As Integer = 0 To EnemiesBoxFromLeft.Count - 1
+            If IsBoxClip(EnemiesBoxFromLeft(i), RyuBox) Then
                 Console.WriteLine("hit")
                 doing = "dead"
-            ElseIf IsBoxClip(Enemy, RyuAttack) Then
+            ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Then
                 Console.WriteLine("attack")
+                EnemiesBoxFromLeft.RemoveAt(i)
             End If
         Next
 
-        For Each Enemy As List(Of Point) In EnemiesBoxFromRight
-            If IsBoxClip(Enemy, RyuBox) Then
+        For i As Integer = 0 To EnemiesBoxFromRight.Count - 1
+            If IsBoxClip(EnemiesBoxFromRight(i), RyuBox) Then
                 Console.WriteLine("hit")
                 doing = "dead"
-            ElseIf IsBoxClip(Enemy, RyuAttack) Then
+            ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Then
                 Console.WriteLine("attack")
-                Timer1.Enabled = False
+                'EnemiesBoxFromLeft.RemoveAt(Index)
             End If
         Next
     End Function
