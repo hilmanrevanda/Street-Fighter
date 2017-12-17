@@ -409,14 +409,34 @@ Public Class Form1
 
     Function MoveEnemiesFrom(Enemies As List(Of List(Of Point)), X As Integer) As List(Of List(Of Point))
         For i As Integer = 0 To Enemies.Count - 1
-            EnemiesBoxFromLeft(i) = MoveBox(EnemiesBoxFromLeft(i), X, 0)
+            Enemies(i) = MoveBox(Enemies(i), X, 0)
+
+            'if overlap
+            Dim Temp = Enemies(i)
+            If Temp(1).X >= bg.Width - 20 Then
+                Enemies(i).RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
+                If i = 0 Then
+                    Enemies = New List(Of List(Of Point))
+                    Exit For
+                End If
+            End If
+
+            If Temp(0).X <= 0 Then
+                Enemies(i).RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
+                If i = 0 Then
+                    Enemies = New List(Of List(Of Point))
+                    Exit For
+                End If
+            End If
         Next
         Return Enemies
     End Function
 
     Sub MoveAllEnemies()
         If EnemiesBoxFromLeft.Count > 0 Then EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft, 10)
-        'EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight)
+        If EnemiesBoxFromRight.Count > 0 Then EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight, -10)
     End Sub
 
     'init random enemy coordinate
@@ -579,10 +599,17 @@ Public Class Form1
             If DIFF = 1 And MaxEnemies > 0 Then
                 TempMaxEnemies = MaxEnemies
                 For i As Integer = 0 To MaxEnemies - 1
-                    Dim X As Integer = (bg.Width - 20) - beeDL(0).Width
-                    EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
-                    X = 20
-                    EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    Dim randomObject As New Random()
+                    Dim side As Integer = randomObject.Next(0, 1)
+                    Dim X As Integer
+
+                    If randomObject.Next(0, 1) = 0 Then
+                        X = (bg.Width - 20) - beeDL(0).Width
+                        EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    Else
+                        X = 20
+                        EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    End If
                 Next
                 MaxEnemies = 0
             End If
@@ -920,6 +947,7 @@ Public Class Form1
             ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Then
                 Console.WriteLine("attack")
                 EnemiesBoxFromLeft.RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
             End If
         Next
 
@@ -929,7 +957,8 @@ Public Class Form1
                 doing = "dead"
             ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Then
                 Console.WriteLine("attack")
-                'EnemiesBoxFromLeft.RemoveAt(Index)
+                EnemiesBoxFromRight.RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
             End If
         Next
     End Function
