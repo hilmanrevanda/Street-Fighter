@@ -584,8 +584,10 @@ Public Class Form1
         End If
 
         If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
-            PutSprite(bg, hdk, hx, hy)
-            RyuFireball = CreateBox(hx, hy, hdk.Width, hdk.Height)
+            If hdk IsNot Nothing Then
+                PutSprite(bg, hdk, hx, hy)
+                RyuFireball = CreateBox(hx, hy, hdk.Width, hdk.Height)
+            End If
         End If
 
         If attack Then
@@ -893,13 +895,14 @@ Public Class Form1
                 hx = Rx
                 indexHdR = 0
             End If
+
         ElseIf phase = "end" Then
                 'dead
                 If doing = "dead" Then
                     'facing left
                     If facing = "left" Then
-                        Ryu = deadL(indexDeadL)
-                        indexDeadL = indexDeadL + 1
+                    Ryu = deadL(indexDeadL)
+                    indexDeadL = indexDeadL + 1
                         If indexDeadL > 5 Then
                         Ryu = My.Resources.game_over
 
@@ -907,13 +910,13 @@ Public Class Form1
                         End If
 
                     ElseIf facing = "right" Then
-                        'facing right
-                        Ryu = deadR(indexDeadR)
+                    'facing right
+                    Ryu = deadR(indexDeadR)
                     indexDeadR = indexDeadR + 1
                     If indexDeadR > 5 Then
                         'Rx = 200
                         'Ry = 100
-                        Ryu = My.Resources.game_over
+                        'Ryu = My.Resources.game_over
                         Timer1.Enabled = False
                     End If
                 End If
