@@ -381,6 +381,8 @@ Public Class Form1
 
         If RyuAttack.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuAttack.ToArray)
 
+        If RyuFireball.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuFireball.ToArray)
+
         For Each enemy As List(Of Point) In EnemiesBoxFromRight
             e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
         Next
@@ -581,6 +583,7 @@ Public Class Form1
 
         If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
             PutSprite(bg, hdk, hx, hy)
+            RyuFireball = CreateBox(hx, hy, hdk.Width, hdk.Height)
         End If
 
         If attack Then
@@ -869,6 +872,7 @@ Public Class Form1
             If indexHdL > 3 Then indexHdL = 2
             If hx <= 20 Then
                 hadouken = "nothing"
+                RyuFireball = New List(Of Point)
                 hx = Rx
                 indexHdL = 0
             End If
@@ -883,6 +887,7 @@ Public Class Form1
             If indexHdR > 3 Then indexHdR = 2
             If hx >= 550 Then
                 hadouken = "nothing"
+                RyuFireball = New List(Of Point)
                 hx = Rx
                 indexHdR = 0
             End If
@@ -957,7 +962,7 @@ Public Class Form1
                 Console.WriteLine("hit")
                 phase = "end"
                 doing = "dead"
-            ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Then
+            ElseIf IsBoxClip(EnemiesBoxFromLeft(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromLeft(i), RyuFireball) Then
                 Console.WriteLine("attack")
                 EnemiesBoxFromLeft.RemoveAt(i)
                 MaxEnemies = MaxEnemies + 1
@@ -967,13 +972,15 @@ Public Class Form1
         For i As Integer = 0 To EnemiesBoxFromRight.Count - 1
             If IsBoxClip(EnemiesBoxFromRight(i), RyuBox) Then
                 Console.WriteLine("hit")
+                phase = "end"
                 doing = "dead"
-            ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Then
+            ElseIf IsBoxClip(EnemiesBoxFromRight(i), RyuAttack) Or IsBoxClip(EnemiesBoxFromRight(i), RyuFireball) Then
                 Console.WriteLine("attack")
                 EnemiesBoxFromRight.RemoveAt(i)
                 MaxEnemies = MaxEnemies + 1
             End If
         Next
+
     End Function
 
     Function IsBoxClip(Enemy As List(Of Point), Box As List(Of Point)) As Boolean
