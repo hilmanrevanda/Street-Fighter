@@ -23,7 +23,7 @@ Public Class Form1
 
     'Determine whether Ryu attacks or not
     Private attack As Boolean
-    Private hadouken As Boolean
+    Private hadouken As String
 
     'Determine whether Bee is attacked
     Private attacked As Boolean
@@ -47,7 +47,9 @@ Public Class Form1
     Dim Ry As Integer = 130
 
     'location of hadouken ball
-    Dim hx, hy As Integer
+    Dim hx As Integer = Rx
+    Dim hy As Integer
+
     'ryu box
     Public RyuBox As List(Of Point) = New List(Of Point)
 
@@ -556,7 +558,8 @@ Public Class Form1
 
         PutSprite(bg, Ryu, Rx, Ry)
         RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
-        If hadouken = True Then
+
+        If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
             PutSprite(bg, hdk, hx, hy)
         End If
 
@@ -607,7 +610,6 @@ Public Class Form1
     End Function
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Dim Temphx As Integer
 
         If phase = "intro" Then
             Ryu = intro(indexIntro)
@@ -801,7 +803,7 @@ Public Class Form1
                     Ryu = hdkL(indexHdkL)
                     indexHdkL = indexHdkL + 1
                     If indexHdkL > 5 Then
-                        hadouken = True
+                        hadouken = "hadouken left"
                         indexHdkL = 0
                         doing = "walkL"
                     End If
@@ -811,7 +813,7 @@ Public Class Form1
                     Ryu = hdkR(indexHdkR)
                     indexHdkR = indexHdkR + 1
                     If indexHdkR > 5 Then
-                        hadouken = True
+                        hadouken = "hadouken right"
                         indexHdkR = 0
                         doing = "walkR"
                     End If
@@ -853,30 +855,31 @@ Public Class Form1
             End If
         End If
 
-        If hadouken = True And facing = "left" Then
+        If hadouken = "hadouken left" Then
+            If indexHdL = 0 Then hx = hx - 10
             hdk = hdL(indexHdL)
             indexHdL = indexHdL + 1
-            Temphx = Rx - 20
             hy = Ry
             hx = hx - 20
 
             If indexHdL > 3 Then indexHdL = 2
             If hx <= 20 Then
-                hadouken = False
-                hx = Temphx
+                hadouken = "nothing"
+                hx = Rx
                 indexHdL = 0
             End If
-        ElseIf hadouken = True And facing = "right" Then
+        ElseIf hadouken = "hadouken right" Then
+            If indexHdR = 0 Then hx = hx + 60
             hdk = hdR(indexHdR)
             indexHdR = indexHdR + 1
-            Temphx = Rx + 50
+
             hy = Ry
             hx = hx + 20
 
             If indexHdR > 3 Then indexHdR = 2
             If hx >= 550 Then
-                hadouken = False
-                hx = Temphx
+                hadouken = "nothing"
+                hx = Rx
                 indexHdR = 0
             End If
         End If
