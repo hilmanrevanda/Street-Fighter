@@ -1,3 +1,244 @@
+commit 53907e263ae76804f89daa57108f7772671f8918
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 16:28:00 2017 +0700
+
+    -merge all
+
+commit 6e5f25e5e7a1e0aa7c35bd185a0f5ca4bcc93247
+Merge: 037d200 ccdcb0b
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sun Dec 17 01:09:18 2017 -0800
+
+    MERGE
+
+commit 037d200d3744ba691d823832591903ba4b267ee0
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sun Dec 17 00:59:03 2017 -0800
+
+    remove enemy when the enemy attaked
+
+commit ccdcb0b4672c353aa587a54d0e49ce214c867141
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 15:37:49 2017 +0700
+
+    -fixed  bug
+
+commit 7cd4ee7ff5046b4cf7f95f628cc0c50e8cce29bd
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 15:31:33 2017 +0700
+
+    -hadouken left and right(masi ada bug)
+    -edit jump
+
+commit cf5badb42e8cdca0f1b71a8c2410105ff1f7c9d7
+Merge: fdbaad6 0741f71
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 12:27:24 2017 -0800
+
+    Merge branch 'master' of https://github.com/ichapredrika/Street-Fighter
+
+commit fdbaad6063eff775f38169971f054a97a5765fdf
+Merge: 2ebeee7 b7b0d8a
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 12:26:50 2017 -0800
+
+    merge
+
+commit 0741f718bf87db999ab5f198c5ad52b1ca181075
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 03:25:22 2017 +0700
+
+    -game over and count
+    -add phase win
+
+commit 2ebeee7b3cc2d82b786f12a169c8d07c10650653
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 12:24:27 2017 -0800
+
+    hit box
+
+commit b7b0d8a434f22ef17be4d91afb4d7be5c7dd93a4
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 03:01:03 2017 +0700
+
+    -create and add the death of bee left and right
+
+commit 51cc4bb2a18a6d191e5a3239ad367126d4cd6528
+Merge: 114622b 53aa31b
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 02:02:42 2017 +0700
+
+    Merge branch 'master' of https://github.com/ichapredrika/Street-Fighter
+
+commit 114622b8a74169d86b30a618c550a68867649a9f
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 02:02:30 2017 +0700
+
+    -belom selesai
+
+commit 53aa31b7b71de00c5e771a8aa36271cc847db757
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 11:01:05 2017 -0800
+
+    move obs left to right (ex)
+
+commit 6c6b83fdbefddbeecad61951fecc2d84b5e3054a
+Merge: ee07664 e065e68
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 10:49:32 2017 -0800
+
+    Merge branch 'master' of https://github.com/ichapredrika/Street-Fighter
+
+commit ee07664bc3c57ba21667326370a5d0c78bb624a0
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 10:49:17 2017 -0800
+
+    box = sprite
+
+commit e065e68f1637d93738383673fd4b42e6bf56d7e5
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 01:40:43 2017 +0700
+
+    -move the obstacle from left to right
+
+commit a8c34580ae2f14d7fd30a4fdc8413b17abacfe7b
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 01:23:29 2017 +0700
+
+    -attack when jump left and right
+
+commit d6bdac0570894507c8b6d4b286a89d96ef1a3686
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sun Dec 17 00:20:00 2017 +0700
+
+    -punch crouch left and right
+
+commit 75db9d6d28a37badaa27c85196f44fa8d2dcc8ea
+Merge: 2c19bf2 c6eabce
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 23:59:06 2017 +0700
+
+    Merge branch 'master' of https://github.com/ichapredrika/Street-Fighter
+
+commit 2c19bf24de945321b4a9b161633d5d6ac9846c38
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 23:58:38 2017 +0700
+
+    -belom selesai
+
+commit c6eabce7dc539f62acb3c328f10c46983df08a5a
+Merge: 5dfaba5 f69e1ee
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 08:39:02 2017 -0800
+
+    Merge branch 'master' of https://github.com/ichapredrika/Street-Fighter
+
+commit f69e1ee00f108dbfb5c044d46361a960b8523569
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 23:38:29 2017 +0700
+
+    -Punch left and right
+
+commit 5dfaba5c4fcbbc57e2de4249795e7a3aa7b0afab
+Merge: aea184d 5e514d7
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 08:38:25 2017 -0800
+
+    merge
+
+commit aea184db621a286ceeb26bdfc6d8c27fc877d272
+Author: Teuku Hilman Revanda <thilmanrevanda@gmail.com>
+Date:   Sat Dec 16 08:25:21 2017 -0800
+
+    entah kenapa tempat ku merah2 semua, mungkin divbnya ini ku push yang udah ku fix, belom ada perubahan lain
+
+commit 5e514d7ca544b8b006f52098495513ec377843de
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 23:00:20 2017 +0700
+
+    -edit hadouken
+
+commit cab9f10203fc8c087959ec62d54b38b20226ea41
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 22:46:54 2017 +0700
+
+    -change jump left and right
+
+commit f053556087a8ba843d1283ad93f78eaf1024f75e
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Sat Dec 16 21:44:37 2017 +0700
+
+    -edit all sprites
+
+commit ab4d2e8bb8760cd90cdb136cca2c974d48bc5693
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Tue Dec 12 23:15:54 2017 +0700
+
+    -
+
+commit ef87bd18f8508d61d4110b93b49a4b536c30d54d
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Tue Dec 12 23:09:39 2017 +0700
+
+    - edit jump forward
+    - convert 3 timer to be 1
+
+commit 091d0711dacf6f4805d27e038bc7362d2b0b93ea
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Tue Dec 12 21:05:16 2017 +0700
+
+    - Mr. Eddo
+
+commit c54449fe86f85545b74f10996a0eab68f0007423
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Tue Dec 12 19:58:36 2017 +0700
+
+    -edit dead left and right image
+    -add dead left and right code
+
+commit a6b86f0441639b1ee69bce2d62d32da41ca78c33
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Tue Dec 12 10:43:22 2017 +0700
+
+    -fix jump forward
+
+commit 136af167770ce614af69162037c75865800bd096
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Mon Dec 11 23:50:48 2017 +0700
+
+    -
+
+commit b8b1559980e1ba45b3db13ba7c2c596fccee15c7
+Merge: 57d2729 f8c74c0
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Mon Dec 11 23:40:16 2017 +0700
+
+    -
+
+commit 57d2729403d8b8decefeffbe4ba18e969a54403a
+Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
+Date:   Mon Dec 11 23:38:12 2017 +0700
+
+    -
+
+commit f8c74c01bdb2b84168b14d5749cd7f8f547dfe27
+Author: TeukuAtjeh <thilmanrevanda@gmail.com>
+Date:   Mon Dec 11 00:19:48 2017 -0800
+
+    move random enemies
+
+commit 6553d2019d7ecc704436294936fc29b2e133e40d
+Author: TeukuAtjeh <thilmanrevanda@gmail.com>
+Date:   Sun Dec 10 23:39:50 2017 -0800
+
+    create random enemy position  (just box)
+
+commit f0144bd0ce9bf5dff2211cc6046443a785c6525a
+Author: TeukuAtjeh <thilmanrevanda@gmail.com>
+Date:   Sun Dec 10 22:34:47 2017 -0800
+
+    create function to move sprite with box in the same time
+
 commit c9f7b21a43b9411d36956075532accbf9b20825d
 Author: Predrika Br Ginting <ichapredrikagm@gmail.com>
 Date:   Sun Dec 10 20:03:21 2017 +0700
