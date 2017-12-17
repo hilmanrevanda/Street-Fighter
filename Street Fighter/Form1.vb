@@ -353,11 +353,13 @@ Public Class Form1
 
         For i = 0 To d.Width - 1
             For j = 0 To d.Height - 1
-                a = c.GetPixel(i + x, j + y).A And d.GetPixel(i, j).A
-                r = c.GetPixel(i + x, j + y).R And d.GetPixel(i, j).R
-                g = c.GetPixel(i + x, j + y).G And d.GetPixel(i, j).G
-                b = c.GetPixel(i + x, j + y).B And d.GetPixel(i, j).B
-                c.SetPixel(i + x, j + y, Color.FromArgb(a, r, g, b))
+                If i + x < bg.Width And i + x > 0 And j + y < bg.Height And j + y > 0 Then
+                    a = c.GetPixel(i + x, j + y).A And d.GetPixel(i, j).A
+                    r = c.GetPixel(i + x, j + y).R And d.GetPixel(i, j).R
+                    g = c.GetPixel(i + x, j + y).G And d.GetPixel(i, j).G
+                    b = c.GetPixel(i + x, j + y).B And d.GetPixel(i, j).B
+                    c.SetPixel(i + x, j + y, Color.FromArgb(a, r, g, b))
+                End If
             Next
         Next
     End Sub
@@ -367,11 +369,13 @@ Public Class Form1
 
         For i = 0 To d.Width - 1
             For j = 0 To d.Height - 1
-                a = c.GetPixel(i + x, j + y).A Or d.GetPixel(i, j).A
-                r = c.GetPixel(i + x, j + y).R Or d.GetPixel(i, j).R
-                g = c.GetPixel(i + x, j + y).G Or d.GetPixel(i, j).G
-                b = c.GetPixel(i + x, j + y).B Or d.GetPixel(i, j).B
-                c.SetPixel(i + x, j + y, Color.FromArgb(a, r, g, b))
+                If i + x < bg.Width And i + x > 0 And j + y < bg.Height And j + y > 0 Then
+                    a = c.GetPixel(i + x, j + y).A Or d.GetPixel(i, j).A
+                    r = c.GetPixel(i + x, j + y).R Or d.GetPixel(i, j).R
+                    g = c.GetPixel(i + x, j + y).G Or d.GetPixel(i, j).G
+                    b = c.GetPixel(i + x, j + y).B Or d.GetPixel(i, j).B
+                    c.SetPixel(i + x, j + y, Color.FromArgb(a, r, g, b))
+                End If
             Next
         Next
     End Sub
@@ -415,7 +419,7 @@ Public Class Form1
 
             'if overlap
             Dim Temp = Enemies(i)
-            If Temp(1).X >= bg.Width - 20 Then
+            If Temp(1).X >= bg.Width + 150 Then
                 Enemies(i).RemoveAt(i)
                 MaxEnemies = MaxEnemies + 1
                 If i = 0 Then
@@ -424,7 +428,7 @@ Public Class Form1
                 End If
             End If
 
-            If Temp(0).X <= 0 Then
+            If Temp(0).X < -150 Then
                 Enemies(i).RemoveAt(i)
                 MaxEnemies = MaxEnemies + 1
                 If i = 0 Then
@@ -611,10 +615,10 @@ Public Class Form1
                     Dim X As Integer
 
                     If randomObject.Next(0, 1) = 0 Then
-                        X = (bg.Width - 20) - beeDL(0).Width
+                        X = bg.Width - 20
                         EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
                     Else
-                        X = 20
+                        X = -20
                         EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
                     End If
                 Next
@@ -905,7 +909,6 @@ Public Class Form1
                     indexDeadL = indexDeadL + 1
                         If indexDeadL > 5 Then
                         Ryu = My.Resources.game_over
-
                         Timer1.Enabled = False
                         End If
 
@@ -916,7 +919,7 @@ Public Class Form1
                     If indexDeadR > 5 Then
                         'Rx = 200
                         'Ry = 100
-                        'Ryu = My.Resources.game_over
+                        Ryu = My.Resources.game_over
                         Timer1.Enabled = False
                     End If
                 End If
