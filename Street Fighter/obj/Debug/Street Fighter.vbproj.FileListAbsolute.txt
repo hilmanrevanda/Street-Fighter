@@ -1,0 +1,22 @@
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.exe.config
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.exe
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.pdb
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.xml
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.vbprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street_Fighter.Form1.resources
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street_Fighter.Resources.resources
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.vbproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.exe
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.xml
+c:\users\user\documents\visual studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.pdb
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.exe.config
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.exe
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.pdb
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\bin\Debug\Street Fighter.xml
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.vbprojResolveAssemblyReference.cache
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street_Fighter.Form1.resources
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street_Fighter.Resources.resources
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.vbproj.GenerateResource.Cache
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.exe
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.xml
+E:\Documents\Visual Studio 2017\Projects\Street Fighter\Street Fighter\obj\Debug\Street Fighter.pdb

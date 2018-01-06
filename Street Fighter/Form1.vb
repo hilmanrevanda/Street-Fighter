@@ -70,50 +70,6 @@ Public Class Form1
     Public MaxEnemies As Integer = 1
     Public TempMaxEnemies As Integer
 
-    Private Sub restart_Click(sender As Object, e As EventArgs) Handles restart.Click
-        EnemiesBoxFromLeft = New List(Of List(Of Point))
-        EnemiesBoxFromRight = New List(Of List(Of Point))
-        Rx = 280
-        Ry = 130
-        restart.Hide()
-        phase = "play"
-        MaxEnemies = 1
-        Ryu = My.Resources.standR0
-        obsL = My.Resources.bee0
-        obsR = My.Resources.beeR0
-        bg = My.Resources.background
-        pbcanvas.Image = bg
-        Timer1.Enabled = True
-    End Sub
-
-    'Creating box by single point
-    Function CreateBox(X As Integer, Y As Integer, NX As Integer, NY As Integer) As List(Of Point)
-        Dim TempPoint As Point
-        Dim box As List(Of Point) = New List(Of Point)
-
-        NX = X + NX
-        NY = Y + NY
-
-        TempPoint.X = X
-        TempPoint.Y = Y
-        box.Add(TempPoint)
-        TempPoint.X = NX
-        TempPoint.Y = Y
-        box.Add(TempPoint)
-        TempPoint.X = NX
-        TempPoint.Y = NY
-        box.Add(TempPoint)
-        TempPoint.X = X
-        TempPoint.Y = NY
-        box.Add(TempPoint)
-        Return box
-    End Function
-
-    'just for checking position with click the picture box
-    Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
-        Console.WriteLine(e.Location)
-    End Sub
-
     'init sprite
     Sub SetIntro()
         intro(0) = My.Resources.intro0
@@ -220,26 +176,31 @@ Public Class Form1
         hdR(2) = My.Resources.hd2
         hdR(3) = My.Resources.hd3
     End Sub
+
     Sub SetPunchL()
         punchL(0) = My.Resources.punchL0
         punchL(1) = My.Resources.punchL1
         punchL(2) = My.Resources.punchL2
     End Sub
+
     Sub SetPunchR()
         punchR(0) = My.Resources.punchR2
         punchR(1) = My.Resources.punchR1
         punchR(2) = My.Resources.punchR0
     End Sub
+
     Sub SetPunchCL()
         punchCL(0) = My.Resources.punchCL0
         punchCL(1) = My.Resources.punchCL1
         punchCL(2) = My.Resources.punchCL2
     End Sub
+
     Sub SetPunchCR()
         punchCR(0) = My.Resources.punchCR2
         punchCR(1) = My.Resources.punchCR1
         punchCR(2) = My.Resources.punchCR0
     End Sub
+
     Sub SetKickL()
         kickL(0) = My.Resources.kickL0
         kickL(1) = My.Resources.kickL1
@@ -250,6 +211,7 @@ Public Class Form1
         kickL(6) = My.Resources.kickL6
         kickL(7) = My.Resources.kickL7
     End Sub
+
     Sub SetKickR()
         kickR(0) = My.Resources.kick0
         kickR(1) = My.Resources.kick1
@@ -292,6 +254,7 @@ Public Class Form1
         beeL(4) = My.Resources.bee4
         beeL(5) = My.Resources.bee5
     End Sub
+
     Sub SetBeeR()
         beeR(0) = My.Resources.beeR0
         beeR(1) = My.Resources.beeR1
@@ -300,6 +263,7 @@ Public Class Form1
         beeR(4) = My.Resources.beeR4
         beeR(5) = My.Resources.beeR5
     End Sub
+
     Sub SetBeeDL()
         beeDL(0) = My.Resources.beedl0
         beeDL(1) = My.Resources.beedl1
@@ -309,6 +273,7 @@ Public Class Form1
         beeDL(5) = My.Resources.beedl5
         beeDL(6) = My.Resources.beedl6
     End Sub
+
     Sub SetBeeDR()
         beeDR(0) = My.Resources.bee0
         beeDR(1) = My.Resources.bee1
@@ -318,12 +283,14 @@ Public Class Form1
         beeDR(5) = My.Resources.beeR5
         beeDR(5) = My.Resources.bee5
     End Sub
+
     Sub PutSprite(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         Dim mask, sprite As Bitmap
         mask = MaskOf(d)
         sprite = SpriteOf(d)
         Spriteand(bg, mask, x, y)
         Spriteor(bg, sprite, x, y)
+
     End Sub
 
     Function MaskOf(b As Bitmap) As Bitmap
@@ -346,6 +313,7 @@ Public Class Form1
         Next
         Return a
     End Function
+
     Function SpriteOf(b As Bitmap) As Bitmap
         'Bg = black
         Dim a As Bitmap
@@ -363,6 +331,7 @@ Public Class Form1
         Next
         Return a
     End Function
+
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
         'set sprite on the bg to be black using and operation bcs d is mask
         Dim i, j, a, r, g, b As Integer
@@ -379,8 +348,9 @@ Public Class Form1
             Next
         Next
     End Sub
+
     Sub Spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'give color to the black sprite using or operation bcs d is sprite(white)
+        'give color to the black sprite using or operation bcs d is sprite
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -395,76 +365,6 @@ Public Class Form1
             Next
         Next
     End Sub
-
-    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
-        If RyuBox.Count > 0 Then e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
-
-        If RyuAttack.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuAttack.ToArray)
-
-        If RyuFireball.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuFireball.ToArray)
-
-        For Each enemy As List(Of Point) In EnemiesBoxFromRight
-            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
-        Next
-
-        For Each enemy As List(Of Point) In EnemiesBoxFromLeft
-            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
-        Next
-    End Sub
-
-    'audio
-    Sub PlayLoopingBackgroundSoundFile()
-        My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.BackgroundLoop)
-    End Sub
-
-    'box sprite move
-    Function MoveBox(P As List(Of Point), x As Integer, y As Integer) As List(Of Point)
-        Dim TempPoint As Point
-        For index As Integer = 0 To P.Count - 1
-            TempPoint = P(index)
-            TempPoint.X = P(index).X + x
-            TempPoint.Y = P(index).Y + y
-            P(index) = TempPoint
-        Next
-        Return P
-    End Function
-
-    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point)), X As Integer) As List(Of List(Of Point))
-        For i As Integer = 0 To Enemies.Count - 1
-            Enemies(i) = MoveBox(Enemies(i), X, 0)
-
-            'if overlap
-            Dim Temp = Enemies(i)
-            If Temp(1).X >= bg.Width + 150 Then
-                Enemies(i).RemoveAt(i)
-                MaxEnemies = MaxEnemies + 1
-                If i = 0 Then
-                    Enemies = New List(Of List(Of Point))
-                    Exit For
-                End If
-            End If
-
-            If Temp(0).X < -150 Then
-                Enemies(i).RemoveAt(i)
-                MaxEnemies = MaxEnemies + 1
-                If i = 0 Then
-                    Enemies = New List(Of List(Of Point))
-                    Exit For
-                End If
-            End If
-        Next
-        Return Enemies
-    End Function
-
-    Sub MoveAllEnemies()
-        If EnemiesBoxFromLeft.Count > 0 Then EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft, 10)
-        If EnemiesBoxFromRight.Count > 0 Then EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight, -10)
-    End Sub
-
-    'init random enemy coordinate
-    Function RandomEnemyY() As Integer
-        Return CInt(Math.Ceiling(Rnd() * 140)) + 67
-    End Function
 
     'Init while the program start
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -535,10 +435,19 @@ Public Class Form1
 
     End Sub
 
+    'audio
+    Sub PlayLoopingBackgroundSoundFile()
+        My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.BackgroundLoop)
+    End Sub
+
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
             If Conditions() Then
                 doing = "walkL"
+                facing = "left"
+            End If
+            If doing = "crouch" Then
+                doing = "crouch"
                 facing = "left"
             End If
             If (Rx >= 20) Then
@@ -549,6 +458,10 @@ Public Class Form1
         ElseIf e.KeyCode = Keys.Right Or e.KeyCode = Keys.D Then
             If Conditions() Then
                 doing = "walkR"
+                facing = "right"
+            End If
+            If doing = "crouch" Then
+                doing = "crouch"
                 facing = "right"
             End If
             If (Rx <= 490) Then
@@ -590,81 +503,11 @@ Public Class Form1
 
     'dalam kondisi ini dia masi bisa gerak kiri kanan
     Function Conditions() As Boolean
-        If doing IsNot "jump" And doing IsNot "jumpR" And doing IsNot "jumpL" And doing IsNot "crouch" Then Return True
+        If doing IsNot "jumpL" Xor doing IsNot "jumpR" Xor doing IsNot "jumpFL" Xor doing IsNot "jumpFR" Xor doing IsNot "crouch" Then
+            Return True
+        End If
         Return False
     End Function
-
-    Sub ReDraw()
-        bg = New Bitmap(My.Resources.background)
-
-        If Ryu IsNot Nothing Then
-            PutSprite(bg, Ryu, Rx, Ry)
-            RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
-        End If
-
-        If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
-            If hdk IsNot Nothing Then
-                PutSprite(bg, hdk, hx, hy)
-                RyuFireball = CreateBox(hx, hy, hdk.Width, hdk.Height)
-            End If
-        End If
-
-        If attack Then
-            RyuAttack = New List(Of Point)
-            If facing Is "left" Then
-                RyuAttack = CreateBox(Rx - 20, Ry + 10, Ryu.Width, 20)
-            ElseIf facing Is "right" Then
-                RyuAttack = CreateBox(Rx, Ry + 10, Ryu.Width + 20, 20)
-            End If
-        Else
-            RyuAttack = New List(Of Point)
-        End If
-
-        If phase = "play" Then
-            'set level
-            If MaxEnemies > 0 Then
-                TempMaxEnemies = MaxEnemies
-                If count Mod 5 = 0 And count > 0 Then
-                    MaxEnemies = MaxEnemies * (count / 5)
-                End If
-                For i As Integer = 0 To MaxEnemies - 1
-                    Dim X As Integer
-
-                    If RandomEnemyY() Mod 2 = 0 Then
-                        X = bg.Width - 20
-                        EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
-                    Else
-                        X = -20
-                        EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
-                    End If
-                Next
-                MaxEnemies = 0
-            End If
-            'draw enemy
-
-            If EnemiesBoxFromRight.Count > 0 Then
-                For Each enemy As List(Of Point) In EnemiesBoxFromRight
-                    PutSprite(bg, obsL, enemy.First.X, enemy.First.Y)
-                Next
-            End If
-
-            If EnemiesBoxFromLeft.Count > 0 Then
-                For Each enemy As List(Of Point) In EnemiesBoxFromLeft
-                    PutSprite(bg, obsR, enemy.First.X, enemy.First.Y)
-                Next
-            End If
-        End If
-
-
-    End Sub
-
-    Public Function CP(x As Integer, y As Integer) As Point
-        Dim R As Point
-        R.X = x
-        R.Y = y
-        Return R
-    End Function
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
         If phase = "intro" Then
@@ -989,6 +832,187 @@ Public Class Form1
         My.Computer.Audio.Stop()
         Close()
     End Sub
+
+    Sub ReDraw()
+        bg = New Bitmap(My.Resources.background)
+
+        If Ryu IsNot Nothing Then
+            PutSprite(bg, Ryu, Rx, Ry)
+            RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
+        End If
+
+        If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
+            If hdk IsNot Nothing Then
+                PutSprite(bg, hdk, hx, hy)
+                RyuFireball = CreateBox(hx, hy, hdk.Width, hdk.Height)
+            End If
+        End If
+
+        If attack Then
+            RyuAttack = New List(Of Point)
+            If facing Is "left" Then
+                RyuAttack = CreateBox(Rx - 20, Ry + 10, Ryu.Width, 20)
+            ElseIf facing Is "right" Then
+                RyuAttack = CreateBox(Rx, Ry + 10, Ryu.Width + 20, 20)
+            End If
+        Else
+            RyuAttack = New List(Of Point)
+        End If
+
+        If phase = "play" Then
+            'set level
+            If MaxEnemies > 0 Then
+                TempMaxEnemies = MaxEnemies
+                If count Mod 5 = 0 And count > 0 Then
+                    MaxEnemies = MaxEnemies * (count / 5)
+                End If
+                For i As Integer = 0 To MaxEnemies - 1
+                    Dim X As Integer
+
+                    If RandomEnemyY() Mod 2 = 0 Then
+                        X = bg.Width - 20
+                        EnemiesBoxFromRight.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    Else
+                        X = -20
+                        EnemiesBoxFromLeft.Add(CreateBox(X, RandomEnemyY(), beeDL(0).Width, beeDL(0).Height))
+                    End If
+                Next
+                MaxEnemies = 0
+            End If
+            'draw enemy
+
+            If EnemiesBoxFromRight.Count > 0 Then
+                For Each enemy As List(Of Point) In EnemiesBoxFromRight
+                    PutSprite(bg, obsL, enemy.First.X, enemy.First.Y)
+                Next
+            End If
+
+            If EnemiesBoxFromLeft.Count > 0 Then
+                For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+                    PutSprite(bg, obsR, enemy.First.X, enemy.First.Y)
+                Next
+            End If
+        End If
+
+
+    End Sub
+
+    Private Sub restart_Click(sender As Object, e As EventArgs) Handles restart.Click
+        EnemiesBoxFromLeft = New List(Of List(Of Point))
+        EnemiesBoxFromRight = New List(Of List(Of Point))
+        Rx = 280
+        Ry = 130
+        restart.Hide()
+        phase = "play"
+        MaxEnemies = 1
+        Ryu = My.Resources.standR0
+        obsL = My.Resources.bee0
+        obsR = My.Resources.beeR0
+        bg = My.Resources.background
+        pbcanvas.Image = bg
+        Timer1.Enabled = True
+    End Sub
+
+    'Creating box by single point
+    Function CreateBox(X As Integer, Y As Integer, NX As Integer, NY As Integer) As List(Of Point)
+        Dim TempPoint As Point
+        Dim box As List(Of Point) = New List(Of Point)
+
+        NX = X + NX
+        NY = Y + NY
+
+        TempPoint.X = X
+        TempPoint.Y = Y
+        box.Add(TempPoint)
+        TempPoint.X = NX
+        TempPoint.Y = Y
+        box.Add(TempPoint)
+        TempPoint.X = NX
+        TempPoint.Y = NY
+        box.Add(TempPoint)
+        TempPoint.X = X
+        TempPoint.Y = NY
+        box.Add(TempPoint)
+        Return box
+    End Function
+
+    'just for checking position with click the picture box
+    Private Sub Pbcanvas_MouseClick(sender As Object, e As MouseEventArgs) Handles pbcanvas.MouseClick
+        Console.WriteLine(e.Location)
+    End Sub
+
+    Private Sub Pbcanvas_Paint(sender As Object, e As PaintEventArgs) Handles pbcanvas.Paint
+        If RyuBox.Count > 0 Then e.Graphics.DrawPolygon(Pens.Red, RyuBox.ToArray)
+
+        If RyuAttack.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuAttack.ToArray)
+
+        If RyuFireball.Count > 0 Then e.Graphics.DrawPolygon(Pens.Yellow, RyuFireball.ToArray)
+
+        For Each enemy As List(Of Point) In EnemiesBoxFromRight
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
+
+        For Each enemy As List(Of Point) In EnemiesBoxFromLeft
+            e.Graphics.DrawPolygon(Pens.Blue, enemy.ToArray)
+        Next
+    End Sub
+
+    'box sprite move
+    Function MoveBox(P As List(Of Point), x As Integer, y As Integer) As List(Of Point)
+        Dim TempPoint As Point
+        For index As Integer = 0 To P.Count - 1
+            TempPoint = P(index)
+            TempPoint.X = P(index).X + x
+            TempPoint.Y = P(index).Y + y
+            P(index) = TempPoint
+        Next
+        Return P
+    End Function
+
+    Function MoveEnemiesFrom(Enemies As List(Of List(Of Point)), X As Integer) As List(Of List(Of Point))
+        For i As Integer = 0 To Enemies.Count - 1
+            Enemies(i) = MoveBox(Enemies(i), X, 0)
+
+            'if overlap
+            Dim Temp = Enemies(i)
+            If Temp(1).X >= bg.Width + 150 Then
+                Enemies(i).RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
+                If i = 0 Then
+                    Enemies = New List(Of List(Of Point))
+                    Exit For
+                End If
+            End If
+
+            If Temp(0).X < -150 Then
+                Enemies(i).RemoveAt(i)
+                MaxEnemies = MaxEnemies + 1
+                If i = 0 Then
+                    Enemies = New List(Of List(Of Point))
+                    Exit For
+                End If
+            End If
+        Next
+        Return Enemies
+    End Function
+
+    Sub MoveAllEnemies()
+        If EnemiesBoxFromLeft.Count > 0 Then EnemiesBoxFromLeft = MoveEnemiesFrom(EnemiesBoxFromLeft, 10)
+        If EnemiesBoxFromRight.Count > 0 Then EnemiesBoxFromRight = MoveEnemiesFrom(EnemiesBoxFromRight, -10)
+    End Sub
+
+    'init random enemy coordinate
+    Function RandomEnemyY() As Integer
+        Return CInt(Math.Ceiling(Rnd() * 140)) + 67
+    End Function
+
+    Public Function CP(x As Integer, y As Integer) As Point
+        Dim R As Point
+        R.X = x
+        R.Y = y
+        Return R
+    End Function
+
     'check box
     Function BoxsCheck() As Integer
 
