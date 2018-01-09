@@ -38,6 +38,7 @@ Public Class Form1
     'phase
     Private phase As String
 
+    'not used-----
     Private DLEFT As String = "LEFT"
     Private DRIGHT As String = "RIGHT"
     Private Direction As String = "DRIGHT"
@@ -57,7 +58,7 @@ Public Class Form1
     Public RyuAttack As List(Of Point) = New List(Of Point)
     Public RyuFireball As List(Of Point) = New List(Of Point)
 
-    'Enemies
+    'not used-----Enemies
     Public EnemiesR As List(Of Bitmap) = New List(Of Bitmap)
     Public EnemiesL As List(Of Bitmap) = New List(Of Bitmap)
 
@@ -299,9 +300,10 @@ Public Class Form1
         Dim c As Color
         Dim i, j As Integer
 
+        'convert by cloning
         a = CType(b.Clone, Bitmap)
         c = a.GetPixel(0, 0) ' color of bg of sprite
-
+        'scan down
         For i = 0 To b.Width - 1
             For j = 0 To b.Height - 1
                 If a.GetPixel(i, j) = c Then
@@ -312,6 +314,7 @@ Public Class Form1
             Next
         Next
         Return a
+
     End Function
 
     Function SpriteOf(b As Bitmap) As Bitmap
@@ -330,10 +333,12 @@ Public Class Form1
             Next
         Next
         Return a
+
     End Function
 
     Sub Spriteand(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
-        'set sprite on the bg to be black using and operation bcs d is mask
+        'bg, mask
+        'set sprite on the bg to be black using and operation 
         Dim i, j, a, r, g, b As Integer
 
         For i = 0 To d.Width - 1
@@ -347,9 +352,11 @@ Public Class Form1
                 End If
             Next
         Next
+
     End Sub
 
     Sub Spriteor(c As Bitmap, d As Bitmap, x As Integer, y As Integer)
+        'bg, sprite
         'give color to the black sprite using or operation bcs d is sprite
         Dim i, j, a, r, g, b As Integer
 
@@ -440,6 +447,14 @@ Public Class Form1
         My.Computer.Audio.Play(My.Resources.sfmusic, AudioPlayMode.BackgroundLoop)
     End Sub
 
+    'exception condition
+    Function Conditions() As Boolean
+        If doing IsNot "jumpL" Xor doing IsNot "jumpR" Xor doing IsNot "jumpFL" Xor doing IsNot "jumpFR" Xor doing IsNot "crouch" Then
+            Return True
+        End If
+        Return False
+    End Function
+
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Left Or e.KeyCode = Keys.A Then
             If Conditions() Then
@@ -471,43 +486,53 @@ Public Class Form1
         End If
 
         If e.KeyCode = Keys.Down Or e.KeyCode = Keys.S Then
-            doing = "crouch"
+            If Conditions() Then doing = "crouch"
         End If
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.W Then
-            doing = "jump"
+            If Conditions() Then
+                doing = "jump"
+            End If
+            If doing = "crouch" Then
+                If facing = "left" Then
+                    Ry = 130
+                    doing = "walkL"
+                ElseIf facing = "right" Then
+                    Ry = 130
+                    doing = "walkR"
+                End If
+            End If
         End If
         '20 550
         If e.KeyCode = Keys.End Or e.KeyCode = Keys.E Then
-            If Rx >= 470 Then
-                doing = "jump"
-            Else
-                doing = "jumpFR"
+            If Conditions() Then
+                If Rx >= 470 Then
+                    doing = "jump"
+                Else
+                    doing = "jumpFR"
+                End If
             End If
         End If
 
         If e.KeyCode = Keys.Q Or e.KeyCode = Keys.ShiftKey Then
-            If Rx <= 40 Then
-                doing = "jump"
-            Else
-                doing = "jumpFL"
+            If Conditions() Then
+                If Rx <= 40 Then
+                    doing = "jump"
+                Else
+                    doing = "jumpFL"
+                End If
             End If
         End If
+
         If e.KeyCode = Keys.CapsLock Then
-            doing = "hadouken"
+            If doing = "walkR" Or doing = "walkL" Then doing = "hadouken"
         End If
+
         If e.KeyCode = Keys.Tab Then
             attack = True
         End If
     End Sub
 
-    'dalam kondisi ini dia masi bisa gerak kiri kanan
-    Function Conditions() As Boolean
-        If doing IsNot "jumpL" Xor doing IsNot "jumpR" Xor doing IsNot "jumpFL" Xor doing IsNot "jumpFR" Xor doing IsNot "crouch" Then
-            Return True
-        End If
-        Return False
-    End Function
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
         If phase = "intro" Then
@@ -839,6 +864,7 @@ Public Class Form1
         If Ryu IsNot Nothing Then
             PutSprite(bg, Ryu, Rx, Ry)
             RyuBox = CreateBox(Rx + 10, Ry + 10, Ryu.Width - 20, Ryu.Height - 20)
+
         End If
 
         If hadouken = "hadouken left" Or hadouken = "hadouken right" Then
