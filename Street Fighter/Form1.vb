@@ -800,6 +800,9 @@ Public Class Form1
                     Ryu = deadL(indexDeadL)
                     indexDeadL = indexDeadL + 1
                     If indexDeadL > 5 Then
+
+                        Rx = 200
+                        Ry = 30
                         Ryu = My.Resources.game_over
                         Timer1.Enabled = False
                         restart.Show()
@@ -930,6 +933,8 @@ Public Class Form1
         Ry = 130
         restart.Hide()
         phase = "play"
+        doing = "walkR"
+        facing = "right"
         MaxEnemies = 1
         Ryu = My.Resources.standR0
         obsL = My.Resources.bee0
@@ -937,6 +942,7 @@ Public Class Form1
         bg = My.Resources.background
         pbcanvas.Image = bg
         Timer1.Enabled = True
+
     End Sub
 
     'Creating box by single point
@@ -1029,14 +1035,7 @@ Public Class Form1
 
     'init random enemy coordinate
     Function RandomEnemyY() As Integer
-        Return CInt(Math.Ceiling(Rnd() * 140)) + 67
-    End Function
-
-    Public Function CP(x As Integer, y As Integer) As Point
-        Dim R As Point
-        R.X = x
-        R.Y = y
-        Return R
+        Return CInt(Math.Ceiling(Rnd() * 130)) + 50
     End Function
 
     'check box
